@@ -1,8 +1,8 @@
 {
-  "name": "angular-seed",
-  "description": "A starter project for AngularJS",
+  "name": "catharijneverhalen",
+  "description": "Frontend to the online storybase of the Dutch museum Catharijneconvent",
   "version": "0.0.0",
-  "homepage": "https://github.com/angular/angular-seed",
+  "homepage": "https://github.com/UUDigitalHumantieslab/catharijneverhalen",
   "license": "MIT",
   "private": true,
   "dependencies": {
