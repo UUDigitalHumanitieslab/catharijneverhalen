@@ -44,11 +44,13 @@ describe('catharijne app', function() {
 			var hamburger = $('.hamburger .wrapper');
 			var menu = $('.container-nav-search');
 			hamburger.click();
+			browser.sleep(500);  // give the opening animation some time
 			expect(menu.isDisplayed()).toBe(true);
 			hamburger.click();
 			browser.sleep(500);  // give the closing animation some time
 			expect(menu.isDisplayed()).toBe(false);
 			hamburger.click();
+			browser.sleep(500);  // give the opening animation some time
 			expect(menu.isDisplayed()).toBe(true);
 		});
 		
