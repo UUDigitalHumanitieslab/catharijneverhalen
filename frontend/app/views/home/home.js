@@ -9,6 +9,12 @@ angular.module('catharijne.home', ['ngRoute'])
 	});
 }])
 
-.controller('HomeCtrl', [function() {
-
+.controller('HomeCtrl', ['$scope', '$document', function($scope, $document) {
+	// code below ensures that the intro block has a dark background
+	// when the home view is selected
+	$scope.body = $document.find('body');
+	$scope.body.addClass('home');
+	$scope.$on('$routeChangeStart', function() {
+		$scope.body.removeClass('home');
+	});
 }]);
