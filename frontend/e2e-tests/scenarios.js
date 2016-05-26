@@ -41,19 +41,21 @@ describe('catharijne app', function() {
 		});
 		
 		it('should open, close each time the hamburger is clicked', function() {
-			var hamburger = $('.js-togglemenu');
+			var hamburger = $('.hamburger .wrapper');
 			var menu = $('.container-nav-search');
 			hamburger.click();
 			expect(menu.isDisplayed()).toBe(true);
 			hamburger.click();
+			browser.sleep(500);  // give the closing animation some time
 			expect(menu.isDisplayed()).toBe(false);
 			hamburger.click();
 			expect(menu.isDisplayed()).toBe(true);
 		});
 		
 		it('should close on internal navigation', function() {
-			$('.js-togglemenu').click();
+			$('.hamburger .wrapper').click();
 			browser.setLocation('view2');
+			browser.sleep(500);  // give the closing animation some time
 			expect($('.container-nav-search').isDisplayed()).toBe(false);
 		});
 	});
