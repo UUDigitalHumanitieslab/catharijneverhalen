@@ -11,7 +11,6 @@ describe('catharijne.menu module', function() {
 		
 		it('initially sets the menu closed status', function() {
 			expect(this.scope.menuOpen).toBeFalse;
-			expect(this.scope.menuDisplayClass).toBe('');
 		});
 		
 		describe('openMenu function', function() {
@@ -19,7 +18,6 @@ describe('catharijne.menu module', function() {
 				this.scope.closeMenu();
 				this.scope.openMenu();
 				expect(this.scope.menuOpen).toBeTrue;
-				expect(this.scope.menuDisplayClass).toBe('menu-open');
 			});
 		});
 		
@@ -28,23 +26,18 @@ describe('catharijne.menu module', function() {
 				this.scope.openMenu();
 				this.scope.closeMenu();
 				expect(this.scope.menuOpen).toBeFalse;
-				expect(this.scope.menuDisplayClass).toBe('');
 			});
 		});
 		
 		describe('toggleMenu function', function() {
 			it('alternates between open and closed status', function() {
 				expect(this.scope.menuOpen).toBeFalse;
-				expect(this.scope.menuDisplayClass).toBe('');
 				this.scope.toggleMenu();
 				expect(this.scope.menuOpen).toBeTrue;
-				expect(this.scope.menuDisplayClass).toBe('menu-open');
 				this.scope.toggleMenu();
 				expect(this.scope.menuOpen).toBeFalse;
-				expect(this.scope.menuDisplayClass).toBe('');
 				this.scope.toggleMenu();
 				expect(this.scope.menuOpen).toBeTrue;
-				expect(this.scope.menuDisplayClass).toBe('menu-open');
 			});
 		});
 	});

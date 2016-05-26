@@ -2,18 +2,17 @@
 
 angular.module('catharijne.menu', [])
 
-.controller('MenuStatus', ['$scope', function($scope) {
+.controller('MenuStatus', ['$scope', '$document', function($scope, $document) {
 	$scope.menuOpen = false;
-	$scope.menuDisplayClass = '';
 	
 	$scope.openMenu = function() {
 		$scope.menuOpen = true;
-		$scope.menuDisplayClass = 'menu-open';
+		$document.find('body').addClass('menu-open');
 	};
 	
 	$scope.closeMenu = function() {
 		$scope.menuOpen = false;
-		$scope.menuDisplayClass = '';
+		$document.find('body').removeClass('menu-open');
 	};
 	
 	$scope.toggleMenu = function() {
