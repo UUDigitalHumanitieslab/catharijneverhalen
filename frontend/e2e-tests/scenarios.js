@@ -61,5 +61,15 @@ describe('catharijne app', function() {
 			expect($('.container-nav-search').isDisplayed()).toBe(false);
 		});
 	});
+	
+	describe('home', function() {
+		beforeEach(function() {
+			browser.get('index.html#/home');
+		});
+		
+		it('should render the home page when the user navigates to /home', function() {
+			expect($('.intro p').getText()).toMatch(/verzamelt herinneringen/);
+		});
+	});
 
 });

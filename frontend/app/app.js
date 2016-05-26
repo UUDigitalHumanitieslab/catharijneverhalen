@@ -6,7 +6,8 @@ angular.module('catharijne', [
 	'catharijne.view1',
 	'catharijne.view2',
 	'catharijne.version',
-	'catharijne.menu'
+	'catharijne.menu',
+	'catharijne.home'
 ]).
 config(['$routeProvider', function($routeProvider) {
 	$routeProvider.otherwise({redirectTo: '/view1'});
