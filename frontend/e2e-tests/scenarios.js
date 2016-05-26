@@ -70,6 +70,10 @@ describe('catharijne app', function() {
 		it('should render the home page when the user navigates to /home', function() {
 			expect($('.intro p').getText()).toMatch(/verzamelt herinneringen/);
 		});
+		
+		it('should contain a button inviting people to join', function() {
+			expect($('.intro a.button').getText()).toMatch(/Doe mee!/);
+		});
 	});
 
 });
