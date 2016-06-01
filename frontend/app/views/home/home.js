@@ -17,4 +17,34 @@ angular.module('catharijne.home', ['ngRoute'])
 	$scope.$on('$routeChangeStart', function() {
 		$scope.body.removeClass('home');
 	});
+	
+	// The blocks that appear on the homepage
+	// TODO: images
+	$scope.blocks = [
+		{
+			title: 'Verhalen',
+			href: '#/verhalen',
+			description: 'Verhalen die zijn toegevoegd door onze deelnemers.'
+		}, {
+			title: 'Artikelen',
+			href: '#/artikelen',
+			description: 'Achtergrond bij objecten.'
+		}, {
+			title: 'Thema\'s',
+			href: '#/themas',
+			description: 'Objecten en verhalen, gegroepeerd rond gezamenlijke onderwerpen.'
+		}, {
+			title: 'Collecties',
+			href: '#/collecties',
+			description: 'Verzamelingen die zijn samengesteld door onze deelnemers.'
+		}, {
+			title: 'Uitleg',
+			href: '#/uitleg',
+			description: 'Hoe werk het project? Redactie. Contact.'
+		}, {
+			title: 'Objecten',
+			href: '#/objecten',
+			description: 'Een volledige catalogus van objecten.'
+		}
+	];
 }]);

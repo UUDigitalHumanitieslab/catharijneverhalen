@@ -74,6 +74,17 @@ describe('catharijne app', function() {
 		it('should contain a button inviting people to join', function() {
 			expect($('.intro a.button').getText()).toMatch(/Doe mee!/);
 		});
+		
+		it('should list the blocks like in the mockup', function() {
+			var blocks = $('.block-overview .container-content h3');
+			expect(blocks.length).toBe(6);
+			expect($(blocks[0]).getText()).toBe('Verhalen');
+			expect($(blocks[1]).getText()).toBe('Artikelen');
+			expect($(blocks[2]).getText()).toBe('Thema\'s');
+			expect($(blocks[3]).getText()).toBe('Collecties');
+			expect($(blocks[4]).getText()).toBe('Uitleg');
+			expect($(blocks[5]).getText()).toBe('Voorwerpen');
+		});
 	});
 
 });
