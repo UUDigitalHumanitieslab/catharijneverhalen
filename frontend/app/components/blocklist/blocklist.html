@@ -1,0 +1,28 @@
+<div class="row">
+	<article class="block-overview">
+		<ul class="list-overview">
+			<li style="height: 603px;" ng-repeat="item in items">
+				<a href="{{ item.href }}">
+					<div class="container-image">
+						<picture>
+							<img srcset="{{ item.imageUrl }}">
+						</picture>
+						<span class="hover">
+							<div class="wrapper">
+								<span>Lees meer</span>
+							</div>
+						</span>
+					</div>
+				</a>
+				<div class="container-content">
+					<span class="divider">
+						{{ item.supertitle }}
+					</span>
+					<h3>{{ item.title }}</h3>
+					<p>{{ item.description }}</p>
+					<a href="{{ item.href }}" class="button">Lees meer</a>
+				</div>
+			</li>
+		</ul>
+	</article>
+</div>
