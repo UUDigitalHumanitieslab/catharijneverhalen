@@ -8,8 +8,18 @@ module.exports = function(config){
 			'bower_components/angular-route/angular-route.js',
 			'bower_components/angular-mocks/angular-mocks.js',
 			'components/**/*.js',
+			'components/**/*.html',
 			'view*/**/*.js'
 		],
+		
+		// enables the usage of HTML templates in Karma tests
+		preprocessors: {
+			'components/**/*.html': ['ng-html2js']
+		},
+		
+		ngHtml2JsPreprocessor: {
+			moduleName: 'templates'
+		},
 
 		autoWatch : true,
 
@@ -21,7 +31,8 @@ module.exports = function(config){
 			'karma-chrome-launcher',
 			'karma-firefox-launcher',
 			'karma-jasmine',
-			'karma-junit-reporter'
+			'karma-junit-reporter',
+			'karma-ng-html2js-preprocessor'
 		],
 
 		junitReporter : {
