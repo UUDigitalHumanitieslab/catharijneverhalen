@@ -8,7 +8,8 @@ angular.module('catharijne', [
 	'catharijne.version',
 	'catharijne.menu',
 	'catharijne.blocklist',
-	'catharijne.home'
+	'catharijne.home',
+	'catharijne.meedoen'
 ]).
 config(['$routeProvider', function($routeProvider) {
 	$routeProvider.otherwise({redirectTo: '/home'});

@@ -72,7 +72,10 @@ describe('catharijne app', function() {
 		});
 		
 		it('should contain a button inviting people to join', function() {
-			expect($('.intro a.button').getText()).toMatch(/Doe mee!/);
+			var button = $('.intro a.button');
+			expect(button.getText()).toMatch(/Doe mee!/);
+			button.click();
+			expect(browser.getLocationAbsUrl()).toContain('/meedoen');
 		});
 		
 		it('should list the blocks like in the mockup', function() {
@@ -86,6 +89,19 @@ describe('catharijne app', function() {
 			expect(blocks.get(3).getText()).toBe('Collecties');
 			expect(blocks.get(4).getText()).toBe('Uitleg');
 			expect(blocks.get(5).getText()).toBe('Objecten');
+		});
+	});
+	
+	describe('meedoen', function() {
+		beforeEach(function() {
+			browser.get('index.html#/meedoen');
+		});
+		
+		it('should render the participation page when the user navigates to /meedoen', function() {
+			var buttons = element.all(by.css('.block-cta a h3'));
+			expect(buttons.count()).toBe(2);
+			expect(buttons.get(0).getText()).toBe('Ik ben hier voor het eerst');
+			expect(buttons.get(1).getText()).toBe('Ik doe al mee');
 		});
 	});
 
