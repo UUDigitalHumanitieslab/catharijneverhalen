@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('catharijne.home', ['ngRoute'])
+angular.module('catharijne.home', ['ngRoute', 'catharijne.blocklist'])
 
 .config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/home', {

@@ -7,6 +7,7 @@ angular.module('catharijne', [
 	'catharijne.view2',
 	'catharijne.version',
 	'catharijne.menu',
+	'catharijne.blocklist',
 	'catharijne.home'
 ]).
 config(['$routeProvider', function($routeProvider) {
