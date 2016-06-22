@@ -105,4 +105,15 @@ describe('catharijne app', function() {
 		});
 	});
 
+	describe('aanmelden', function() {
+		beforeEach(function() {
+			browser.get('index.html#/aanmelden');
+		});
+		
+		it('should render the registration page when the user navigates to /aanmelden', function() {
+			var title = $('.block-cta form h3');
+			expect(title.getText()).toContain('Maak een account');
+		});
+	});
+
 });
