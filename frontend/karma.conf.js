@@ -9,7 +9,7 @@ module.exports = function(config){
 			'bower_components/angular-mocks/angular-mocks.js',
 			'components/**/*.js',
 			'components/**/*.html',
-			'view*/**/*.js'
+			'views/**/*.js'
 		],
 		
 		// enables the usage of HTML templates in Karma tests
