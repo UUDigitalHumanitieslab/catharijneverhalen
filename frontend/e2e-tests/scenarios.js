@@ -116,4 +116,15 @@ describe('catharijne app', function() {
 		});
 	});
 
+	describe('inloggen', function() {
+		beforeEach(function() {
+			browser.get('index.html#/inloggen');
+		});
+		
+		it('should render the registration page when the user navigates to /inloggen', function() {
+			var title = $('.block-cta h3');
+			expect(title.getText()).toContain('Welkom terug');
+		});
+	});
+
 });
