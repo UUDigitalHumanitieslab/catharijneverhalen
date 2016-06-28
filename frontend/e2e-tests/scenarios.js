@@ -104,5 +104,18 @@ describe('catharijne app', function() {
 			expect(title.getText()).toContain('Welkom terug');
 		});
 	});
+	
+	describe('verhaalofprofiel', function() {
+		beforeEach(function() {
+			browser.get('index.html#/verhaalofprofiel');
+		});
+		
+		it('should render the participation page when the user navigates to /verhaalofprofiel', function() {
+			var buttons = element.all(by.css('.block-cta a h3'));
+			expect(buttons.count()).toBe(2);
+			expect(buttons.get(0).getText()).toBe('Schrijf een verhaal');
+			expect(buttons.get(1).getText()).toBe('Naar je profiel');
+		});
+	});
 
 });
