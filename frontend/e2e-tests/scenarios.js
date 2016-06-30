@@ -99,7 +99,7 @@ describe('catharijne app', function() {
 			browser.get('index.html#/inloggen');
 		});
 		
-		it('should render the registration page when the user navigates to /inloggen', function() {
+		it('should render the authentication page when the user navigates to /inloggen', function() {
 			var title = $('.block-cta h3');
 			expect(title.getText()).toContain('Welkom terug');
 		});
@@ -110,7 +110,7 @@ describe('catharijne app', function() {
 			browser.get('index.html#/verhaalofprofiel');
 		});
 		
-		it('should render the participation page when the user navigates to /verhaalofprofiel', function() {
+		it('should give a choice between writing a story or amending the profile when the user navigates to /verhaalofprofiel', function() {
 			var buttons = element.all(by.css('.block-cta a h3'));
 			expect(buttons.count()).toBe(2);
 			expect(buttons.get(0).getText()).toBe('Schrijf een verhaal');
