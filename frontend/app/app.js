@@ -11,7 +11,8 @@ angular.module('catharijne', [
 	'catharijne.meedoen',
 	'catharijne.aanmelden',
 	'catharijne.inloggen',
-	'catharijne.verhaalofprofiel'
+	'catharijne.verhaalofprofiel',
+	'catharijne.profiel'
 ]).
 config(['$routeProvider', function($routeProvider) {
 	$routeProvider.otherwise({redirectTo: '/home'});

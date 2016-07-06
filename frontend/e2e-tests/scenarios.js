@@ -117,5 +117,19 @@ describe('catharijne app', function() {
 			expect(buttons.get(1).getText()).toBe('Naar je profiel');
 		});
 	});
+	
+	describe('profiel', function() {
+		beforeEach(function() {
+			browser.get('index.html#/profiel');
+		});
+		
+		it('displays user data, a stories preview and a collections preview', function() {
+			var blocks = element.all(by.css('ul.list-overview li'));
+			expect(blocks.count()).toBe(3);
+			expect(blocks.get(0).getText()).toContain('Woonplaats');
+			expect(blocks.get(1).getText()).toContain('Verhalen');
+			expect(blocks.get(2).getText()).toContain('Collecties');
+		});
+	});
 
 });
