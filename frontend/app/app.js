@@ -5,6 +5,7 @@ angular.module('catharijne', [
 	'ngRoute',
 	'catharijne.version',
 	'catharijne.menu',
+	'catharijne.block',
 	'catharijne.blocklist',
 	'catharijne.home',
 	'catharijne.meedoen',

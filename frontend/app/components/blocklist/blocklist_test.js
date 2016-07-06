@@ -13,33 +13,7 @@ describe('catharijne.blocklist module', function() {
 				)($rootScope);
 				$rootScope.testdata = [];
 				$rootScope.$digest();
-				expect(element.html()).toBe('<div class="row ng-isolate-scope" items="testdata">\n\t<article class="block-overview">\n\t\t<ul class="list-overview">\n\t\t\t<!-- ngRepeat: item in items -->\n\t\t</ul>\n\t</article>\n</div>');
-			});
-		});
-		
-		it('renders a block with image, link, title and summary', function() {
-			inject(function($compile, $rootScope) {
-				var element = $compile(
-					'<app-blocklist items=testdata>'
-				)($rootScope);
-				$rootScope.testdata = [
-					{
-						title: 'Banana',
-						supertitle: 'Meeting',
-						href: 'http://meeting.banana.com',
-						imageUrl: 'http://meeting.banana.com/image.jpg',
-						description: 'Voice your opinion on bananas'
-					}
-				];
-				$rootScope.$digest();
-				var html = element.html();
-				expect(html).toContain('<a href="http://meeting.banana.com">');
-				expect(html).toContain('<img srcset="http://meeting.banana.com/image.jpg">');
-				expect(html).toContain('<span>Lees meer</span>');
-				expect(html).toContain('Meeting');
-				expect(html).toContain('>Banana</h3>');
-				expect(html).toContain('>Voice your opinion on bananas</p>');
-				expect(html).toContain('<a href="http://meeting.banana.com" class="button">Lees meer</a>');
+				expect(element.html()).toBe('<div class="row ng-isolate-scope" items="testdata">\n\t<article class="block-overview">\n\t\t<!-- ngIf: items --><ul class="list-overview ng-scope" ng-if="items">\n\t\t\t<!-- ngRepeat: item in items -->\n\t\t</ul><!-- end ngIf: items -->\n\t\t<!-- ngIf: !items -->\n\t</article>\n</div>');
 			});
 		});
 		
@@ -65,8 +39,24 @@ describe('catharijne.blocklist module', function() {
 				];
 				$rootScope.$digest();
 				var html = element.html();
-				expect(html).toContain('<a href="http://exposition.apple.com">');
+				expect(html).toContain('href="http://exposition.apple.com"');
 				expect(html).toContain('>Learn how to peel oranges</p>');
+			});
+		});
+		
+		it('offers a transclusion mode', function() {
+			inject(function($compile, $rootScope) {
+				var element = $compile(
+					'<app-blocklist>' +
+					'\t<app-block>Grape</app-block>' +
+					'\t<app-block>Blueberry</app-block>' +
+					'</app-blocklist>'
+				)($rootScope);
+				$rootScope.$digest();
+				var html = element.html();
+				expect(html).toContain('</li>\t<li');
+				expect(html).toContain('Grape');
+				expect(html).toContain('Blueberry');
 			});
 		});
 	});
