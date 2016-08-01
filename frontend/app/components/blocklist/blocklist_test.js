@@ -13,7 +13,7 @@ describe('catharijne.blocklist module', function() {
 				)($rootScope);
 				$rootScope.testdata = [];
 				$rootScope.$digest();
-				expect(element.html()).toBe('<div class="row ng-isolate-scope" items="testdata">\n\t<article class="block-overview">\n\t\t<!-- ngIf: items --><ul class="list-overview ng-scope" ng-if="items">\n\t\t\t<!-- ngRepeat: item in items -->\n\t\t</ul><!-- end ngIf: items -->\n\t\t<!-- ngIf: !items -->\n\t</article>\n</div>');
+				expect(element.html()).toMatch(/<div( class="row ng-isolate-scope"| items="testdata"){2}>\n\t<article class="block-overview">\n\t\t<!-- ngIf: items --><ul class="list-overview ng-scope" ng-if="items">\n\t\t\t<!-- ngRepeat: item in items -->\n\t\t<\/ul><!-- end ngIf: items -->\n\t\t<!-- ngIf: !items -->\n\t<\/article>\n<\/div>/);
 			});
 		});
 		

@@ -20,7 +20,7 @@ describe('catharijne.block module', function() {
 				};
 				$rootScope.$digest();
 				var html = element.html();
-				expect(html).toContain('<a ng-if="item.imageUrl" href="http://meeting.banana.com" class="ng-scope">');
+				expect(html).toMatch(/<a[^>]* href="http:\/\/meeting.banana.com"/);
 				expect(html).toContain('<img srcset="http://meeting.banana.com/image.jpg">');
 				expect(html).toContain('<span>Lees meer</span>');
 				expect(html).toContain('Meeting');
