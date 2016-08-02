@@ -1214,6 +1214,36 @@ figure.full-width figcaption {
     FORM STYLES
 ******************/
 
+/*
+    The following styles were inserted by Digital Humanities Lab (2016).
+*/
+
+form fieldset.column {
+    display: block;
+    float: left;
+    width: 50%;
+    margin: 0;
+    padding: 0 10px;
+}
+
+form fieldset.column:first-child {
+    padding-left: 0;
+}
+
+form fieldset.column:last-child {
+    padding-right: 0;
+}
+
+form fieldset label.column {
+    display: inline-block;
+    width: 50%;
+    padding: 0 10px;
+}
+
+/*
+    (End of insertions by DHL)
+*/
+
 .form {
     /* Rows and Columns */
     /* Checkboxes */

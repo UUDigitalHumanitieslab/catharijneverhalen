@@ -4,9 +4,9 @@
 		<div class="overlay-bottom"></div>
 	</article>
 </div>
-<div class="row">
-	<article class="block-form">
-		<form class="wrapper form block-form">
+<form class="form">
+	<div class="row">
+		<article class="block-form">
 			<fieldset class="column">
 				<div>
 					<!-- TODO: implement custom form control -->
@@ -19,25 +19,25 @@
 					Titel
 					<input type="text" name="title" required>
 				</label>
-				<label>
+				<label class=column>
 					Locatie
 					<input type="text" name="location" required>
 				</label>
-				<label>
+				<label class=column>
 					Jaar
 				<input type="number" name="year" min=1900 max=2017 step=1 placeholder=1960 required>
 				</label>
 				<label>
 					Inleiding
-					<textarea name="introduction" rows="3" cols="40"></textarea>
+					<textarea name="introduction"></textarea>
 				</label>
 				<label>
 					Mijn herinnering
-					<textarea name="story" rows="10" cols="40" required></textarea>
+					<textarea name="story" required></textarea>
 				</label>
 				<button>Voeg media toe</button>
 				<button>Ik heb mijn verhaal verteld</button>
 			</fieldset>
-		</form>
-	</article>
-</div>
+		</article>
+	</div>
+</form>
