@@ -13,7 +13,8 @@ angular.module('catharijne', [
 	'catharijne.inloggen',
 	'catharijne.verhaalofprofiel',
 	'catharijne.profiel',
-	'catharijne.toevoegen'
+	'catharijne.toevoegen',
+	'catharijne.googleMaps'
 ]).
 config(['$routeProvider', function($routeProvider) {
 	$routeProvider.otherwise({redirectTo: '/home'});
