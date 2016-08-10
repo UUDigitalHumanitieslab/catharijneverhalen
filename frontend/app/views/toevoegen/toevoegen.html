@@ -19,14 +19,16 @@
 					Titel
 					<input type="text" name="title" required>
 				</label>
-				<label class=column>
-					Locatie
-					<input type="text" name="location" required>
-				</label>
-				<label class=column>
-					Jaar
-				<input type="number" name="year" min=1900 max=2017 step=1 placeholder=1960 required>
-				</label>
+				<fieldset>
+					<label class=column>
+						Locatie
+						<input type="text" name="location" required>
+					</label>
+					<label class=column>
+						Jaar
+						<input type="number" name="year" min=1900 max=2017 step=1 placeholder=1960 required>
+					</label>
+				</fieldset>
 				<label>
 					Inleiding
 					<textarea name="introduction"></textarea>
@@ -35,8 +37,10 @@
 					Mijn herinnering
 					<textarea name="story" required></textarea>
 				</label>
-				<button>Voeg media toe</button>
-				<button>Ik heb mijn verhaal verteld</button>
+				<fieldset>
+					<button>Voeg media toe</button>
+					<button class=button-submit>Ik heb mijn verhaal verteld</button>
+				</fieldset>
 			</fieldset>
 		</article>
 	</div>
