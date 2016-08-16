@@ -7,3 +7,4 @@ tmp
 .idea
 __pycache__
 *.pyc
+/frontend/app/components/googleMaps/googleMaps-apiKey.js

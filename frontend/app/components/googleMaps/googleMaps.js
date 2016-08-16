@@ -1,14 +1,10 @@
 'use strict';
 
-angular.module('catharijne.googleMaps', ['uiGmapgoogle-maps'])
+angular.module('catharijne.googleMaps', ['catharijne.googleMaps.apiKey', 'uiGmapgoogle-maps'])
 
-.config(['$http', '$log', 'uiGmapGoogleMapApiProvider', function($http, $log, uiGmapGoogleMapApiProvider) {
-	$http.get('/api/gmapikey').then(function success(response) {
-		uiGmapGoogleMapApiProvider.configure({
-			key: response.data,
-			libraries: 'drawing'
-		});
-	}, function error(response) {
-		$log.debug('fetching gmapikey failed with ' + response.statusText);
+.config(['appGmapiKey', 'uiGmapGoogleMapApiProvider', function(appGmapiKey, uiGmapGoogleMapApiProvider) {
+	uiGmapGoogleMapApiProvider.configure({
+		key: appGmapiKey,
+		libraries: 'drawing'
 	});
 }]);

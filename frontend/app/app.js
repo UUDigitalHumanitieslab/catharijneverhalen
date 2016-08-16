@@ -14,7 +14,8 @@ angular.module('catharijne', [
 	'catharijne.verhaalofprofiel',
 	'catharijne.profiel',
 	'catharijne.toevoegen',
-	'catharijne.googleMaps'
+	'catharijne.googleMaps',
+	'catharijne.googleMaps.apiKey'
 ]).
 config(['$routeProvider', function($routeProvider) {
 	$routeProvider.otherwise({redirectTo: '/home'});

@@ -1,30 +1,23 @@
 'use strict';
 
 describe('catharijne.googleMaps module', function() {
-	var $httpBackend;
+	var gmap;
 	
-	beforeAll(inject(function($injector) {
-		$httpBackend = $injector.get('$httpBackend');
-	}));
-	
-	beforeEach(module('uiGmapgoogle-maps'));
-	
-	describe('config', function() {
-		var gmap;
-		
-		beforeEach(inject(function(uiGmapGoogleMapApiProvider) {
+	beforeEach(function() {
+		angular.module('testAssist', ['uiGmapgoogle-maps'])
+		.config(function(uiGmapGoogleMapApiProvider) {
 			gmap = uiGmapGoogleMapApiProvider;
-			spyOn(gmap.configure);
-		}));
-	
-		it('configures google maps using the API key from the backend', function() {
-			$httpBackend.expectGET('/api/gmapikey').respond(200, '12345');
-			module('catharijne.googleMaps');
-			$httpBackend.flush();
-			expect(gmap.configure).toHaveBeenCalledWith({
-				key: '12345',
-				libraries: 'drawing'
-			});
+			spyOn(gmap, 'configure');
 		});
+		module('testAssist');
+		module('catharijne.googleMaps');
+		inject();
 	});
+	
+	it('configures google maps using the API key', inject(function(appGmapiKey) {
+		expect(gmap.configure).toHaveBeenCalledWith({
+			key: appGmapiKey,
+			libraries: 'drawing'
+		});
+	}));
 });
