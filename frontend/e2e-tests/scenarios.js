@@ -138,7 +138,7 @@ describe('catharijne app', function() {
 		});
 		
 		it('enables the user to contribute a memory', function() {
-			var formFields = element.all(by.css('fieldset > *'));
+			var formFields = element.all(by.css('fieldset > :not(fieldset)'));
 			expect(formFields.count()).toBe(9);
 			expect(formFields.get(0).getText()).toContain('Kies een voorwerp');
 			expect(formFields.get(1).getText()).toContain('Schrijftips');
