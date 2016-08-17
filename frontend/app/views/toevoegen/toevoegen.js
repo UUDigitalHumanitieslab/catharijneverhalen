@@ -6,4 +6,4 @@ angular.module('catharijne.toevoegen', ['ngRoute'])
 	$routeProvider.when('/toevoegen', {
 		templateUrl: 'views/toevoegen/toevoegen.html'
 	});
-}])
+}]);

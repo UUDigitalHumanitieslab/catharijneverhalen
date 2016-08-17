@@ -6,4 +6,4 @@ angular.module('catharijne.inloggen', ['ngRoute'])
 	$routeProvider.when('/inloggen', {
 		templateUrl: 'views/inloggen/inloggen.html'
 	});
-}])
+}]);
