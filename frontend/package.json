@@ -8,7 +8,6 @@
   "devDependencies": {
     "angular-google-maps": "^2.3.4",
     "bower": "^1.7.9",
-    "http-server": "^0.6.1",
     "jasmine-core": "^2.4.1",
     "karma": "^1.2.0",
     "karma-chrome-launcher": "^1.0.1",
@@ -21,8 +20,6 @@
   },
   "scripts": {
     "postinstall": "bower install",
-    "prestart": "npm install",
-    "start": "http-server -a localhost -p 8000 -c-1",
     "pretest": "npm install",
     "test": "karma start karma.conf.js",
     "test-once": "karma start karma.conf.js  --single-run",

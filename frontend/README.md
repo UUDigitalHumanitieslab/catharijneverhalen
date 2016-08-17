@@ -48,7 +48,7 @@ it easier to serve the files by a webserver.*
 
 ## Running the Application during development
 
-While there is a webserver available from within Node, you should run the development server from the backend instead. See `/backend/Readme.md` for instructions. TLDR:
+Contrary to the original angular-seed project, there is no webserver available from within Node. You should run the development server from the backend instead. See `/backend/Readme.md` for instructions. TLDR:
 
     cd ../backend
     # (activate your virtualenv if not done already)
