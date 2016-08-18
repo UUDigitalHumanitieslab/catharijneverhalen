@@ -11,15 +11,15 @@ var routeFix = {
 		module('testRouteProviderAssist');
 	},
 	checkRoute: function(route, template, controller) {
-		it(
-			'routes on ' + route + ' with ' + template + ' and ' + controller,
-			function() {
-				inject();
-				expect(routeFix.$routeProvider.when).toHaveBeenCalledWith(
-					route,
-					{templateUrl: template, 'controller': controller}
-				);
-			}
-		);
+		var specString = 'routes on ' + route + ' with ' + template;
+		var routeConfig = {templateUrl: template};
+		if (controller) {
+			specString += ' and ' + controller;
+			routeConfig.controller = controller;
+		}
+		it(specString, function() {
+			inject();
+			expect(routeFix.$routeProvider.when).toHaveBeenCalledWith(route, routeConfig);
+		});
 	}
 };
