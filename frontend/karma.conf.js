@@ -13,7 +13,8 @@ module.exports = function(config){
 			'../unittest-fixtures.js',
 			'components/**/*.js',
 			'components/**/*.html',
-			'views/**/*.js'
+			'views/**/*.js',
+			'*.js'
 		],
 		
 		// enables the usage of HTML templates in Karma tests

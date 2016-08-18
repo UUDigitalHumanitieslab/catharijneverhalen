@@ -7,6 +7,7 @@ var routeFix = {
 		]).config(function($routeProvider) {
 			routeFix.$routeProvider = $routeProvider;
 			spyOn(routeFix.$routeProvider, 'when');
+			spyOn(routeFix.$routeProvider, 'otherwise');
 		});
 		module('testRouteProviderAssist');
 	},
