@@ -1,26 +1,16 @@
 'use strict';
 
 describe('catharijne.toevoegen', function() {
-	var $routeProvider;
-	
 	beforeEach(function() {
-		angular.module('testAssist', [
-			'ngRoute'
-		]).config(function(_$routeProvider_) {
-			$routeProvider = _$routeProvider_;
-			spyOn($routeProvider, 'when');
-		});
-		module('testAssist');
+		routeFix.captureRouteProvider();
 		module('catharijne.toevoegen');
 	});
 	
-	it('routes on /toevoegen with toevoegen.html and StoryFormCtrl', function() {
-		inject();
-		expect($routeProvider.when).toHaveBeenCalledWith('/toevoegen', {
-			templateUrl: 'views/toevoegen/toevoegen.html',
-			controller: 'StoryFormCtrl'
-		});
-	});
+	routeFix.checkRoute(
+		'/toevoegen',
+		'views/toevoegen/toevoegen.html',
+		'StoryFormCtrl'
+	);
 	
 	describe('StoryFormCtrl', function() {
 		var testScope, testController;

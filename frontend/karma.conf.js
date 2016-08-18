@@ -10,6 +10,7 @@ module.exports = function(config){
 			'bower_components/angular-mocks/angular-mocks.js',
 			'bower_components/angular-simple-logger/dist/angular-simple-logger.js',
 			'bower_components/angular-google-maps/dist/angular-google-maps.js',
+			'../unittest-fixtures.js',
 			'components/**/*.js',
 			'components/**/*.html',
 			'views/**/*.js'
