@@ -2,13 +2,13 @@
 
 var routeFix = {
 	captureRouteProvider: function() {
-		angular.module('testAssist', [
+		angular.module('testRouteProviderAssist', [
 			'ngRoute'
 		]).config(function($routeProvider) {
 			routeFix.$routeProvider = $routeProvider;
 			spyOn(routeFix.$routeProvider, 'when');
 		});
-		module('testAssist');
+		module('testRouteProviderAssist');
 	},
 	checkRoute: function(route, template, controller) {
 		it(
