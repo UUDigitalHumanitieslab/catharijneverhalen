@@ -1,7 +1,16 @@
 'use strict';
 
 describe('catharijne.home', function() {
-	beforeEach(module('catharijne.home'));
+	beforeEach(function() {
+		routeFix.captureRouteProvider();
+		module('catharijne.home');
+	});
+	
+	routeFix.checkRoute(
+		'/home',
+		'views/home/home.html',
+		'HomeCtrl'
+	);
 	
 	describe('HomeCtrl', function() {
 		beforeEach(inject(function($controller, $rootScope) {
