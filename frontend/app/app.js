@@ -8,6 +8,7 @@ angular.module('catharijne', [
 	'catharijne.blocklist',
 	'catharijne.version',
 	'catharijne.googleMaps',
+	'catharijne.location',
 	'catharijne.home',
 	'catharijne.meedoen',
 	'catharijne.aanmelden',
