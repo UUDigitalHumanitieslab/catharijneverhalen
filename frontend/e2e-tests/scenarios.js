@@ -147,7 +147,7 @@ describe('catharijne app', function() {
 			expect(formFields.get(4).getText()).toContain('Jaar');
 			expect(formFields.get(5).getText()).toContain('Inleiding');
 			expect(formFields.get(6).getText()).toContain('Mijn herinnering');
-			expect(formFields.get(7).getText()).toContain('Voeg media toe');
+			expect(formFields.get(7).getAttribute('value')).toBe('Voeg media toe');
 			expect(formFields.get(8).getText()).toContain('Ik heb mijn verhaal verteld');
 		});
 	});
