@@ -7,7 +7,8 @@ angular.module('catharijne.location', [
 	controller: 'LocationCtrl',
 	scope: {
 		properties: '<'
-	}
+	},
+	replace: true
 };}).controller('LocationCtrl', ['$scope', 'uiGmapGoogleMapApi', function($scope, uiGmapGoogleMapApi) {
 	$scope.mapOptions = {
 		draggable: false,

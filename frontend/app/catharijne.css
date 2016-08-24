@@ -22,18 +22,18 @@
 
 /* Location widget */
 
-app-location figure {
+figure.app-location {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-app-location .angular-google-map-container {
+.app-location .angular-google-map-container {
     height: 96px;
     width: 120px;
 }
 
-app-location figcaption {
+.app-location figcaption {
     margin-left: 1em;
 }
 
