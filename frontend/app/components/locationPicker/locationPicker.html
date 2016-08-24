@@ -1,0 +1,16 @@
+<div class=app-location-picker>
+	<span ng-if="!active">
+		<button
+			ng-if="!location.coords || !location.label"
+			ng-click="activate()"
+		>Kies een locatie</button>
+		<app-location
+			properties=location
+			ng-if="location.coords && location.label"
+			ng-click="activate()"
+		></app-location>
+	</span>
+	<ui-gmap-google-map center=location.coords zoom=location.zoom ng-if=active>
+		
+	</ui-gmap-google-map>
+</div>

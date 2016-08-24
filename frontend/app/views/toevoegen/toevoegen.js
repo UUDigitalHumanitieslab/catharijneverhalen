@@ -11,4 +11,10 @@ angular.module('catharijne.toevoegen', ['ngRoute'])
 
 .controller('StoryFormCtrl', ['$scope', function($scope) {
 	$scope.story = {};
+	// $scope.map = {
+	// 	coords: {latitude: 52, longitude: 4},
+	// 	zoom: 10,
+	// 	id: 0,
+	// 	label: 'probeersel'
+	// };
 }]);

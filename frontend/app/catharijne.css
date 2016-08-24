@@ -37,6 +37,17 @@ figure.app-location {
     margin-left: 1em;
 }
 
+/* Location picker form control */
+
+.app-location-picker .angular-google-map-container {
+    height: 480px;
+    width: 600px;
+    position: fixed;
+    top: calc(0.5vh - 240px);
+    left: calc(0.5vw - 300px);
+    z-index: 1;
+}
+
 /*
     End DHL insertions.
 */

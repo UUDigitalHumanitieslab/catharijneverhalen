@@ -9,6 +9,7 @@ angular.module('catharijne', [
 	'catharijne.version',
 	'catharijne.googleMaps',
 	'catharijne.location',
+	'catharijne.locationPicker',
 	'catharijne.home',
 	'catharijne.meedoen',
 	'catharijne.aanmelden',
