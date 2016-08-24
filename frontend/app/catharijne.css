@@ -3,6 +3,8 @@
     catharijneconvent.nl/static/presentation/screen.css?2
     but debug declarations and outcomments have been removed.
 
+    Insertions by the Digital Humanities Lab can be found with 'DHL'.
+
     DO NOT USE IN PRODUCTION.
 */
 
@@ -13,6 +15,31 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
+/*
+    DHL insertions that don't belong anywhere else.
+*/
+
+/* Location widget */
+
+app-location figure {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+app-location .angular-google-map-container {
+    height: 96px;
+    width: 120px;
+}
+
+app-location figcaption {
+    margin-left: 1em;
+}
+
+/*
+    End DHL insertions.
+*/
 
 /*******************
     COLORS
