@@ -2,18 +2,14 @@
 
 angular.module('catharijne.location', [
 	'catharijne.googleMaps'
-]).component('appLocation', {
+]).directive('appLocation', function() {return {
 	templateUrl: 'components/location/location.html',
-	replace: true,
 	controller: 'LocationCtrl',
-	bindings: {
-		id: '<',
-		coords: '<',
-		bounds: '<',
-		label: '<'
+	scope: {
+		properties: '<'
 	}
-}).controller('LocationCtrl', ['$scope', 'uiGmapGoogleMapApi', function($scope, uiGmapGoogleMapApi) {
+};}).controller('LocationCtrl', ['$scope', 'uiGmapGoogleMapApi', function($scope, uiGmapGoogleMapApi) {
 	uiGmapGoogleMapApi.then(function(maps) {
 		
 	})
-}])
+}]);

@@ -9,15 +9,14 @@ describe('catharijne.location', function() {
 		it('renders a figure with map, marker and caption', function() {
 			inject(function($rootScope, $compile, uiGmapGoogleMapApi) {
 				var scope = $rootScope.$new();
-				scope.center = {longitude: 4, latitude: 52};
-				scope.bounds = {
-					northeast: {longitude: 6.5, latitude: 54},
-					southwest: {longitude: 1.5, latitude: 50}
-				};
-				scope.id = 0;
-				scope.label = 'Somewhere near the Netherlands';
+				scope.map = {
+					coords: {longitude: 4, latitude: 52},
+					zoom: 10,
+					id: 0,
+					label: 'Somewhere near the Netherlands'
+				}
 				var element = $compile(
-					'<app-location center=center bounds=bounds id=id label=label></app-location>'
+					'<app-location properties=map></app-location>'
 				)(scope);
 				scope.$digest();
 				uiGmapGoogleMapApi.then(function(maps) {

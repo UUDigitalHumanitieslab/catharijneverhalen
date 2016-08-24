@@ -1,6 +1,6 @@
 <figure>
-	<ui-gmap-google-map center=coords bounds=bounds>
-		<ui-gmap-marker idKey=id coords=coords></ui-gmap-marker>
+	<ui-gmap-google-map center=properties.coords zoom=properties.zoom>
+		<ui-gmap-marker idKey=properties.id coords=properties.coords></ui-gmap-marker>
 	</ui-gmap-google-map>
-	<figcaption>{{ label }}</figcaption>
+	<figcaption>{{ properties.label }}</figcaption>
 </figure>
