@@ -3,6 +3,18 @@
 describe('catharijne.location', function() {
 	beforeEach(module('catharijne.location'));
 	
+	describe('locationDefaults', function() {
+		it('contains default center and zoom values for the Netherlands', function() {
+			inject(function(locationDefaults) {
+				expect(locationDefaults).toBeDefined();
+				expect(locationDefaults.coords).toBeDefined();
+				expect(locationDefaults.coords.latitude).toEqual(jasmine.any(Number));
+				expect(locationDefaults.coords.longitude).toEqual(jasmine.any(Number));
+				expect(locationDefaults.zoom).toEqual(jasmine.any(Number));
+			});
+		});
+	});
+	
 	describe('appLocation', function() {
 		beforeEach(module('templates'));
 		

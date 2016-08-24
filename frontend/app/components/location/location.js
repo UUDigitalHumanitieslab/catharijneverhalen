@@ -2,7 +2,10 @@
 
 angular.module('catharijne.location', [
 	'catharijne.googleMaps'
-]).directive('appLocation', function() {return {
+]).constant('locationDefaults', {  // The Netherlands
+	coords: {latitude: 52.4, longitude: 4.5},
+	zoom: 9
+}).directive('appLocation', function() {return {
 	templateUrl: 'components/location/location.html',
 	controller: 'LocationCtrl',
 	scope: {
