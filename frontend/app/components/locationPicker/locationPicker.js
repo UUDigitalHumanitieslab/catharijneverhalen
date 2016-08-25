@@ -20,7 +20,13 @@ angular.module('catharijne.locationPicker', [
 				scope.location = ngModelController.$viewValue;
 			};
 			
-			scope.location = ngModelController.$viewValue || new Object(locationDefaults);
+			var initValue = ngModelController.$viewValue;
+			if (initValue) {
+				scope.location = initValue;
+			} else {
+				scope.location = new Object(locationDefaults);
+				ngModelController.$setViewValue(scope.location);
+			}
 		}
 	};
 }]).controller('LocationPickerCtrl', [
