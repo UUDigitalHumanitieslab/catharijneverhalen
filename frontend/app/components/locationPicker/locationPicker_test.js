@@ -4,23 +4,17 @@ describe('catharijne.locationPicker module', function() {
 	beforeEach(module('catharijne.locationPicker'));
 	
 	describe('LocationPickerCtrl controller', function() {
-		var scope, controller, gmapApi;
+		var scope, controller;
 		
-		beforeEach(inject(function($rootScope, $controller, uiGmapGoogleMapApi) {
+		beforeEach(inject(function($rootScope, $controller) {
 			scope = $rootScope.$new();
 			controller = $controller('LocationPickerCtrl', {$scope: scope});
-			gmapApi = uiGmapGoogleMapApi;
 		}));
 		
 		it('defines active/inactive logic on the scope', function() {
 			expect(scope.active).toBe(false);
 			expect(scope.activate).toEqual(jasmine.any(Function));
-			spyOn(gmapApi, 'then').and.callFake(function(func) {
-				func();
-			});
-			expect(gmapApi.then).not.toHaveBeenCalled();
 			scope.activate();
-			expect(gmapApi.then).toHaveBeenCalled();
 			expect(scope.active).toBe(true);
 		});
 	});

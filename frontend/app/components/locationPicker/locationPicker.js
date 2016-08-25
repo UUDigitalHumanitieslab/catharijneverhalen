@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('catharijne.locationPicker', [
-	'catharijne.location',
-	'catharijne.googleMaps'
+	'catharijne.location'
 ]).directive('appLocationPicker', function() {
 	return {
 		templateUrl: 'components/locationPicker/locationPicker.html',
@@ -14,13 +13,10 @@ angular.module('catharijne.locationPicker', [
 }).controller('LocationPickerCtrl', [
 	'locationDefaults',
 	'$scope',
-	'uiGmapGoogleMapApi',
-	function(locationDefaults, $scope, uiGmapGoogleMapApi) {
+	function(locationDefaults, $scope) {
 		$scope.active = false;
 		$scope.activate = function() {
-			uiGmapGoogleMapApi.then(function() {
-				$scope.active = true;
-			});
+			$scope.active = true;
 		};
 		if (! $scope.location) $scope.location = new Object(locationDefaults);
 	}
