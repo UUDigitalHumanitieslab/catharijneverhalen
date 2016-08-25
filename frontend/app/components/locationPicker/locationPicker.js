@@ -3,41 +3,25 @@
 angular.module('catharijne.locationPicker', [
 	'catharijne.location',
 	'catharijne.googleMaps'
-]).directive('appLocationPicker', ['locationDefaults', function(locationDefaults) {
+]).directive('appLocationPicker', function() {
 	return {
-		require: 'ngModel',
 		templateUrl: 'components/locationPicker/locationPicker.html',
-		scope: {},
-		controller: 'LocationPickerCtrl',
-		link: function(scope, element, attributes, ngModelController) {
-			var controller = element.controller('LocationPickerCtrl');
-			
-			element.on('blur', function() {
-				ngModelController.$setViewValue(scope.getValue());
-			});
-			
-			ngModelController.$render = function() {
-				scope.location = ngModelController.$viewValue;
-			};
-			
-			var initValue = ngModelController.$viewValue;
-			if (initValue) {
-				scope.location = initValue;
-			} else {
-				scope.location = new Object(locationDefaults);
-				ngModelController.$setViewValue(scope.location);
-			}
-		}
+		scope: {
+			location: '='
+		},
+		controller: 'LocationPickerCtrl'
 	};
-}]).controller('LocationPickerCtrl', [
+}).controller('LocationPickerCtrl', [
+	'locationDefaults',
 	'$scope',
 	'uiGmapGoogleMapApi',
-	function($scope, uiGmapGoogleMapApi) {
+	function(locationDefaults, $scope, uiGmapGoogleMapApi) {
 		$scope.active = false;
 		$scope.activate = function() {
 			uiGmapGoogleMapApi.then(function() {
 				$scope.active = true;
 			});
 		};
+		if (! $scope.location) $scope.location = new Object(locationDefaults);
 	}
 ]);
