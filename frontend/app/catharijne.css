@@ -39,12 +39,16 @@ figure.app-location {
 
 /* Location picker form control */
 
+.app-location-picker {
+    max-height: 96px;
+}
+
 .app-location-picker .angular-google-map-container {
     height: 480px;
     width: 600px;
-    position: fixed;
-    top: calc(0.5vh - 240px);
-    left: calc(0.5vw - 300px);
+    position: absolute;        /* no fixed because of animations */
+    bottom: 200px;             /* put on top of form */
+    left: calc(50vw - 300px);  /* center on the page */
     z-index: 1;
 }
 
