@@ -1,12 +1,12 @@
 <div class=app-location-picker>
 	<span ng-if="!active">
 		<button
-			ng-if="!location.coords || !location.label"
+			ng-if="!has_picked"
 			ng-click="activate()"
 		>Kies een locatie</button>
 		<app-location
 			properties=location
-			ng-if="location.coords && location.label"
+			ng-if="has_picked"
 			ng-click="activate()"
 		></app-location>
 	</span>

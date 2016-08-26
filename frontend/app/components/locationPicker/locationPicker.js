@@ -19,5 +19,6 @@ angular.module('catharijne.locationPicker', [
 			$scope.active = true;
 		};
 		if (! $scope.location) $scope.location = new Object(locationDefaults);
+		$scope.has_picked = ($scope.location.id != undefined);
 	}
 ]);
