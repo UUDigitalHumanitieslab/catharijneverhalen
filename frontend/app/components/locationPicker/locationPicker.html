@@ -11,6 +11,6 @@
 		></app-location>
 	</span>
 	<ui-gmap-google-map center=location.coords zoom=location.zoom ng-if=active>
-		
+		<ui-gmap-marker idKey=location.id coords=location.coords ng-if=has_picked></ui-gmap-marker>
 	</ui-gmap-google-map>
 </div>
