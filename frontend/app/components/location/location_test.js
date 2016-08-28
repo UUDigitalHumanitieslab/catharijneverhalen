@@ -19,7 +19,7 @@ describe('catharijne.location', function() {
 		beforeEach(module('templates'));
 		
 		it('renders a figure with map, marker and caption', function() {
-			inject(function($rootScope, $compile, uiGmapGoogleMapApi) {
+			inject(function($rootScope, $compile, uiGmapIsReady) {
 				var scope = $rootScope.$new();
 				scope.map = {
 					coords: {longitude: 4, latitude: 52},
@@ -31,7 +31,7 @@ describe('catharijne.location', function() {
 					'<app-location properties=map></app-location>'
 				)(scope);
 				scope.$digest();
-				uiGmapGoogleMapApi.then(function(maps) {
+				uiGmapIsReady.promise().then(function() {
 					expect(element.children().length).toBe(2);
 					var map = $(element.children()[0]);
 					var caption = $(element.children[1]);

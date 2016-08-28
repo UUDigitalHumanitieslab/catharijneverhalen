@@ -79,8 +79,8 @@ describe('catharijne.locationPicker module', function() {
 			
 			it('does not display a marker initially', function() {
 				button.triggerHandler('click');
-				inject(function(uiGmapGoogleMapApi) {
-					uiGmapGoogleMapApi.then(function(gMapsApi) {
+				inject(function(uiGmapIsReady) {
+					uiGmapIsReady.promise().then(function() {
 						expect(childScope.handle.getGMap).toBeDefined();
 						expect(childScope.handle.getGMarkers).not.toBeDefined();
 					});
@@ -117,8 +117,8 @@ describe('catharijne.locationPicker module', function() {
 			
 			it('does display a marker initially', function() {
 				widget.triggerHandler('click');
-				inject(function(uiGmapGoogleMapApi) {
-					uiGmapGoogleMapApi.then(function(gMapsApi) {
+				inject(function(uiGmapIsReady) {
+					uiGmapIsReady.promise().then(function() {
 						expect(childScope.handle.getGMarkers).toBeDefined();
 						expect(childScope.handle.getGMarkers().length).toBe(1);
 					});

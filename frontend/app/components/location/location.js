@@ -12,7 +12,7 @@ angular.module('catharijne.location', [
 		properties: '<'
 	},
 	replace: true
-};}).controller('LocationCtrl', ['$scope', 'uiGmapGoogleMapApi', function($scope, uiGmapGoogleMapApi) {
+};}).controller('LocationCtrl', ['$scope', 'uiGmapIsReady', function($scope, uiGmapIsReady) {
 	$scope.mapOptions = {
 		draggable: false,
 		scrollwheel: false
@@ -20,7 +20,7 @@ angular.module('catharijne.location', [
 	$scope.markerOptions = {
 		clickable: false
 	};
-	uiGmapGoogleMapApi.then(function(maps) {
+	uiGmapIsReady.promise().then(function() {
 		
 	});
 }]);
