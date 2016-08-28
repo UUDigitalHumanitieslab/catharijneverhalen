@@ -60,6 +60,15 @@ describe('catharijne.locationPicker module', function() {
 				expect(button.length).toBe(1);
 				expect(button.text()).toBe('Kies een locatie');
 			});
+			
+			it('opens a larger map when clicked', function() {
+				var button = getChild('button');
+				button.triggerHandler('click');
+				expect(getChild('button').length).toBe(0);
+				var map = getChild('ui-gmap-google-map');
+				expect(map.length).toBe(1);
+				expect(map.scope().active).toBe(true);
+			});
 		});
 		
 		describe('with a prior location', function() {
@@ -86,23 +95,6 @@ describe('catharijne.locationPicker module', function() {
 				expect(widget.length).toBe(1);
 				var subWidget = angular.element(widget.children()[0]);
 				expect(subWidget.scope().properties).toEqual(priorLocation);
-			});
-		});
-		
-		describe('in general', function() {
-			beforeEach(function() {
-				element = elementFunc(scope);
-				scope.$digest();
-			});
-			
-			it('opens a larger map when clicked', function() {
-				var button = getChild('button');
-				expect(button.length).toBe(1);
-				button.triggerHandler('click');
-				expect(getChild('button').length).toBe(0);
-				var map = getChild('ui-gmap-google-map');
-				expect(map.length).toBe(1);
-				expect(map.scope().active).toBe(true);
 			});
 		});
 	});
