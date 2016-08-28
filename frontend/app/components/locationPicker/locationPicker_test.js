@@ -86,7 +86,7 @@ describe('catharijne.locationPicker module', function() {
 						done();
 					});
 				});
-			}, 10000);
+			});
 		});
 		
 		describe('with a prior location', function() {
@@ -125,7 +125,7 @@ describe('catharijne.locationPicker module', function() {
 						done();
 					});
 				});
-			}, 10000);
+			});
 		});
 	});
 });
