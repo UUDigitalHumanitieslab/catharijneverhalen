@@ -41,6 +41,14 @@ describe('catharijne.locationPicker module', function() {
 			});
 		});
 		
+		afterEach(function() {
+			childScope = undefined;
+			widget = undefined;
+			button = undefined;
+			element = undefined;
+			scope = undefined;
+		});
+		
 		describe('by default', function() {
 			beforeEach(function() {
 				element = elementFunc(scope);
@@ -108,7 +116,7 @@ describe('catharijne.locationPicker module', function() {
 			});
 			
 			it('does display a marker initially', function() {
-				button.triggerHandler('click');
+				widget.triggerHandler('click');
 				inject(function(uiGmapGoogleMapApi) {
 					uiGmapGoogleMapApi.then(function(gMapsApi) {
 						expect(childScope.handle.getGMarkers).toBeDefined();
