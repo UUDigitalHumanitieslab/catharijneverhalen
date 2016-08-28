@@ -69,6 +69,18 @@ describe('catharijne.locationPicker module', function() {
 				expect(map.length).toBe(1);
 				expect(map.scope().active).toBe(true);
 			});
+			
+			it('does not display a marker initially', function() {
+				var button = getChild('button');
+				var subScope = button.scope();
+				button.triggerHandler('click');
+				inject(function(uiGmapGoogleMapApi) {
+					uiGmapGoogleMapApi.then(function(gMapsApi) {
+						expect(subScope.handle.getGMap).toBeDefined();
+						expect(subScope.handle.getGMarkers).not.toBeDefined();
+					});
+				});
+			});
 		});
 		
 		describe('with a prior location', function() {
@@ -95,6 +107,18 @@ describe('catharijne.locationPicker module', function() {
 				expect(widget.length).toBe(1);
 				var subWidget = angular.element(widget.children()[0]);
 				expect(subWidget.scope().properties).toEqual(priorLocation);
+			});
+			
+			it('does display a marker initially', function() {
+				var button = getChild('button');
+				var subScope = button.scope();
+				button.triggerHandler('click');
+				inject(function(uiGmapGoogleMapApi) {
+					uiGmapGoogleMapApi.then(function(gMapsApi) {
+						expect(subScope.handle.getGMarkers).toBeDefined();
+						expect(subScope.handle.getGMarkers().length).toBe(1);
+					});
+				});
 			});
 		});
 	});

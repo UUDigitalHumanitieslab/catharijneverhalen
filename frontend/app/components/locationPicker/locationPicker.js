@@ -14,6 +14,7 @@ angular.module('catharijne.locationPicker', [
 	'locationDefaults',
 	'$scope',
 	function(locationDefaults, $scope) {
+		$scope.handle = {};
 		$scope.active = false;
 		$scope.activate = function() {
 			$scope.active = true;
