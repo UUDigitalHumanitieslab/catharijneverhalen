@@ -1,11 +1,6 @@
 'use strict';
 
-describe('catharijne.toevoegen', function() {
-	beforeEach(function() {
-		routeFix.captureRouteProvider();
-		module('catharijne.toevoegen');
-	});
-	
+injectorFix.describe('catharijne.toevoegen', function() {
 	routeFix.checkRoute(
 		'/toevoegen',
 		'views/toevoegen/toevoegen.html',

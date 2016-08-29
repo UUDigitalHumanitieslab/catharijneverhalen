@@ -1,8 +1,6 @@
 'use strict';
 
-describe('catharijne.location', function() {
-	beforeEach(module('catharijne.location'));
-	
+injectorFix.describe('catharijne.location', function() {
 	describe('locationDefaults', function() {
 		it('contains default center and zoom values for the Netherlands', function() {
 			inject(function(locationDefaults) {
@@ -16,8 +14,6 @@ describe('catharijne.location', function() {
 	});
 	
 	describe('appLocation', function() {
-		beforeEach(module('templates'));
-		
 		it('renders a figure with map, marker and caption', function() {
 			inject(function($rootScope, $compile, uiGmapIsReady) {
 				var scope = $rootScope.$new();

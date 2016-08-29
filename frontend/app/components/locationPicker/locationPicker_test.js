@@ -1,8 +1,6 @@
 'use strict';
 
-describe('catharijne.locationPicker module', function() {
-	beforeEach(module('catharijne.locationPicker'));
-	
+injectorFix.describe('catharijne.locationPicker module', function() {
 	describe('LocationPickerCtrl controller', function() {
 		var scope, controller;
 		
@@ -32,7 +30,6 @@ describe('catharijne.locationPicker module', function() {
 		};
 		
 		beforeEach(function() {
-			module('templates');
 			inject(function($rootScope, $compile) {
 				scope = $rootScope.$new();
 				elementFunc = $compile(

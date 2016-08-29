@@ -14,7 +14,8 @@ module.exports = function(config){
 			'components/**/*.js',
 			'components/**/*.html',
 			'views/**/*.js',
-			'*.js'
+			'*.js',
+			'../globalInject_test.js'
 		],
 		
 		// enables the usage of HTML templates in Karma tests

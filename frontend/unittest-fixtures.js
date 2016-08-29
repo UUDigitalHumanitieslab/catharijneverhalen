@@ -24,3 +24,20 @@ var routeFix = {
 		});
 	}
 };
+
+/*
+	Custom test registration for specs that load Google Maps.
+	This speeds up testing and prevents the error message about multiple
+	instances of the Google Maps API.
+	Use by calling injectorFix.describe instead of the global describe.
+
+	DO NOT create or load modules in your spec. The specs are inserted
+	in a context with a "fat" injector already containing everything you
+	might possibly need, including routeFix and the templates.
+*/
+var injectorFix = {
+	queue: {},
+	describe: function(description, context) {
+		injectorFix.queue[description] = context;
+	}
+};
