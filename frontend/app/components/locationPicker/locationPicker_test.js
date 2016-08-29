@@ -85,6 +85,20 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 					var marker = getChild('.angular-google-map-marker');
 					expect(marker.length).toBe(0);
 				});
+				
+				it('allows one to place a marker', function() {
+					childScope.mapEvents.click(null, null, [{latLng: {
+						lat: function(){return 10;},
+						lng: function(){return 20;}
+					}}]);
+					var marker = getChild('.angular-google-map-marker');
+					expect(marker.length).toBe(1);
+					expect(childScope.location.coords).toEqual({
+						latitude: 10,
+						longitude: 20
+					});
+					expect(childScope.has_picked).toBe(true);
+				});
 			});
 		});
 		
