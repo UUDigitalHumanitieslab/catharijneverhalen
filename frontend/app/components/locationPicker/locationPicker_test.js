@@ -18,7 +18,7 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 	});
 	
 	describe('appLocationPicker directive', function() {
-		var scope, elementFunc, element, button, widget, childScope;
+		var scope, elementFunc, element, button, widget, childScope, map;
 		var getChild = function(query) {
 			var rawChild;
 			if (query) {
@@ -39,6 +39,7 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 		});
 		
 		afterEach(function() {
+			map = undefined;
 			childScope = undefined;
 			widget = undefined;
 			button = undefined;
@@ -69,14 +70,21 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 			it('opens a larger map when clicked', function() {
 				button.triggerHandler('click');
 				expect(getChild('button').length).toBe(0);
-				var map = getChild('ui-gmap-google-map');
+				map = getChild('ui-gmap-google-map');
 				expect(map.length).toBe(1);
 				expect(map.scope().active).toBe(true);
 			});
 			
-			it('does not display a marker initially', function() {
-				button.triggerHandler('click');
-				expect(getChild('.angular-google-map-marker').length).toBe(0);
+			describe('the open map', function() {
+				beforeEach(function() {
+					button.triggerHandler('click');
+					map = getChild('ui-gmap-google-map');
+				});
+			
+				it('does not display a marker initially', function() {
+					var marker = getChild('.angular-google-map-marker');
+					expect(marker.length).toBe(0);
+				});
 			});
 		});
 		
@@ -107,9 +115,16 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 				expect(subWidget.scope().properties).toEqual(priorLocation);
 			});
 			
-			it('does display a marker initially', function() {
-				widget.triggerHandler('click');
-				expect(getChild('.angular-google-map-marker').length).toBe(1);
+			describe('the open map', function() {
+				beforeEach(function() {
+					widget.triggerHandler('click');
+					map = getChild('ui-gmap-google-map');
+				});
+			
+				it('does display a marker initially', function() {
+					var marker = getChild('.angular-google-map-marker');
+					expect(marker.length).toBe(1);
+				});
 			});
 		});
 	});
