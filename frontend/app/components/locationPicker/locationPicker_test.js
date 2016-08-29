@@ -1,11 +1,15 @@
 'use strict';
 
 injectorFix.describe('catharijne.locationPicker module', function() {
+	var scope, controller, elementFunc, element, button, widget, childScope, map;
+
+	beforeEach(inject(function($rootScope) {
+		scope = $rootScope.$new();
+		scope.map = {};
+	}));
+	
 	describe('LocationPickerCtrl controller', function() {
-		var scope, controller;
-		
-		beforeEach(inject(function($rootScope, $controller) {
-			scope = $rootScope.$new();
+		beforeEach(inject(function($controller) {
 			controller = $controller('LocationPickerCtrl', {$scope: scope});
 		}));
 		
@@ -18,7 +22,6 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 	});
 	
 	describe('appLocationPicker directive', function() {
-		var scope, elementFunc, element, button, widget, childScope, map;
 		var getChild = function(query) {
 			var rawChild;
 			if (query) {
@@ -29,14 +32,11 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 			return angular.element(rawChild);
 		};
 		
-		beforeEach(function() {
-			inject(function($rootScope, $compile) {
-				scope = $rootScope.$new();
-				elementFunc = $compile(
-					'<app-location-picker location=map></app-location-picker>'
-				);
-			});
-		});
+		beforeEach(inject(function($compile) {
+			elementFunc = $compile(
+				'<app-location-picker location=map></app-location-picker>'
+			);
+		}));
 		
 		afterEach(function() {
 			map = undefined;
@@ -50,7 +50,6 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 		describe('by default', function() {
 			beforeEach(function() {
 				element = elementFunc(scope);
-				scope.$digest();
 				button = getChild('button');
 				childScope = button.scope();
 			});
@@ -86,19 +85,20 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 					expect(marker.length).toBe(0);
 				});
 				
-				it('allows one to place a marker', function() {
+				it('allows one to place a marker', inject(function(locationDefaults) {
 					childScope.mapEvents.click(null, null, [{latLng: {
 						lat: function(){return 10;},
 						lng: function(){return 20;}
 					}}]);
 					var marker = getChild('.angular-google-map-marker');
 					expect(marker.length).toBe(1);
-					expect(childScope.location.coords).toEqual({
+					expect(childScope.center).toEqual(locationDefaults);
+					expect(scope.map.coords).toEqual({
 						latitude: 10,
 						longitude: 20
 					});
 					expect(childScope.has_picked).toBe(true);
-				});
+				}));
 			});
 		});
 		
@@ -113,7 +113,6 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 			beforeEach(function() {
 				scope.map = new Object(priorLocation);
 				element = elementFunc(scope);
-				scope.$digest();
 				widget = getChild('.app-location');
 				childScope = widget.scope();
 			});

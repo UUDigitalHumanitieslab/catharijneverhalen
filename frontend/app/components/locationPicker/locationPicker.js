@@ -6,7 +6,7 @@ angular.module('catharijne.locationPicker', [
 	return {
 		templateUrl: 'components/locationPicker/locationPicker.html',
 		scope: {
-			location: '='
+			location: '=*'
 		},
 		controller: 'LocationPickerCtrl'
 	};
@@ -19,7 +19,10 @@ angular.module('catharijne.locationPicker', [
 		$scope.activate = function() {
 			$scope.active = true;
 		};
-		if (! $scope.location) $scope.location = new Object(locationDefaults);
+		$scope.center = _.assign(
+			{},
+			$scope.location.coords || locationDefaults.coords
+		);
 		$scope.has_picked = ($scope.location.id != undefined);
 		$scope.mapEvents = {
 			click: function(map, eventName, args) {
@@ -30,7 +33,6 @@ angular.module('catharijne.locationPicker', [
 				};
 				if (! $scope.location.id) $scope.location.id = 'temp';
 				$scope.has_picked = true;
-				$scope.$digest();
 			}
 		};
 	}
