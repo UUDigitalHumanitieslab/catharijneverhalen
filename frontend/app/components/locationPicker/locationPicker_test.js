@@ -79,12 +79,7 @@ describe('catharijne.locationPicker module', function() {
 			
 			it('does not display a marker initially', function() {
 				button.triggerHandler('click');
-				inject(function(uiGmapIsReady) {
-					uiGmapIsReady.promise().then(function() {
-						expect(childScope.handle.getGMap).toBeDefined();
-						expect(childScope.handle.getGMarkers).not.toBeDefined();
-					});
-				});
+				expect(getChild('.angular-google-map-marker').length).toBe(0);
 			});
 		});
 		
@@ -117,12 +112,7 @@ describe('catharijne.locationPicker module', function() {
 			
 			it('does display a marker initially', function() {
 				widget.triggerHandler('click');
-				inject(function(uiGmapIsReady) {
-					uiGmapIsReady.promise().then(function() {
-						expect(childScope.handle.getGMarkers).toBeDefined();
-						expect(childScope.handle.getGMarkers().length).toBe(1);
-					});
-				});
+				expect(getChild('.angular-google-map-marker').length).toBe(1);
 			});
 		});
 	});
