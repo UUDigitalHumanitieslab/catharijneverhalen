@@ -17,7 +17,8 @@ describe('catharijne.googleMaps module', function() {
 	it('configures google maps using the API key', inject(function(appGmapiKey) {
 		expect(gmap.configure).toHaveBeenCalledWith({
 			key: appGmapiKey,
-			libraries: 'drawing'
+			libraries: 'drawing',
+			language: 'nl'
 		});
 	}));
 });

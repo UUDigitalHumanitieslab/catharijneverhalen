@@ -5,6 +5,7 @@ angular.module('catharijne.googleMaps', ['catharijne.googleMaps.apiKey', 'uiGmap
 .config(['appGmapiKey', 'uiGmapGoogleMapApiProvider', function(appGmapiKey, uiGmapGoogleMapApiProvider) {
 	uiGmapGoogleMapApiProvider.configure({
 		key: appGmapiKey,
-		libraries: 'drawing'
+		libraries: 'drawing',
+		language: 'nl'
 	});
 }]);
