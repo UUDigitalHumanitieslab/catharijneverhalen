@@ -1,6 +1,11 @@
 'use strict';
 
-globalInjectorFix.describe('catharijne', function() {
+describe('catharijne', function() {
+	beforeEach(function() {
+		routeFix.captureRouteProvider();
+		module('catharijne');
+	});
+	
 	it('redirects / to /home', function() {
 		inject();
 		expect(routeFix.$routeProvider.otherwise).toHaveBeenCalledWith({

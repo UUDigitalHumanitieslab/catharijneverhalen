@@ -77,13 +77,12 @@ describe('catharijne.locationPicker module', function() {
 				expect(map.scope().active).toBe(true);
 			});
 			
-			it('does not display a marker initially', function(done) {
+			it('does not display a marker initially', function() {
 				button.triggerHandler('click');
 				inject(function(uiGmapIsReady) {
 					uiGmapIsReady.promise().then(function() {
 						expect(childScope.handle.getGMap).toBeDefined();
 						expect(childScope.handle.getGMarkers).not.toBeDefined();
-						done();
 					});
 				});
 			});
@@ -116,13 +115,12 @@ describe('catharijne.locationPicker module', function() {
 				expect(subWidget.scope().properties).toEqual(priorLocation);
 			});
 			
-			it('does display a marker initially', function(done) {
+			it('does display a marker initially', function() {
 				widget.triggerHandler('click');
 				inject(function(uiGmapIsReady) {
 					uiGmapIsReady.promise().then(function() {
 						expect(childScope.handle.getGMarkers).toBeDefined();
 						expect(childScope.handle.getGMarkers().length).toBe(1);
-						done();
 					});
 				});
 			});
