@@ -1,5 +1,6 @@
 'use strict';
 
+// Common logic for testing route configuration
 var routeFix = {
 	captureRouteProvider: function() {
 		angular.module('testRouteProviderAssist', [
