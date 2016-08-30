@@ -27,6 +27,10 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 			controller = $controller('LocationPickerCtrl', {$scope: scope});
 		}));
 		
+		it('has a handle for getting hold of google.maps objects', function() {
+			expect(scope.handle).toBeDefined();
+		});
+		
 		it('defines active/inactive logic on the scope', function() {
 			expect(scope.active).toBe(false);
 			expect(scope.activate).toEqual(jasmine.any(Function));
@@ -39,22 +43,26 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 			controller = $controller('LocationPickerCtrl', {$scope: scope});
 			expect(scope.center).toEqual(priorLocation.coords);
 			expect(scope.zoom).toEqual(priorLocation.zoom);
+			expect(scope.has_picked).toBe(true);
 		}));
 		
 		it('uses the Netherlands as a fallback location', function() {
 			inject(function(locationDefaults) {
 				expect(scope.center).toEqual(locationDefaults.coords);
 				expect(scope.zoom).toEqual(locationDefaults.zoom);
+				expect(scope.has_picked).toBe(false);
 			});
 		});
 		
 		it('updates on click events', inject(function(locationDefaults) {
+			scope.zoom = 10;
 			scope.mapEvents.click(null, null, clickEventMock);
 			expect(scope.center).toEqual(locationDefaults.coords);
 			expect(scope.location.coords).toEqual({
 				latitude: 52.3,
 				longitude: 5.4
 			});
+			expect(scope.location.zoom).toBe(10);
 			expect(scope.has_picked).toBe(true);
 		}));
 	});
