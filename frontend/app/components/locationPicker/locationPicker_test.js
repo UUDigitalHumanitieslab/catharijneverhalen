@@ -196,6 +196,30 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 			});
 		});
 		
+		describe('the map', function() {
+			var button, childScope, map;
+			
+			beforeEach(function() {
+				element = elementFunc(scope);
+				scope.$digest();
+				button = getChild('button');
+				childScope = button.scope();
+				button.triggerHandler('click');
+				map = getChild('ui-gmap-google-map');
+				// map exists, as proven by previous tests
+			});
+			
+			it('has controls', function() {
+				console.debug(element.html());
+				expect(getChild('.close-button').length).toBe(1);
+			});
+			
+			it('can be closed', function() {
+				getChild('.close-button').triggerHandler('click');
+				expect(getChild('ui-gmap-google-map').length).toBe(0);
+			});
+		});
+		
 		describe('the marker', function() {
 			var button, childScope, marker;
 			
@@ -205,7 +229,7 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 				button = getChild('button');
 				childScope = button.scope();
 				button.triggerHandler('click');
-				// now there is a map;
+				// now there is a map
 				childScope.mapEvents.click(null, null, clickEventMock);
 				marker = getChild('.angular-google-map-marker');
 				// marker exists, as proven by previous tests
