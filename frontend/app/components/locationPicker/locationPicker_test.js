@@ -8,12 +8,23 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 		id: 0,
 		label: 'Golf van Guinee'
 	};
-	var clickEventMock = [{latLng: {
-		// coordinates chosen to be different from the
-		// defaults, but still visible on the map
-		lat: function(){return 52.3;},
-		lng: function(){return 5.4;}
-	}}];  // mimics google.maps.MouseEvent
+	var clickEventMock = [  // mimics google.maps.MouseEvent
+		{latLng: {
+			// coordinates chosen to be different from the
+			// defaults, but still visible on the map
+			lat: function(){return 52.3;},
+			lng: function(){return 5.4;}
+		}}
+	];
+	var dragEventMock = {  // mimics google.maps.Map
+		getCenter: function() { return {
+			lat: function(){return 60;},
+			lng: function(){return 10;}
+		}; }
+	};
+	var zoomEventMock = {  // mimics google.maps.Map
+		getZoom: function() { return 2; }
+	};
 
 	beforeEach(inject(function($rootScope) {
 		scope = $rootScope.$new();
@@ -54,7 +65,7 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 			});
 		});
 		
-		it('updates on click events', inject(function(locationDefaults) {
+		it('updates on map click events', inject(function(locationDefaults) {
 			scope.zoom = 10;
 			scope.mapEvents.click(null, null, clickEventMock);
 			expect(scope.center).toEqual(locationDefaults.coords);
@@ -64,6 +75,34 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 			});
 			expect(scope.location.zoom).toBe(10);
 			expect(scope.has_picked).toBe(true);
+		}));
+		
+		it('updates on map drag events', inject(function(locationDefaults) {
+			scope.mapEvents.center_changed(dragEventMock, null);
+			expect(scope.center).toEqual({
+				latitude: 60,
+				longitude: 10
+			});
+			expect(scope.has_picked).toBe(false);
+			expect(scope.location.coords).not.toBeDefined();
+		}));
+		
+		it('updates on map zoom events', inject(function(locationDefaults) {
+			scope.mapEvents.zoom_changed(zoomEventMock, null);
+			expect(scope.zoom).toBe(2);
+			expect(scope.has_picked).toBe(false);
+			expect(scope.location.zoom).not.toBeDefined();
+		}));
+		
+		it('updates on marker click events', inject(function(locationDefaults) {
+			scope.mapEvents.click(null, null, clickEventMock);
+			// now it has a marker
+			scope.markerEvents.click(null, null, null, clickEventMock);
+			// now it should be removed again
+			expect(scope.has_picked).toBe(false);
+			expect(scope.center).toEqual(locationDefaults.coords);
+			expect(scope.location.coords).not.toBeDefined();
+			expect(scope.location.zoom).not.toBeDefined();
 		}));
 	});
 	
@@ -154,6 +193,27 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 					var marker = getChild('.angular-google-map-marker');
 					expect(marker.length).toBe(1);
 				});
+			});
+		});
+		
+		describe('the marker', function() {
+			var button, childScope, marker;
+			
+			beforeEach(function() {
+				element = elementFunc(scope);
+				scope.$digest();
+				button = getChild('button');
+				childScope = button.scope();
+				button.triggerHandler('click');
+				// now there is a map;
+				childScope.mapEvents.click(null, null, clickEventMock);
+				marker = getChild('.angular-google-map-marker');
+				// marker exists, as proven by previous tests
+			});
+			
+			it('can be removed by clicking it', function() {
+				childScope.markerEvents.click();
+				expect(getChild('.angular-google-map-marker').length).toBe(0);
 			});
 		});
 	});

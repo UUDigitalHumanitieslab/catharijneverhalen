@@ -36,6 +36,24 @@ angular.module('catharijne.locationPicker', [
 				if (! $scope.location.id) $scope.location.id = 'temp';
 				$scope.has_picked = true;
 				$scope.$digest();
+			},
+			center_changed: function(map, eventName) {
+				var newCenter = map.getCenter();
+				$scope.center = {
+					latitude: newCenter.lat(),
+					longitude: newCenter.lng()
+				};
+			},
+			zoom_changed: function(map, eventName) {
+				$scope.zoom = map.getZoom();
+			}
+		};
+		$scope.markerEvents = {
+			click: function(marker, eventName, model, args) {
+				$scope.has_picked = false;
+				$scope.$digest();
+				delete $scope.location.coords;
+				delete $scope.location.zoom;
 			}
 		};
 	}
