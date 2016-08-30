@@ -23,6 +23,7 @@ angular.module('catharijne.locationPicker', [
 			{},
 			$scope.location.coords || locationDefaults.coords
 		);
+		$scope.zoom = $scope.location.zoom || locationDefaults.zoom;
 		$scope.has_picked = ($scope.location.id != undefined);
 		$scope.mapEvents = {
 			click: function(map, eventName, args) {
@@ -31,8 +32,10 @@ angular.module('catharijne.locationPicker', [
 					latitude: newCoords.lat(),
 					longitude: newCoords.lng()
 				};
+				$scope.location.zoom = $scope.zoom;
 				if (! $scope.location.id) $scope.location.id = 'temp';
 				$scope.has_picked = true;
+				$scope.$digest();
 			}
 		};
 	}

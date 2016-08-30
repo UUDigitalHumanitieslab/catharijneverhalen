@@ -5,11 +5,11 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 
 	beforeEach(inject(function($rootScope) {
 		scope = $rootScope.$new();
-		scope.map = {};
 	}));
 	
 	describe('LocationPickerCtrl controller', function() {
 		beforeEach(inject(function($controller) {
+			scope.location = {};
 			controller = $controller('LocationPickerCtrl', {$scope: scope});
 		}));
 		
@@ -36,6 +36,7 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 			elementFunc = $compile(
 				'<app-location-picker location=map></app-location-picker>'
 			);
+			scope.map = {};
 		}));
 		
 		afterEach(function() {
@@ -50,14 +51,15 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 		describe('by default', function() {
 			beforeEach(function() {
 				element = elementFunc(scope);
+				scope.$digest();
 				button = getChild('button');
 				childScope = button.scope();
 			});
 			
-			it('uses the Netherlands as a backup location', function() {
+			it('uses the Netherlands as a fallback location', function() {
 				inject(function(locationDefaults) {
-					expect(scope.map).toEqual(locationDefaults);
-					expect(childScope.location).toEqual(locationDefaults);
+					expect(childScope.center).toEqual(locationDefaults.coords);
+					expect(childScope.zoom).toEqual(locationDefaults.zoom);
 				});
 			});
 			
@@ -87,17 +89,19 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 				
 				it('allows one to place a marker', inject(function(locationDefaults) {
 					childScope.mapEvents.click(null, null, [{latLng: {
-						lat: function(){return 10;},
-						lng: function(){return 20;}
+						// coordinates chosen to be different from the
+						// defaults, but still visible on the map
+						lat: function(){return 52.3;},
+						lng: function(){return 5.4;}
 					}}]);
 					var marker = getChild('.angular-google-map-marker');
-					expect(marker.length).toBe(1);
-					expect(childScope.center).toEqual(locationDefaults);
+					expect(childScope.center).toEqual(locationDefaults.coords);
 					expect(scope.map.coords).toEqual({
-						latitude: 10,
-						longitude: 20
+						latitude: 52.3,
+						longitude: 5.4
 					});
 					expect(childScope.has_picked).toBe(true);
+					expect(marker.length).toBe(1);
 				}));
 			});
 		});
@@ -113,6 +117,7 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 			beforeEach(function() {
 				scope.map = new Object(priorLocation);
 				element = elementFunc(scope);
+				scope.$digest();
 				widget = getChild('.app-location');
 				childScope = widget.scope();
 			});
