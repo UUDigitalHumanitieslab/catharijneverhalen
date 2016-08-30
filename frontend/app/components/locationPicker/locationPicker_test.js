@@ -1,13 +1,15 @@
 'use strict';
 
 injectorFix.describe('catharijne.locationPicker module', function() {
-	var scope, controller, elementFunc, element, button, widget, childScope, map;
+	var scope;
 
 	beforeEach(inject(function($rootScope) {
 		scope = $rootScope.$new();
 	}));
 	
 	describe('LocationPickerCtrl controller', function() {
+		var controller;
+		
 		beforeEach(inject(function($controller) {
 			scope.location = {};
 			controller = $controller('LocationPickerCtrl', {$scope: scope});
@@ -22,6 +24,7 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 	});
 	
 	describe('appLocationPicker directive', function() {
+		var elementFunc, element;
 		var getChild = function(query) {
 			var rawChild;
 			if (query) {
@@ -39,16 +42,9 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 			scope.map = {};
 		}));
 		
-		afterEach(function() {
-			map = undefined;
-			childScope = undefined;
-			widget = undefined;
-			button = undefined;
-			element = undefined;
-			scope = undefined;
-		});
-		
 		describe('by default', function() {
+			var button, childScope, map;
+			
 			beforeEach(function() {
 				element = elementFunc(scope);
 				scope.$digest();
@@ -107,6 +103,7 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 		});
 		
 		describe('with a prior location', function() {
+			var widget, childScope, map;
 			var priorLocation = {
 				coords: {latitude: 0, longitude: 0},
 				zoomlevel: 7,
