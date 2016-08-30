@@ -2,6 +2,18 @@
 
 injectorFix.describe('catharijne.locationPicker module', function() {
 	var scope;
+	var priorLocation = {
+		coords: {latitude: 0, longitude: 0},
+		zoom: 7,
+		id: 0,
+		label: 'Golf van Guinee'
+	};
+	var clickEventMock = [{latLng: {
+		// coordinates chosen to be different from the
+		// defaults, but still visible on the map
+		lat: function(){return 52.3;},
+		lng: function(){return 5.4;}
+	}}];  // mimics google.maps.MouseEvent
 
 	beforeEach(inject(function($rootScope) {
 		scope = $rootScope.$new();
@@ -21,6 +33,30 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 			scope.activate();
 			expect(scope.active).toBe(true);
 		});
+		
+		it('uses the prior location when available', inject(function($controller) {
+			_.assign(scope.location, priorLocation);
+			controller = $controller('LocationPickerCtrl', {$scope: scope});
+			expect(scope.center).toEqual(priorLocation.coords);
+			expect(scope.zoom).toEqual(priorLocation.zoom);
+		}));
+		
+		it('uses the Netherlands as a fallback location', function() {
+			inject(function(locationDefaults) {
+				expect(scope.center).toEqual(locationDefaults.coords);
+				expect(scope.zoom).toEqual(locationDefaults.zoom);
+			});
+		});
+		
+		it('updates on click events', inject(function(locationDefaults) {
+			scope.mapEvents.click(null, null, clickEventMock);
+			expect(scope.center).toEqual(locationDefaults.coords);
+			expect(scope.location.coords).toEqual({
+				latitude: 52.3,
+				longitude: 5.4
+			});
+			expect(scope.has_picked).toBe(true);
+		}));
 	});
 	
 	describe('appLocationPicker directive', function() {
@@ -52,13 +88,6 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 				childScope = button.scope();
 			});
 			
-			it('uses the Netherlands as a fallback location', function() {
-				inject(function(locationDefaults) {
-					expect(childScope.center).toEqual(locationDefaults.coords);
-					expect(childScope.zoom).toEqual(locationDefaults.zoom);
-				});
-			});
-			
 			it('shows a button for choosing a location', function() {
 				expect(button.length).toBe(1);
 				expect(button.text()).toBe('Kies een locatie');
@@ -69,7 +98,6 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 				expect(getChild('button').length).toBe(0);
 				map = getChild('ui-gmap-google-map');
 				expect(map.length).toBe(1);
-				expect(map.scope().active).toBe(true);
 			});
 			
 			describe('the open map', function() {
@@ -84,19 +112,8 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 				});
 				
 				it('allows one to place a marker', inject(function(locationDefaults) {
-					childScope.mapEvents.click(null, null, [{latLng: {
-						// coordinates chosen to be different from the
-						// defaults, but still visible on the map
-						lat: function(){return 52.3;},
-						lng: function(){return 5.4;}
-					}}]);
+					childScope.mapEvents.click(null, null, clickEventMock);
 					var marker = getChild('.angular-google-map-marker');
-					expect(childScope.center).toEqual(locationDefaults.coords);
-					expect(scope.map.coords).toEqual({
-						latitude: 52.3,
-						longitude: 5.4
-					});
-					expect(childScope.has_picked).toBe(true);
 					expect(marker.length).toBe(1);
 				}));
 			});
@@ -104,12 +121,6 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 		
 		describe('with a prior location', function() {
 			var widget, childScope, map;
-			var priorLocation = {
-				coords: {latitude: 0, longitude: 0},
-				zoomlevel: 7,
-				id: 0,
-				label: 'Golf van Guinee'
-			};
 			
 			beforeEach(function() {
 				scope.map = new Object(priorLocation);
@@ -117,11 +128,6 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 				scope.$digest();
 				widget = getChild('.app-location');
 				childScope = widget.scope();
-			});
-			
-			it('uses the prior location', function() {
-				expect(childScope.location).toEqual(priorLocation);
-				expect(scope.map).toEqual(priorLocation);
 			});
 			
 			it('shows the location', function() {
