@@ -47,6 +47,8 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 			expect(scope.activate).toEqual(jasmine.any(Function));
 			scope.activate();
 			expect(scope.active).toBe(true);
+			scope.deactivate();
+			expect(scope.active).toBe(false);
 		});
 		
 		it('uses the prior location when available', inject(function($controller) {
@@ -210,12 +212,17 @@ injectorFix.describe('catharijne.locationPicker module', function() {
 			});
 			
 			it('has controls', function() {
-				console.debug(element.html());
-				expect(getChild('.close-button').length).toBe(1);
+				expect(getChild('ui-gmap-map-control').length).toBe(1);
+				// The transcluded control templates are not instantiated
+				// because of nested layers of promises in uiGmapControl that
+				// are difficult to mock.
+				// For lack of an actual test, the controls are listed below:
+				// 1. the .close-button
 			});
 			
 			it('can be closed', function() {
-				getChild('.close-button').triggerHandler('click');
+				// Ideally this is triggered by clicking the .close-button.
+				childScope.deactivate();
 				expect(getChild('ui-gmap-google-map').length).toBe(0);
 			});
 		});
