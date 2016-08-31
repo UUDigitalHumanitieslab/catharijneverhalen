@@ -1,5 +1,5 @@
 <div class=app-location-picker>
-	<span ng-if="!active">
+	<span ng-show="!active">
 		<button
 			ng-if="!has_picked"
 			ng-click="activate()"
@@ -16,13 +16,11 @@
 		zoom=zoom
 		events=mapEvents
 		control=handle
-		ng-if=active
+		ng-show=active
+		ng-if=kickedOff
 	>
-		<ui-gmap-marker
-			idKey=location.id
-			coords=location.coords
-			control=handle
-			ng-if=has_picked
-		></ui-gmap-marker>
+		<ui-gmap-map-control position=TOP_RIGHT>
+			<button class=close-button ng-click="deactivate()">Sluit</button>
+		</ui-gmap-map-control>
 	</ui-gmap-google-map>
 </div>
