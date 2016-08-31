@@ -43,7 +43,7 @@ figure.app-location {
     max-height: 96px;
 }
 
-.app-location-picker .angular-google-map-container {
+.app-location-picker .major .angular-google-map-container {
     height: 480px;
     width: 600px;
     position: absolute;        /* no fixed because of animations */
