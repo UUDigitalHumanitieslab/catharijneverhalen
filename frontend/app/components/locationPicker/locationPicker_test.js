@@ -1,6 +1,6 @@
 'use strict';
 
-injectorFix.describe('catharijne.locationPicker module', function() {
+xdescribe('catharijne.locationPicker module', function() {
 	var scope;
 	var priorLocation = {
 		coords: {latitude: 0, longitude: 0},

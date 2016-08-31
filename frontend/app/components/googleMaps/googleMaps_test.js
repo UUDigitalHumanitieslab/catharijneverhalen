@@ -1,6 +1,6 @@
 'use strict';
 
-describe('catharijne.googleMaps module', function() {
+xdescribe('catharijne.googleMaps module', function() {
 	var gmap;
 	
 	beforeEach(function() {

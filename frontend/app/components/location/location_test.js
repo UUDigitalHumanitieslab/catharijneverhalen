@@ -1,6 +1,6 @@
 'use strict';
 
-injectorFix.describe('catharijne.location', function() {
+xdescribe('catharijne.location', function() {
 	describe('locationDefaults', function() {
 		it('contains default center and zoom values for the Netherlands', function() {
 			inject(function(locationDefaults) {
