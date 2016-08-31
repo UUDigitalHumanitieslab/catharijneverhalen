@@ -1,12 +1,12 @@
 <div class=app-location-picker>
 	<span ng-show="!active">
 		<button
-			ng-if="!has_picked"
+			ng-if="!location.id"
 			ng-click="activate()"
 		>Kies een locatie</button>
 		<app-location
 			properties=location
-			ng-if="has_picked"
+			ng-if="location.id"
 			ng-click="activate()"
 		></app-location>
 	</span>
@@ -18,9 +18,10 @@
 		control=handle
 		ng-show=active
 		ng-if=kickedOff
+		ng-click="clickMap($event)"
 	>
 		<ui-gmap-map-control position=TOP_RIGHT>
-			<button class=close-button ng-click="deactivate()">Sluit</button>
+			<button class=close-button ng-click="deactivate($event)">Sluit</button>
 		</ui-gmap-map-control>
 	</ui-gmap-google-map>
 </div>
