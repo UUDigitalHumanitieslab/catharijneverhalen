@@ -70,13 +70,7 @@ xdescribe('catharijne.locationPicker module', function() {
 	describe('appLocationPicker directive', function() {
 		var elementFunc, element;
 		var getChild = function(query) {
-			var rawChild;
-			if (query) {
-				rawChild = element[0].querySelector(query);
-			} else {
-				rawChild = element.children()[0];
-			}
-			return angular.element(rawChild);
+			return domFix.getChild(element, query);
 		};
 		
 		beforeEach(inject(function($compile) {

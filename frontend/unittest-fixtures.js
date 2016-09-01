@@ -42,3 +42,16 @@ var injectorFix = {
 		injectorFix.queue[description] = context;
 	}
 };
+
+// Helper functions for DOM manipulation
+var domFix = {
+	getChild: function(element, query) {
+		var rawChild;
+		if (query) {
+			rawChild = element[0].querySelector(query);
+		} else {
+			rawChild = element.children()[0];
+		}
+		return angular.element(rawChild);
+	}
+};
