@@ -18,6 +18,7 @@ describe('catharijne.objectPicker module', function() {
 	
 	beforeEach(function() {
 		module('catharijne.objectPicker');
+		module('templates');
 		inject(function($rootScope, $httpBackend) {
 			scope = $rootScope.$new();
 			backend = $httpBackend.expectGET('demo_objects.json');
@@ -110,5 +111,66 @@ describe('catharijne.objectPicker module', function() {
 				data: 'not found'
 			}));
 		}));
+	});
+	
+	describe('appObjectPicker directive', function() {
+		var parentScope, elementFunc, element;
+		var getChild = function(query) {
+			return domFix.getChild(element, query);
+		};
+		var createElement = function() {
+			element = elementFunc(parentScope);
+			parentScope.$digest();
+		};
+		var setScope = function() {
+			// For consistency, `scope` belongs to the controller.
+			if (element.children().length) {
+				scope = getChild().scope();
+			} else {
+				// this is a hack
+				element.append('<span>');
+				var child = getChild();  // the span from above
+				scope = child.scope();
+				child.remove();
+			}
+		};
+		
+		beforeEach(inject(function($compile) {
+			parentScope = scope;
+			elementFunc = $compile(
+				'<app-object-picker object-id=id></app-object-picker>'
+			);
+			backend.respond(_.cloneDeep(responseMock));
+		}));
+		
+		it('creates a figure element', function() {
+			createElement();
+			expect(element.hasClass('app-object-picker')).toBe(true);
+		});
+		
+		it('shows image with caption when available', function() {
+			parentScope.id = 'RMCC v1026';
+			createElement();
+			flushRequests();
+			expect(element.children().length).toBe(2);
+			setScope();
+			var img = getChild('img');
+			expect(img.length).toBe(1);
+			expect(img.attr('ng-src')).toBe('object.image');
+			var caption = getChild('figcaption');
+			expect(caption.length).toBe(1);
+			expect(caption.text()).toBe(scope.objectDescriptions[1].title);
+		});
+		
+		it('displays the options when picking', function() {
+			createElement();
+			flushRequests();
+			setScope();
+			scope.picking = true;
+			scope.$digest();
+			var ul = getChild('ul');
+			expect(ul.length).toBe(1);
+			expect(ul.children().length).toBe(2);  // one for each object
+		});
 	});
 });
