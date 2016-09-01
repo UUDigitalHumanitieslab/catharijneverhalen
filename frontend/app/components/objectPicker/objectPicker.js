@@ -3,10 +3,10 @@
 angular.module(
 	'catharijne.objectPicker',
 	['catharijne.blocklist']
-).directive('app-object-picker', function() {
+).directive('appObjectPicker', function() {
 	return {
 		scope: {
-			objectID: '='
+			objectId: '='
 		},
 		templateUrl: 'components/objectPicker/objectPicker.html',
 		controller: 'ObjectPickerCtrl',
@@ -15,10 +15,10 @@ angular.module(
 }).controller('ObjectPickerCtrl', function($scope, $http, $log) {
 	var self = this;
 	$scope.picking = false;
-	$scope.update = function(objectID) {
-		if (objectID) $scope.objectID = objectID;
-		$scope.object = _.find(self.allObjects, {inventoryID: $scope.objectID});
-		if (! $scope.object) $scope.objectID = undefined;
+	$scope.update = function(objectId) {
+		if (objectId) $scope.objectId = objectId;
+		$scope.object = _.find(self.allObjects, {inventoryID: $scope.objectId});
+		if (! $scope.object) $scope.objectId = undefined;
 	};
 	$http.get('demo_objects.json', {
 		responseType: 'json'
