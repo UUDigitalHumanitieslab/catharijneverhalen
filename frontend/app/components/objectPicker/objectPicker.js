@@ -17,7 +17,7 @@ angular.module(
 	$scope.picking = false;
 	$scope.update = function(objectID) {
 		if (objectID) $scope.objectID = objectID;
-		if ($scope.objectID) $scope.object = _.find(self.allObjects, {inventoryID: objectID});
+		$scope.object = _.find(self.allObjects, {inventoryID: $scope.objectID});
 		if (! $scope.object) $scope.objectID = undefined;
 	};
 	$http.get('demo_objects.json', {
