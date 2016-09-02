@@ -15,6 +15,9 @@ angular.module(
 }).controller('ObjectPickerCtrl', function($scope, $http, $log) {
 	var self = this;
 	$scope.picking = false;
+	$scope.pick = function() {
+		$scope.picking = true;
+	};
 	$scope.update = function(objectId) {
 		if (objectId) $scope.objectId = objectId;
 		$scope.object = _.find(self.allObjects, {inventoryID: $scope.objectId});

@@ -37,6 +37,12 @@ describe('catharijne.objectPicker module', function() {
 			expect(scope.picking).toBe(false);
 		});
 		
+		it('sets a scope method to start picking', function() {
+			expect(scope.pick).toEqual(jasmine.any(Function));
+			scope.pick();
+			expect(scope.picking).toBe(true);
+		});
+		
 		it('can update to a consistent state', function() {
 			expect(scope.objectId).not.toBeDefined();
 			expect(scope.object).not.toBeDefined();
@@ -173,6 +179,18 @@ describe('catharijne.objectPicker module', function() {
 			var caption = getChild('figcaption');
 			expect(caption.length).toBe(1);
 			expect(caption.text()).toBe(scope.objectDescriptions[1].title);
+		});
+		
+		it('shows a button otherwise', function() {
+			createElement();
+			expect(element.children().length).toBe(1);
+			setScope();
+			expect(scope.$parent).toBe(parentScope);
+			var button = getChild('button');
+			expect(button.length).toBe(1);
+			expect(scope.picking).toBe(false);
+			button.triggerHandler('click');
+			expect(scope.picking).toBe(true);
 		});
 		
 		it('displays the options when picking', function() {

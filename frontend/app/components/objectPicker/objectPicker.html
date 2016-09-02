@@ -1,4 +1,5 @@
 <figure class=app-object-picker>
+	<button ng-click="pick()" ng-if="!object">Kies een voorwerp</button>
 	<img ng-src="object.image" ng-if=object>
 	<figcaption ng-if=object>{{object.title}}</figcaption>
 	<app-blocklist items=objectDescriptions ng-if=picking></app-blocklist>
