@@ -171,7 +171,7 @@ describe('catharijne.objectPicker module', function() {
 			parentScope.id = 'RMCC v1026';
 			createElement();
 			flushRequests();
-			expect(element.children().length).toBe(2);
+			expect(element.children().length).toBe(3);
 			setScope();
 			var img = getChild('img');
 			expect(img.length).toBe(1);
@@ -183,7 +183,7 @@ describe('catharijne.objectPicker module', function() {
 		
 		it('shows a button otherwise', function() {
 			createElement();
-			expect(element.children().length).toBe(1);
+			expect(element.children().length).toBe(2);
 			setScope();
 			expect(scope.$parent).toBe(parentScope);
 			var button = getChild('button');
