@@ -43,7 +43,7 @@ describe('catharijne.block module', function() {
 			expect(anchorDivPicture.children().length).toBe(1);
 			var anchorDivPictureChild = anchorDivPicture.children()[0];
 			expect(anchorDivPictureChild.tagName).toMatch(/^img$/i);
-			expect(anchorDivPictureChild.srcset).toBe(
+			expect(anchorDivPictureChild.src).toBe(
 				'http://meeting.banana.com/image.jpg'
 			);
 			var anchorDivSpan = angular.element(anchorDivChildren[1]);

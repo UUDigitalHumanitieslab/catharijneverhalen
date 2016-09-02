@@ -2,7 +2,7 @@
 	<a ng-if="item.imageUrl" ng-href="{{ item.href }}" ng-click="item.click && item.click($event)">
 		<div class="container-image">
 			<picture>
-				<img ng-srcset="{{ item.imageUrl }}">
+				<img ng-src="{{ item.imageUrl }}">
 			</picture>
 			<span class="hover">
 				<div class="wrapper">
