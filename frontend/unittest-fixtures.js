@@ -46,6 +46,7 @@ var injectorFix = {
 // Helper functions for DOM manipulation
 var domFix = {
 	getChild: function(element, query) {
+		element = angular.element(element);
 		var rawChild;
 		if (query) {
 			rawChild = element[0].querySelector(query);
