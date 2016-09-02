@@ -93,12 +93,30 @@ describe('catharijne.objectPicker module', function() {
 			expect(scope.objectDescriptions).toEqual([{
 				"imageUrl" : "image/ABM v275a-e.jpg",
 				"title" : " Communieserviesje ",
-				"description" : "N.V. Société Céramique	 (1950-1955)"
+				"description" : "N.V. Société Céramique	 (1950-1955)",
+				"linkText": "Kies",
+				"click": jasmine.any(Function),
 			}, {
 				"imageUrl" : "image/RMCC v1026.jpg",
 				"title" : " Eerste communiegeschenk: glas beschilderd met kelk en hostie, ",
-				"description" : "Maker onbekend	 (1920)"
+				"description" : "Maker onbekend	 (1920)",
+				"linkText": "Kies",
+				"click": jasmine.any(Function),
 			}]);
+		});
+		
+		it('sets click handlers for making a choice', function() {
+			spyOn(scope, 'update');
+			backend.respond(_.cloneDeep(responseMock));
+			flushRequests();
+			scope.objectDescriptions[0].click();
+			expect(scope.update.calls.mostRecent().args).toEqual([
+				'ABM v275a-e',
+			]);
+			scope.objectDescriptions[1].click();
+			expect(scope.update.calls.mostRecent().args).toEqual([
+				'RMCC v1026',
+			]);
 		});
 		
 		it('logs fetch errors', inject(function($log) {

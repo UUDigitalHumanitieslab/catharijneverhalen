@@ -28,7 +28,12 @@ angular.module(
 			return {
 				imageUrl: 'image/' + obj.image,
 				title: obj.title,
-				description: obj.creator + ' (' + obj.dateRange + ')'
+				description: obj.creator + ' (' + obj.dateRange + ')',
+				linkText: 'Kies',
+				click: function() {
+					$scope.update(obj.inventoryID);
+					$scope.picking = false;
+				},
 			};
 		});
 		$scope.update();
