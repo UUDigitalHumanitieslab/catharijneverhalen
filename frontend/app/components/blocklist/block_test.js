@@ -53,7 +53,7 @@ describe('catharijne.block module', function() {
 			expect(anchorDivSpanChildren[0].tagName).toMatch(/^div$/i);
 			var anchorDivSpanDiv = angular.element(anchorDivSpanChildren[0]);
 			expect(anchorDivSpanDiv.hasClass('wrapper')).toBe(true);
-			expect(anchorDivSpanDiv.html().trim()).toBe('<span>Lees meer</span>');
+			expect(anchorDivSpanDiv.html().trim()).toMatch(/<span[^<>]*>Lees meer<\/span>/);
 			var div = angular.element(children[1]);
 			expect(div.hasClass('container-content')).toBe(true);
 			var divChildren = div.children();
@@ -73,6 +73,110 @@ describe('catharijne.block module', function() {
 			expect(divAnchor.hasClass('button')).toBe(true);
 			expect(divAnchor.prop('href')).toBe('http://meeting.banana.com/');
 			expect(divAnchor.html().trim()).toBe('Lees meer');
+		});
+		
+		it('permits overriding the link text', function() {
+			parentScope.testdata = {
+				title: 'Banana',
+				supertitle: 'Meeting',
+				href: 'http://meeting.banana.com/',
+				imageUrl: 'http://meeting.banana.com/image.jpg',
+				description: 'Voice your opinion on bananas',
+				linkText: 'Fly'
+			};
+			parentScope.$digest();
+			var children = element.children();
+			var anchor = angular.element(children[0]);
+			var anchorDiv = angular.element(anchor.children()[0]);
+			var anchorDivSpan = angular.element(anchorDiv.children()[1]);
+			var anchorDivSpanDiv = angular.element(anchorDivSpan.children()[0]);
+			expect(anchorDivSpanDiv.html().trim()).toMatch(/<span[^<>]*>Fly<\/span>/);
+			var div = angular.element(children[1]);
+			var divAnchor = angular.element(div.children()[3]);
+			expect(divAnchor.html().trim()).toBe('Fly');
+		});
+		
+		it('permits setting click handlers on the anchor elements', function() {
+			parentScope.testdata = {
+				title: 'Banana',
+				imageUrl: 'http://meeting.banana.com/image.jpg',
+				description: 'Voice your opinion on bananas',
+				click: function(){}
+			};
+			parentScope.$digest();
+			var children = element.children();
+			var anchor = angular.element(children[0]);
+			var div = angular.element(children[1]);
+			// no supertitle, so divAnchor is the 3rd instead of 4th child
+			var divAnchor = angular.element(div.children()[2]);
+			expect(getChild(div, 'a')[0]).toBe(divAnchor[0]);
+			spyOn(parentScope.testdata, 'click');
+			anchor.triggerHandler('click');
+			expect(parentScope.testdata.click.calls.count()).toBe(1);
+			divAnchor.triggerHandler('click');
+			expect(parentScope.testdata.click.calls.count()).toBe(2);
+			expect(parentScope.testdata.click.calls.first()).toEqual({
+				object: parentScope.testdata,
+				args: [jasmine.objectContaining({
+					target: anchor[0],
+					defaultPrevented: true
+				})],
+				returnValue: undefined
+			});
+			expect(parentScope.testdata.click.calls.mostRecent()).toEqual({
+				object: parentScope.testdata,
+				args: [jasmine.objectContaining({
+					target: divAnchor[0],
+					defaultPrevented: true
+				})],
+				returnValue: undefined
+			});
+		});
+		
+		it('can accept a href and a click handler at once', function() {
+			parentScope.testdata = {
+				title: 'Banana',
+				imageUrl: 'http://meeting.banana.com/image.jpg',
+				description: 'Voice your opinion on bananas',
+				click: function(event){ event.preventDefault(); },
+				href: 'http://test.com/'
+			};
+			parentScope.$digest();
+			var children = element.children();
+			var anchor = angular.element(children[0]);
+			var div = angular.element(children[1]);
+			// no supertitle, so divAnchor is the 3rd instead of 4th child
+			var divAnchor = angular.element(div.children()[2]);
+			expect(getChild(div, 'a')[0]).toBe(divAnchor[0]);
+			expect(anchor.prop('href')).toBe('http://test.com/');
+			expect(divAnchor.prop('href')).toBe('http://test.com/');
+			spyOn(parentScope.testdata, 'click');
+			anchor.triggerHandler('click');
+			expect(parentScope.testdata.click.calls.count()).toBe(1);
+			divAnchor.triggerHandler('click');
+			expect(parentScope.testdata.click.calls.count()).toBe(2);
+			var firstCall = parentScope.testdata.click.calls.first();
+			expect(firstCall).toEqual({
+				object: parentScope.testdata,
+				args: [jasmine.objectContaining({
+					target: anchor[0],
+				})],
+				returnValue: undefined
+			});
+			expect(firstCall.args[0]).not.toEqual(jasmine.objectContaining({
+				defaultPrevented: true
+			}));
+			var lastCall = parentScope.testdata.click.calls.mostRecent();
+			expect(lastCall).toEqual({
+				object: parentScope.testdata,
+				args: [jasmine.objectContaining({
+					target: divAnchor[0],
+				})],
+				returnValue: undefined
+			});
+			expect(lastCall.args[0]).not.toEqual(jasmine.objectContaining({
+				defaultPrevented: true
+			}));
 		});
 	});
 	
