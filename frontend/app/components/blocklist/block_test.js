@@ -21,12 +21,12 @@ describe('catharijne.block module', function() {
 				$rootScope.$digest();
 				var html = element.html();
 				expect(html).toMatch(/<a[^>]* href="http:\/\/meeting.banana.com"/);
-				expect(html).toContain('<img srcset="http://meeting.banana.com/image.jpg">');
+				expect(html).toMatch(/img [^<>]*srcset="http:\/\/meeting.banana.com\/image.jpg"/);
 				expect(html).toContain('<span>Lees meer</span>');
 				expect(html).toContain('Meeting');
 				expect(html).toContain('>Banana</h3>');
 				expect(html).toContain('>Voice your opinion on bananas</p>');
-				expect(html).toContain('<a href="http://meeting.banana.com" class="button">Lees meer</a>');
+				expect(html).toMatch(/<a [^<>]*href="http:\/\/meeting.banana.com" class="button"[^<>]*>Lees meer<\/a>/);
 			});
 		});
 	});
