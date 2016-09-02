@@ -6,6 +6,7 @@ angular.module('catharijne', [
 	'catharijne.menu',
 	'catharijne.block',
 	'catharijne.blocklist',
+	'catharijne.objectPicker',
 	'catharijne.version',
 	'catharijne.home',
 	'catharijne.meedoen',
