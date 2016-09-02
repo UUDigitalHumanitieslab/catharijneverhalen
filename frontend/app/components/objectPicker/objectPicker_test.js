@@ -142,15 +142,10 @@ describe('catharijne.objectPicker module', function() {
 		};
 		var setScope = function() {
 			// For consistency, `scope` belongs to the controller.
-			if (element.children().length) {
-				scope = getChild().scope();
-			} else {
-				// this is a hack
-				element.append('<span>');
-				var child = getChild();  // the span from above
-				scope = child.scope();
-				child.remove();
-			}
+			element.prepend('<span>');
+			var child = getChild();  // the span from above
+			scope = child.scope();
+			child.remove();
 		};
 		
 		beforeEach(inject(function($compile) {
