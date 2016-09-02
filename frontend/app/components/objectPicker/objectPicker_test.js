@@ -175,7 +175,7 @@ describe('catharijne.objectPicker module', function() {
 			setScope();
 			var img = getChild('img');
 			expect(img.length).toBe(1);
-			expect(img.attr('ng-src')).toBe('object.image');
+			expect(img.attr('src')).toBe('image/RMCC v1026.jpg');
 			var caption = getChild('figcaption');
 			expect(caption.length).toBe(1);
 			expect(caption.text()).toBe(scope.objectDescriptions[1].title);
