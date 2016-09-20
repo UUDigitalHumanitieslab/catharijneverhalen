@@ -10,7 +10,5 @@ angular.module('catharijne.toevoegen', ['ngRoute'])
 }])
 
 .controller('StoryFormCtrl', ['$scope', function($scope) {
-	$scope.story = {
-		location: {}
-	};
+	$scope.story = {};
 }]);
