@@ -385,11 +385,11 @@ figure.app-location {
 }
 
 
-.form .row input[type="text"], .form input[type="number"], .form input[type="email"],
+.form /*.row REMOVED BY DHL*/ input[type="text"], .form input[type="number"], .form input[type="email"],
 .form input[type="password"],
 .form input[type="tel"], .form input[type="url"],
-.form textarea, .form select,
-.form .column input[type="text"] {
+.form textarea, .form select
+/*, .form .column input[type="text"] REMOVED BY DHL*/ {
     box-sizing: border-box;
     border: 2px solid #c8c8c8;
     color: #363E46;
@@ -1374,11 +1374,11 @@ figure.full-width figcaption {
 }
 
 
-.form .row input[type="text"], .form input[type="number"], .form input[type="email"],
+.form /*.row REMOVED BY DHL*/ input[type="text"], .form input[type="number"], .form input[type="email"],
 .form input[type="password"],
 .form input[type="tel"], .form input[type="url"],
 .form textarea, .form select,
-.form .column input[type="text"], .form input[type="number"],
+/*.form .column input[type="text"], REMOVED BY DHL*/ .form input[type="number"],
 .form input[type="email"], .form input[type="password"],
 .form input[type="tel"],
 .form input[type="url"], .form textarea, .form select {
@@ -1387,11 +1387,11 @@ figure.full-width figcaption {
 
 @media screen and (min-width: 701px) {
 
-    .form .row input[type="text"], .form input[type="number"], .form input[type="email"],
+    .form /*.row REMOVED BY DHL*/ input[type="text"], .form input[type="number"], .form input[type="email"],
     .form input[type="password"],
     .form input[type="tel"], .form input[type="url"],
     .form textarea, .form select,
-    .form .column input[type="text"], .form input[type="number"],
+    /*.form .column input[type="text"], REMOVED BY DHL*/ .form input[type="number"],
     .form input[type="email"], .form input[type="password"],
     .form input[type="tel"],
     .form input[type="url"], .form textarea, .form select {
