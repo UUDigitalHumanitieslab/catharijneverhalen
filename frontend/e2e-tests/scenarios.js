@@ -60,13 +60,10 @@ describe('catharijne app', function() {
 			var blocks = element.all(by.css(
 				'.block-overview .container-content h3'
 			));
-			expect(blocks.count()).toBe(6);
+			expect(blocks.count()).toBe(3);
 			expect(blocks.get(0).getText()).toBe('Verhalen');
-			expect(blocks.get(1).getText()).toBe('Artikelen');
-			expect(blocks.get(2).getText()).toBe('Thema\'s');
-			expect(blocks.get(3).getText()).toBe('Collecties');
-			expect(blocks.get(4).getText()).toBe('Uitleg');
-			expect(blocks.get(5).getText()).toBe('Objecten');
+			expect(blocks.get(1).getText()).toBe('Voorwerpen');
+			expect(blocks.get(2).getText()).toBe('Uitleg');
 		});
 	});
 	
