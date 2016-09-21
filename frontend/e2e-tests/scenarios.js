@@ -124,8 +124,8 @@ describe('catharijne app', function() {
 			var blocks = element.all(by.css('ul.list-overview li'));
 			expect(blocks.count()).toBe(3);
 			expect(blocks.get(0).getText()).toContain('Woonplaats');
-			expect(blocks.get(1).getText()).toContain('Verhalen');
-			expect(blocks.get(2).getText()).toContain('Collecties');
+			expect(blocks.get(1).getText()).toContain('verhalen');
+			expect(blocks.get(2).getText()).toContain('collecties');
 		});
 	});
 	
