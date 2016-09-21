@@ -86,7 +86,7 @@ describe('catharijne app', function() {
 		});
 		
 		it('should render the registration page when the user navigates to /aanmelden', function() {
-			var title = $('.block-cta form h3');
+			var title = $('.block-form form h3');
 			expect(title.getText()).toContain('Maak een account');
 		});
 	});
@@ -97,7 +97,7 @@ describe('catharijne app', function() {
 		});
 		
 		it('should render the authentication page when the user navigates to /inloggen', function() {
-			var title = $('.block-cta h3');
+			var title = $('.block-form h3');
 			expect(title.getText()).toContain('Welkom terug');
 		});
 	});
