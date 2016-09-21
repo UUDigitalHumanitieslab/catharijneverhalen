@@ -3185,7 +3185,9 @@ button:after,
 
 /* Insertions by DHL */
 
-.block-form button {
+.block-form button,
+.block-overview button,
+.block-overview .button {
     display: inline-block;
     position: relative;
     left: 0;
@@ -3194,7 +3196,9 @@ button:after,
     color: #363E46;
 }
 
-.block-form button:hover {
+.block-form button:hover,
+.block-overview button:hover,
+.block-overview .button:hover {
     background-color: #363E46;
     color: #fff;
 }
