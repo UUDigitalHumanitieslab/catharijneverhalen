@@ -1,7 +1,16 @@
 'use strict';
 
 describe('catharijne.profiel', function() {
-	beforeEach(module('catharijne.profiel'));
+	beforeEach(function() {
+		routeFix.captureRouteProvider();
+		module('catharijne.profiel');
+	});
+	
+	routeFix.checkRoute(
+		'/profiel/:profileId?',
+		'views/profiel/profiel.html',
+		'ProfileCtrl'
+	);
 	
 	describe('ProfileCtrl', function() {
 		beforeEach(inject(function($controller, $rootScope) {

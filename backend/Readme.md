@@ -9,8 +9,6 @@ Create a database and user for the application. Write a python module that looks
 
     from catharijne.settings import *  # unless you want to override everything
     
-    GOOGLE_MAPS_API = '...'
-    
     # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
     DATABASES = {...}
     

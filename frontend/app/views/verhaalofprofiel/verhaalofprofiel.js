@@ -6,4 +6,4 @@ angular.module('catharijne.verhaalofprofiel', ['ngRoute'])
 	$routeProvider.when('/verhaalofprofiel', {
 		templateUrl: 'views/verhaalofprofiel/verhaalofprofiel.html'
 	});
-}])
+}]);

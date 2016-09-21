@@ -5,7 +5,7 @@ angular.module('catharijne.block', [])
 .directive('appBlock', function() {
 	return {
 		scope: {
-			item: '='
+			item: '<'
 		},
 		templateUrl: function (tElement, tAttrs) {
 			if (tAttrs.item) {

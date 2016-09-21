@@ -6,4 +6,4 @@ angular.module('catharijne.aanmelden', ['ngRoute'])
 	$routeProvider.when('/aanmelden', {
 		templateUrl: 'views/aanmelden/aanmelden.html'
 	});
-}])
+}]);

@@ -3,6 +3,8 @@
     catharijneconvent.nl/static/presentation/screen.css?2
     but debug declarations and outcomments have been removed.
 
+    Insertions by the Digital Humanities Lab can be found with 'DHL'.
+
     DO NOT USE IN PRODUCTION.
 */
 
@@ -13,6 +15,66 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
+/*
+    DHL insertions that don't belong anywhere else.
+*/
+
+/* Object picker widget */
+
+figure.app-object-picker {
+    width: auto;
+    min-height: 400px;
+    border: 2px black solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.app-object-picker div.row {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background: white;
+}
+
+/* Location widget */
+
+figure.app-location {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.app-location .angular-google-map-container {
+    height: 96px;
+    width: 120px;
+}
+
+.app-location figcaption {
+    margin-left: 1em;
+}
+
+/* Location picker form control */
+
+.app-location-picker {
+    max-height: 96px;
+}
+
+.app-location-picker .major .angular-google-map-container {
+    height: 480px;
+    width: 600px;
+    position: absolute;        /* no fixed because of animations */
+    bottom: 200px;             /* put on top of form */
+    left: calc(50vw - 300px);  /* center on the page */
+    z-index: 1;
+}
+
+/*
+    End DHL insertions.
+*/
 
 /*******************
     COLORS
@@ -1213,6 +1275,44 @@ figure.full-width figcaption {
 /******************
     FORM STYLES
 ******************/
+
+/*
+    The following styles were inserted by Digital Humanities Lab (2016).
+*/
+
+.form fieldset.column,
+.form fieldset label.column {
+    float: left;
+    width: 50%;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* Compensating for .form .column */
+.form fieldset label.column {
+    margin-bottom: 0;
+    vertical-align: baseline;
+}
+
+.form fieldset.column:first-child,
+.form fieldset label.column:first-child {
+    padding-left: 0;
+}
+
+.form fieldset.column:last-child,
+.form fieldset label.column:last-child {
+    padding-right: 0;
+}
+
+.form fieldset fieldset {
+    margin: 0;
+}
+
+/*
+    (End of insertions by DHL)
+*/
 
 .form {
     /* Rows and Columns */
@@ -3081,6 +3181,25 @@ button:after,
     top: 32%;
     right: 14px;
 }
+
+
+/* Insertions by DHL */
+
+.block-form button {
+    display: inline-block;
+    position: relative;
+    left: 0;
+    right: 0;
+    border-color: #363E46;
+    color: #363E46;
+}
+
+.block-form button:hover {
+    background-color: #363E46;
+    color: #fff;
+}
+
+/* End insertions by DHL */
 
 
 .row button, .row

@@ -5,7 +5,7 @@ angular.module('catharijne.blocklist', ['catharijne.block'])
 .directive('appBlocklist', function() {
 	return {
 		scope: {
-			items: '='
+			items: '<'
 		},
 		templateUrl: 'components/blocklist/blocklist.html',
 		replace: true,

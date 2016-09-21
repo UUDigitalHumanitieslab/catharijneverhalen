@@ -7,3 +7,7 @@ tmp
 .idea
 __pycache__
 *.pyc
+/frontend/app/components/googleMaps/googleMaps-apiKey.js
+.cache
+settings.py
+!/backend/catharijneverhalen/settings.py
