@@ -140,7 +140,7 @@ describe('catharijne app', function() {
 			expect(formFields.get(0).getText()).toContain('Kies een voorwerp');
 			expect(formFields.get(1).getText()).toContain('Schrijftips');
 			expect(formFields.get(2).getText()).toContain('Titel');
-			expect(formFields.get(3).getText()).toContain('Locatie');
+			expect(formFields.get(3).getText()).toContain('Plaats');
 			expect(formFields.get(4).getText()).toContain('Jaar');
 			expect(formFields.get(5).getText()).toContain('Inleiding');
 			expect(formFields.get(6).getText()).toContain('Mijn herinnering');
