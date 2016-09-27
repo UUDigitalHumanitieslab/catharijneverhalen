@@ -111,7 +111,7 @@ describe('catharijne app', function() {
 			var buttons = element.all(by.css('.block-cta a h3'));
 			expect(buttons.count()).toBe(2);
 			expect(buttons.get(0).getText()).toBe('Schrijf een verhaal');
-			expect(buttons.get(1).getText()).toBe('Naar je profiel');
+			expect(buttons.get(1).getText()).toBe('Naar uw profiel');
 		});
 	});
 	

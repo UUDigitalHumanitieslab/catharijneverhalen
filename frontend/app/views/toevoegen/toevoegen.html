@@ -14,27 +14,27 @@
 			<fieldset class="column">
 				<label>
 					Titel
-					<input type="text" name="title" required ng-model="story.title" placeholder="Titel van je herinnering">
+					<input type="text" name="title" required ng-model="story.title" placeholder="Titel van uw herinnering">
 				</label>
 				<fieldset>
 					<label class=column>
 						Plaats
 						<input type=text name=location required ng-model="story.location" placeholder="Utrecht">
-						Waar speelt je herinnering zich af?
+						Waar speelt uw herinnering zich af?
 					</label>
 					<label class=column>
 						Jaar
 						<input type="number" name="year" min=1900 max=2017 step=1 placeholder=1960 required ng-model="story.year">
-						In welk jaar of welke periode speelde je herinnering zich af?
+						In welk jaar of welke periode speelde uw herinnering zich af?
 					</label>
 				</fieldset>
 				<label>
 					Inleiding
-					<textarea name="introduction" ng-model="story.introduction" placeholder="Schrijf een korte inleiding bij jouw verhaal van maximaal vijf zinnen."></textarea>
+					<textarea name="introduction" ng-model="story.introduction" placeholder="Schrijf een korte inleiding bij uw verhaal van maximaal vijf zinnen."></textarea>
 				</label>
 				<label>
 					Mijn herinnering
-					<textarea name="story" required ng-model="story.fulltext" style="height: 30em;" placeholder="Beschrijf hier je herinnering (maximaal 500 woorden)."></textarea>
+					<textarea name="story" required ng-model="story.fulltext" style="height: 30em;" placeholder="Beschrijf hier uw herinnering (maximaal 500 woorden)."></textarea>
 				</label>
 				<fieldset>
 					<input type=button ng-model="story.media" value="Voeg media toe">
