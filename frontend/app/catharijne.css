@@ -6828,6 +6828,19 @@ body:after {
 
 @media screen and (min-width: 701px) {
 
+    /* Insertions by DHL */
+
+    ul.list-overview {
+        display: flex;
+        display: -webkit-flex;
+        display: -ms-flex;
+        flex-flow: row wrap;
+        -webkit-flex-flow: row wrap;
+        -ms-flex-flow: row wrap;
+    }
+
+    /* End insertions by DHL */
+
     .block-overview {
         padding-top: 0;
         padding-bottom: 0;
@@ -6840,10 +6853,11 @@ body:after {
 
 
     .block-overview > ul > li {
-        float: left;
+        /*float: left; DHL removed*/
         display: block;
         margin-right: 2.12766%;
-        width: 48.93617%;
+        /*width: 48.93617%; DHL removed*/
+        flex: 1 45%; /*DHL inserted*/
     }
 
 
@@ -6886,10 +6900,11 @@ body:after {
 
 
     .block-overview.exhibitions > ul > li {
-        float: left;
+        /*float: left; DHL removed*/
         display: block;
         margin-right: 2.12766%;
-        width: 48.93617%;
+        /*width: 48.93617%; DHL removed*/
+        flex: 1 45%; /*DHL inserted*/
     }
 
 
@@ -6914,10 +6929,11 @@ body:after {
 
 
     .block-overview > ul > li.highlight {
-        float: left;
+        /*float: left; DHL removed*/
         display: block;
         margin-right: 2.12766%;
-        width: 100%;
+        /*width: 100%; DHL removed*/
+        flex: 2 90%; /*DHL inserted*/
     }
 
 
@@ -6929,10 +6945,11 @@ body:after {
 @media screen and (min-width: 1000px) {
 
     .block-overview > ul > li {
-        float: left;
+        /*float: left; DHL removed*/
         display: block;
         margin-right: 2.12766%;
-        width: 31.91489%;
+        /*width: 31.91489%; DHL removed*/
+        flex: 1 30%; /*DHL inserted*/
     }
 
 
@@ -6957,10 +6974,11 @@ body:after {
 
 
     .block-overview.exhibitions > ul > li {
-        float: left;
+        /*float: left; DHL removed*/
         display: block;
         margin-right: 2.12766%;
-        width: 31.91489%;
+        /*width: 31.91489%; DHL removed*/
+        flex: 1 30%; /*DHL inserted*/
     }
 
 
@@ -6990,10 +7008,11 @@ body:after {
 
 
     .block-overview > ul > li.highlight {
-        float: left;
+        /*float: left; DHL removed*/
         display: block;
         margin-right: 2.12766%;
-        width: 65.95745%;
+        /*width: 65.95745%; DHL removed*/
+        flex: 2 60%; /*DHL inserted*/
     }
 
 
