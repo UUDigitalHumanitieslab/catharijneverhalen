@@ -61,7 +61,7 @@ describe('catharijne app', function() {
 				'.block-overview .container-content h3'
 			));
 			expect(blocks.count()).toBe(3);
-			expect(blocks.get(0).getText()).toBe('Verhalen');
+			expect(blocks.get(0).getText()).toBe('Herinneringen');
 			expect(blocks.get(1).getText()).toBe('Voorwerpen');
 			expect(blocks.get(2).getText()).toBe('Uitleg');
 		});
@@ -102,12 +102,12 @@ describe('catharijne app', function() {
 		});
 	});
 	
-	describe('verhaalofprofiel', function() {
+	describe('herinneringofprofiel', function() {
 		beforeEach(function() {
-			browser.get('index.html#/verhaalofprofiel');
+			browser.get('index.html#/herinneringofprofiel');
 		});
 		
-		it('should give a choice between writing a story or amending the profile when the user navigates to /verhaalofprofiel', function() {
+		it('should give a choice between writing a story or amending the profile when the user navigates to /herinneringofprofiel', function() {
 			var buttons = element.all(by.css('.block-cta a h3'));
 			expect(buttons.count()).toBe(2);
 			expect(buttons.get(0).getText()).toBe('Schrijf een verhaal');

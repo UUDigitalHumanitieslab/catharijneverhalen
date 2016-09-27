@@ -22,9 +22,9 @@ angular.module('catharijne.home', ['ngRoute', 'catharijne.blocklist'])
 	// TODO: images
 	$scope.blocks = [
 		{
-			title: 'Verhalen',
-			href: '#/verhalen',
-			description: 'Verhalen die zijn toegevoegd door onze deelnemers.'
+			title: 'Herinneringen',
+			href: '#/herinneringen',
+			description: 'Herinneringen die zijn toegevoegd door onze deelnemers.'
 		}, {
 			title: 'Voorwerpen',
 			href: '#/voorwerpen',

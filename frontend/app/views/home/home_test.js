@@ -35,7 +35,7 @@ describe('catharijne.home', function() {
 			expect(this.scope.blocks[0].title).toBeDefined();
 			expect(this.scope.blocks[0].href).toBeDefined();
 			expect(this.scope.blocks[0].description).toBeDefined();
-			expect(this.scope.blocks[0].title).toBe('Verhalen');
+			expect(this.scope.blocks[0].title).toBe('Herinneringen');
 			expect(this.scope.blocks[1].title).toBe('Voorwerpen');
 			expect(this.scope.blocks[2].title).toBe('Uitleg');
 		});

@@ -12,7 +12,7 @@ angular.module('catharijne', [
 	'catharijne.meedoen',
 	'catharijne.aanmelden',
 	'catharijne.inloggen',
-	'catharijne.verhaalofprofiel',
+	'catharijne.herinneringofprofiel',
 	'catharijne.profiel',
 	'catharijne.toevoegen'
 ]).
