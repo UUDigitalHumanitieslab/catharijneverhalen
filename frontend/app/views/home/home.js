@@ -26,25 +26,13 @@ angular.module('catharijne.home', ['ngRoute', 'catharijne.blocklist'])
 			href: '#/verhalen',
 			description: 'Verhalen die zijn toegevoegd door onze deelnemers.'
 		}, {
-			title: 'Artikelen',
-			href: '#/artikelen',
-			description: 'Achtergrond bij objecten.'
-		}, {
-			title: 'Thema\'s',
-			href: '#/themas',
-			description: 'Objecten en verhalen, gegroepeerd rond gezamenlijke onderwerpen.'
-		}, {
-			title: 'Collecties',
-			href: '#/collecties',
-			description: 'Verzamelingen die zijn samengesteld door onze deelnemers.'
+			title: 'Voorwerpen',
+			href: '#/voorwerpen',
+			description: 'Een volledige catalogus van objecten.'
 		}, {
 			title: 'Uitleg',
 			href: '#/uitleg',
 			description: 'Hoe werk het project? Redactie. Contact.'
-		}, {
-			title: 'Objecten',
-			href: '#/objecten',
-			description: 'Een volledige catalogus van objecten.'
 		}
 	];
 }]);

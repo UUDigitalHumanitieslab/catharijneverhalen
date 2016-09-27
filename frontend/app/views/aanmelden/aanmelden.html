@@ -5,48 +5,38 @@
 	</article>
 </div>
 <div class="row">
-	<article class="block-cta">
-		<div class="container-cta double">
-			<div class="cta">
-				<form class="wrapper form block-form" id=registration-form>
-					<h3>Maak een account,</h3>
-					<table class=table style="text-align: left;">
-						<tr>
-							<td><label for=login>Emailadres:</label></td>
-							<td><input name=login id=login type=email placeholder="voorbeeld@domein.xyz" required size=30></td>
-						</tr>
-						<tr>
-							<td><label for=password>Wachtwoord:</label></td>
-							<td><input name=password id=password type=password maxlength=40 size=30 required></td>
-						</tr>
-						<tr class=row>
-							<td><label for=name>Naam:</label></td>
-							<td><input name=name id=name type=text size=30 placeholder=Ingrid></td>
-						</tr>
-						<tr>
-							<td><label for=year>Geboortejaar:</label></td>
-							<td><input name=year id=year type=number min=1900 max=2016 step=1 placeholder=1980 size=4></td>
-						</tr>
-						<tr>
-							<td><label for=gender>Geslacht:</label></td>
-							<td><select name=gender id=gender>
-								<option value=woman>vrouw</option>
-								<option value=man>man</option>
-								<option value=other>overig</option>
-							</select></td>
-						</tr>
-					</table>
-					<!--<button type=submit ng-click="">Aanmelden</button>-->
-					<a href="#/verhaalofprofiel" class=button>Aanmelden</a>
-				</form>
-			</div>
-			<div class="cta">
-				<div class="wrapper">
-					<h3>Of log in met:</h3>
-					<span class="button">Google</span>
-					<span class="button">Facebook</span>
-				</div>
-			</div>
-		</div>
+	<article class="block-form">
+		<form class="wrapper form" id=registration-form>
+			<h3>Maak een account aan</h3>
+			<table class=table style="text-align: left;">
+				<tr>
+					<td><label for=login>Emailadres:</label></td>
+					<td><input name=login id=login type=email placeholder="voorbeeld@domein.xyz" required size=30></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><label for=login>Je emailadres wordt niet aan andere bezoekers getoond.</label></td>
+				</tr>
+				<tr>
+					<td><label for=password>Wachtwoord:</label></td>
+					<td><input name=password id=password type=password maxlength=40 size=30 required placeholder="&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><label for=password>Kies een wachtwoord dat je nog niet eerder hebt gebruikt en dat niet door een kennis geraden zou kunnen worden. Hoe langer het wachtwoord, hoe beter. Er mogen spaties en leestekens in zitten.</label></td>
+				</tr>
+				<tr>
+					<td><label for=name>Gebruikersnaam:</label></td>
+					<td><input name=name id=name type=text size=30 placeholder=Ingrid></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><label for=name>Deze naam verschijnt bij de herinneringen die je bijdraagt en bij je publiek zichtbare profiel. Dit hoeft niet je echte naam te zijn.</label></td>
+				</tr>
+			</table>
+			<p>Door je aan te melden, ga je akkoord met onze <a href="#/voorwaarden">voorwaarden</a>.</p>
+			<!--<button type=submit ng-click="">Aanmelden</button>-->
+			<p><a href="#/verhaalofprofiel" class=button>Aanmelden</a></p>
+		</form>
 	</article>
 </div>

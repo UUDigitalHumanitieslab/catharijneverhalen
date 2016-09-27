@@ -5,29 +5,21 @@
 	</article>
 </div>
 <div class="row">
-	<article class="block-cta">
-		<div class="container-cta double">
-			<div class="cta">
-				<div class="wrapper">
-					<h3>Welkom terug</h3>
-				</div>
-			</div>
-			<div class="cta">
-				<form class="wrapper form block-form" id=authentication-form>
-					<table class=table style="text-align: left;">
-						<tr>
-							<td><label for=login>Emailadres:</label></td>
-							<td><input name=login id=login type=email placeholder="voorbeeld@domein.xyz" required size=30></td>
-						</tr>
-						<tr>
-							<td><label for=password>Wachtwoord:</label></td>
-							<td><input name=password id=password type=password maxlength=40 size=30 required></td>
-						</tr>
-					</table>
-					<!--<button type=submit ng-click="">Inloggen</button>-->
-					<a href="#/verhaalofprofiel" class=button>Inloggen</a>
-				</form>
-			</div>
-		</div>
+	<article class="block-form">
+		<form class="wrapper form" id=authentication-form>
+			<h3>Welkom terug</h3>
+			<table class=table style="text-align: left;">
+				<tr>
+					<td><label for=login>Emailadres:</label></td>
+					<td><input name=login id=login type=email placeholder="voorbeeld@domein.xyz" required size=30></td>
+				</tr>
+				<tr>
+					<td><label for=password>Wachtwoord:</label></td>
+					<td><input name=password id=password type=password maxlength=40 size=30 required placeholder="&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;"></td>
+				</tr>
+			</table>
+			<!--<button type=submit ng-click="">Inloggen</button>-->
+			<a href="#/verhaalofprofiel" class=button>Inloggen</a>
+		</form>
 	</article>
 </div>

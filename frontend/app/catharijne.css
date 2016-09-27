@@ -385,20 +385,32 @@ figure.app-location {
 }
 
 
-.form .row input[type="text"], .form input[type="number"], .form input[type="email"],
+.form /*.row REMOVED BY DHL*/ input[type="text"], .form input[type="number"], .form input[type="email"],
 .form input[type="password"],
 .form input[type="tel"], .form input[type="url"],
-.form textarea, .form select,
-.form .column input[type="text"] {
+.form textarea, .form select
+/*, .form .column input[type="text"] REMOVED BY DHL*/ {
     box-sizing: border-box;
     border: 2px solid #c8c8c8;
     color: #363E46;
     font-size: 16px;
-    line-height: 30px;
+    /*line-height: 30px; removed by DHL*/
     padding: 0 10px;
     -webkit-appearance: none;
     border-radius: 0;
 }
+
+
+/* Insertions by DHL */
+
+.form input[type="text"], .form input[type="number"], .form input[type="email"],
+.form input[type="password"],
+.form input[type="tel"], .form input[type="url"],
+.form select {
+    line-height: 30px;
+}
+
+/* End insertions by DHL */
 
 
 .footer-main .nav-footer .form-newsletter input, .container-search input {
@@ -1374,11 +1386,11 @@ figure.full-width figcaption {
 }
 
 
-.form .row input[type="text"], .form input[type="number"], .form input[type="email"],
+.form /*.row REMOVED BY DHL*/ input[type="text"], .form input[type="number"], .form input[type="email"],
 .form input[type="password"],
 .form input[type="tel"], .form input[type="url"],
 .form textarea, .form select,
-.form .column input[type="text"], .form input[type="number"],
+/*.form .column input[type="text"], REMOVED BY DHL*/ .form input[type="number"],
 .form input[type="email"], .form input[type="password"],
 .form input[type="tel"],
 .form input[type="url"], .form textarea, .form select {
@@ -1387,17 +1399,26 @@ figure.full-width figcaption {
 
 @media screen and (min-width: 701px) {
 
-    .form .row input[type="text"], .form input[type="number"], .form input[type="email"],
+    .form /*.row REMOVED BY DHL*/ input[type="text"], .form input[type="number"], .form input[type="email"],
     .form input[type="password"],
     .form input[type="tel"], .form input[type="url"],
     .form textarea, .form select,
-    .form .column input[type="text"], .form input[type="number"],
+    /*.form .column input[type="text"], REMOVED BY DHL*/ .form input[type="number"],
     .form input[type="email"], .form input[type="password"],
     .form input[type="tel"],
     .form input[type="url"], .form textarea, .form select {
-        line-height: 44px;
+        /*line-height: 44px; removed by DHL*/
         height: 44px;
     }
+
+    /* Insertions by DHL */
+    .form input[type="text"], .form input[type="email"],
+    .form input[type="password"],
+    .form input[type="tel"], .form input[type="url"],
+    .form select {
+        line-height: 44px;
+    }
+    /* End insertions by DHL */
 }
 
 
@@ -3185,7 +3206,9 @@ button:after,
 
 /* Insertions by DHL */
 
-.block-form button {
+.block-form button,
+.block-overview button,
+.block-overview .button {
     display: inline-block;
     position: relative;
     left: 0;
@@ -3194,7 +3217,9 @@ button:after,
     color: #363E46;
 }
 
-.block-form button:hover {
+.block-form button:hover,
+.block-overview button:hover,
+.block-overview .button:hover {
     background-color: #363E46;
     color: #fff;
 }
@@ -6824,6 +6849,19 @@ body:after {
 
 @media screen and (min-width: 701px) {
 
+    /* Insertions by DHL */
+
+    ul.list-overview {
+        display: flex;
+        display: -webkit-flex;
+        display: -ms-flex;
+        flex-flow: row wrap;
+        -webkit-flex-flow: row wrap;
+        -ms-flex-flow: row wrap;
+    }
+
+    /* End insertions by DHL */
+
     .block-overview {
         padding-top: 0;
         padding-bottom: 0;
@@ -6836,10 +6874,11 @@ body:after {
 
 
     .block-overview > ul > li {
-        float: left;
+        /*float: left; DHL removed*/
         display: block;
         margin-right: 2.12766%;
-        width: 48.93617%;
+        /*width: 48.93617%; DHL removed*/
+        flex: 1 45%; /*DHL inserted*/
     }
 
 
@@ -6882,10 +6921,11 @@ body:after {
 
 
     .block-overview.exhibitions > ul > li {
-        float: left;
+        /*float: left; DHL removed*/
         display: block;
         margin-right: 2.12766%;
-        width: 48.93617%;
+        /*width: 48.93617%; DHL removed*/
+        flex: 1 45%; /*DHL inserted*/
     }
 
 
@@ -6910,10 +6950,11 @@ body:after {
 
 
     .block-overview > ul > li.highlight {
-        float: left;
+        /*float: left; DHL removed*/
         display: block;
         margin-right: 2.12766%;
-        width: 100%;
+        /*width: 100%; DHL removed*/
+        flex: 2 90%; /*DHL inserted*/
     }
 
 
@@ -6925,10 +6966,11 @@ body:after {
 @media screen and (min-width: 1000px) {
 
     .block-overview > ul > li {
-        float: left;
+        /*float: left; DHL removed*/
         display: block;
         margin-right: 2.12766%;
-        width: 31.91489%;
+        /*width: 31.91489%; DHL removed*/
+        flex: 1 30%; /*DHL inserted*/
     }
 
 
@@ -6953,10 +6995,11 @@ body:after {
 
 
     .block-overview.exhibitions > ul > li {
-        float: left;
+        /*float: left; DHL removed*/
         display: block;
         margin-right: 2.12766%;
-        width: 31.91489%;
+        /*width: 31.91489%; DHL removed*/
+        flex: 1 30%; /*DHL inserted*/
     }
 
 
@@ -6986,10 +7029,11 @@ body:after {
 
 
     .block-overview > ul > li.highlight {
-        float: left;
+        /*float: left; DHL removed*/
         display: block;
         margin-right: 2.12766%;
-        width: 65.95745%;
+        /*width: 65.95745%; DHL removed*/
+        flex: 2 60%; /*DHL inserted*/
     }
 
 

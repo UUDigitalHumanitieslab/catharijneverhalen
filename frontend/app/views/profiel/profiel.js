@@ -13,13 +13,15 @@ angular.module('catharijne.profiel', ['ngRoute'])
 	this.profileId = $routeParams.profileId;
 	
 	$scope.storiesPreview = {
-		title: 'Verhalen',
+		title: 'Mijn verhalen',
 		imageUrl: 'verhalenvoorbeeld.jpg',
-		href: '/profiel'
+		href: '/profiel',
+		linkText: 'Bewerk',
 	};
 	$scope.collectionsPreview = {
-		title: 'Collecties',
+		title: 'Mijn collecties',
 		imageUrl: 'collectiesvoorbeeld.jpg',
-		href: '/profiel'
+		href: '/profiel',
+		linkText: 'Bewerk',
 	};
 }]);

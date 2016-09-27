@@ -60,13 +60,10 @@ describe('catharijne app', function() {
 			var blocks = element.all(by.css(
 				'.block-overview .container-content h3'
 			));
-			expect(blocks.count()).toBe(6);
+			expect(blocks.count()).toBe(3);
 			expect(blocks.get(0).getText()).toBe('Verhalen');
-			expect(blocks.get(1).getText()).toBe('Artikelen');
-			expect(blocks.get(2).getText()).toBe('Thema\'s');
-			expect(blocks.get(3).getText()).toBe('Collecties');
-			expect(blocks.get(4).getText()).toBe('Uitleg');
-			expect(blocks.get(5).getText()).toBe('Objecten');
+			expect(blocks.get(1).getText()).toBe('Voorwerpen');
+			expect(blocks.get(2).getText()).toBe('Uitleg');
 		});
 	});
 	
@@ -89,7 +86,7 @@ describe('catharijne app', function() {
 		});
 		
 		it('should render the registration page when the user navigates to /aanmelden', function() {
-			var title = $('.block-cta form h3');
+			var title = $('.block-form form h3');
 			expect(title.getText()).toContain('Maak een account');
 		});
 	});
@@ -100,7 +97,7 @@ describe('catharijne app', function() {
 		});
 		
 		it('should render the authentication page when the user navigates to /inloggen', function() {
-			var title = $('.block-cta h3');
+			var title = $('.block-form h3');
 			expect(title.getText()).toContain('Welkom terug');
 		});
 	});
@@ -127,8 +124,8 @@ describe('catharijne app', function() {
 			var blocks = element.all(by.css('ul.list-overview li'));
 			expect(blocks.count()).toBe(3);
 			expect(blocks.get(0).getText()).toContain('Woonplaats');
-			expect(blocks.get(1).getText()).toContain('Verhalen');
-			expect(blocks.get(2).getText()).toContain('Collecties');
+			expect(blocks.get(1).getText()).toContain('verhalen');
+			expect(blocks.get(2).getText()).toContain('collecties');
 		});
 	});
 	
@@ -143,7 +140,7 @@ describe('catharijne app', function() {
 			expect(formFields.get(0).getText()).toContain('Kies een voorwerp');
 			expect(formFields.get(1).getText()).toContain('Schrijftips');
 			expect(formFields.get(2).getText()).toContain('Titel');
-			expect(formFields.get(3).getText()).toContain('Locatie');
+			expect(formFields.get(3).getText()).toContain('Plaats');
 			expect(formFields.get(4).getText()).toContain('Jaar');
 			expect(formFields.get(5).getText()).toContain('Inleiding');
 			expect(formFields.get(6).getText()).toContain('Mijn herinnering');

@@ -28,10 +28,19 @@ angular.module(
 	}).then(function success(response) {
 		self.allObjects = response.data;
 		$scope.objectDescriptions = _.map(self.allObjects, function(obj) {
+			var dateRange = obj.dateRange, creator = obj.creator;
+			if (typeof dateRange === 'string') {
+				dateRange = dateRange.trim();
+			}
+			if (typeof creator === 'string') {
+				creator = creator.trim();
+			}
+			creator = creator || 'Maker onbekend';
+			dateRange = dateRange || 'datum onbekend';
 			return {
 				imageUrl: 'image/' + obj.image,
 				title: obj.title,
-				description: obj.creator + ' (' + obj.dateRange + ')',
+				description: creator + ', ' + dateRange,
 				linkText: 'Kies',
 				click: function() {
 					$scope.update(obj.inventoryID);
