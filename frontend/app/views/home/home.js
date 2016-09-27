@@ -24,15 +24,16 @@ angular.module('catharijne.home', ['ngRoute', 'catharijne.blocklist'])
 		{
 			title: 'Herinneringen',
 			href: '#/herinneringen',
-			description: 'Herinneringen die zijn toegevoegd door onze deelnemers.'
+			description: 'Lees, beluister en bekijk alle persoonlijke herinneringen.'
 		}, {
 			title: 'Voorwerpen',
 			href: '#/voorwerpen',
-			description: 'Een volledige catalogus van objecten.'
+			description: 'Bekijk de collectie voorwerpen van het museum.'
 		}, {
-			title: 'Uitleg',
+			title: 'Uitleg en contact',
 			href: '#/uitleg',
-			description: 'Hoe werk het project? Redactie. Contact.'
+			description: 'Klik hier voor meer informatie en contact.',
+			linkText: 'Naar uitleg en contact',
 		}
 	];
 }]);

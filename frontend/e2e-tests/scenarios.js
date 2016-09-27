@@ -46,7 +46,7 @@ describe('catharijne app', function() {
 		});
 		
 		it('should render the home page when the user navigates to /home', function() {
-			expect($('.intro p').getText()).toMatch(/verzamelt herinneringen/);
+			expect($('.intro p').getText()).toMatch(/verzamelt persoonlijke herinneringen/);
 		});
 		
 		it('should contain a button inviting people to join', function() {
@@ -63,7 +63,7 @@ describe('catharijne app', function() {
 			expect(blocks.count()).toBe(3);
 			expect(blocks.get(0).getText()).toBe('Herinneringen');
 			expect(blocks.get(1).getText()).toBe('Voorwerpen');
-			expect(blocks.get(2).getText()).toBe('Uitleg');
+			expect(blocks.get(2).getText()).toBe('Uitleg en contact');
 		});
 	});
 	
