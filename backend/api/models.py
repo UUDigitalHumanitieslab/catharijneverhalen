@@ -1,5 +1,6 @@
 from django.db import models
 from django.core import validators
+from django.contrib.auth.models import User
 
 
 class Category(models.Model):
@@ -16,6 +17,12 @@ class Person(models.Model):
         (1, 'female'),
         (2, 'male'),
         (3, 'other'),
+    )
+    user = models.OneToOneField(
+        User,
+        on_delete=models.SET_NULL,
+        related_name='person',
+        null=True,
     )
     name = models.CharField(blank=True, max_length=254)
     address_place = models.CharField(blank=True, max_length=126)
