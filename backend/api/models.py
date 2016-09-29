@@ -23,12 +23,14 @@ class Person(models.Model):
         validators.MinValueValidator(-2000),
         validators.MaxValueValidator(2017),
     ])
+    birth_date = models.DateField(null=True, blank=True)
     birth_place = models.CharField(blank=True, max_length=126)
     gender = models.SmallIntegerField(
         null=True, 
         blank=True,
         choices=GENDER_CHOICES,
     )
+    nationality = models.CharField(blank=True, max_length=126)
     family_composition = models.TextField(blank=True)
     education_level = models.ForeignKey(
         'EducationLevel',
