@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 from django.core import validators
 from django.contrib.auth.models import User
@@ -77,3 +79,91 @@ class ParentOccupation(models.Model):
 
 class Parent(Category):
     """ Helper model for listing valid parent types. """
+
+
+class Story(models.Model):
+    """ Story data, loosely modeled after Dublin Core. 
+    
+        Mapping of the Dublin Core terms.
+        contributor:  `editors`
+        coverage:     `place`, `year`
+        creator:      `author`
+        date:         `creation_date`, `edit.date for edit in edits`
+        description:  `introduction`
+        format:       `FORMAT`
+        identifier:   TODO (URL of REST API location)
+        language:     `language`
+        publisher:    URL of the application
+        relation:     not applicable
+        rights:       to be determined by the museum
+        source:       not applicable
+        subject:      `subject`
+        title:        `title`
+        type:         personal memory involving the subject
+    """
+    
+    # Dublin Core fields
+    editors = models.ManyToManyField(
+        'Person',
+        through='StoryEdit',
+        related_name='edited_stories',
+    )
+    place = models.CharField(blank=True, max_length=254)
+    year = models.DurationField(blank=True, null=True)
+    author = models.ForeignKey(
+        'Person',
+        on_delete=models.PROTECT,
+        related_name='stories',
+    )
+    creation_date = models.DateTimeField(default=datetime.datetime.today)
+    introduction = models.TextField(blank=True)
+    FORMAT = 'text/plain'
+    language = 'NL'
+    subject = models.URLField(blank=True, null=True, max_length=254)
+    title = models.CharField(blank=True, max_length=254)
+    content = models.TextField(blank=True)
+    
+    # additional fields
+    last_checked_on = models.DateTimeField(blank=True, null=True)
+    last_checked_by = models.ForeignKey(
+        'Person',
+        on_delete=models.PROTECT,
+        blank=True,
+        null=True,
+    )
+
+
+class StoryEdit(models.Model):
+    """ Supporting model for keeping track of Story edits. """
+    story = models.ForeignKey(
+        'Story',
+        on_delete=models.CASCADE,
+        related_name='edits',
+    )
+    date = models.DateTimeField(editable=False, default=datetime.datetime.now)
+    editor = models.ForeignKey(
+        'Person',
+        on_delete=models.PROTECT,
+        related_name='edits',
+    )
+
+
+class UrlStoryAttachment(models.Model):
+    """ Supporting model for attaching remote media to Stories. """
+    story = models.ForeignKey(
+        'Story',
+        on_delete=models.CASCADE,
+        related_name='url_attachments',
+    )
+    attachment = models.URLField(max_length=254)
+
+
+class ImageStoryAttachment(models.Model):
+    """ Supporting model for attaching local images to Stories. """
+    story = models.ForeignKey(
+        'Story',
+        on_delete=models.SET_NULL,
+        related_name='image_attachments',
+        null=True,
+    )
+    attachment = models.ImageField(upload_to="illustrations")
