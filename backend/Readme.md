@@ -15,6 +15,7 @@ Create a database and user for the application. Write a python module that looks
     # https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
     SECRET_KEY = '...'
     ALLOWED_HOSTS = [...]
+    MEDIA_ROOT = '...'
 
 For now, assume that this module is called `settings.py`. It must be available from the PYTHONPATH.
 
