@@ -12,14 +12,14 @@ from api.models import *
 
 
 class UserSerializer(serializers.ModelSerializer):
-    persons = serializers.PrimaryKeyRelatedField(
-        many=True,
+    person = serializers.PrimaryKeyRelatedField(
+        many=False,
         queryset=Person.objects.all(),
     )
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'persons')
+        fields = ('id', 'username', 'person')
 
 
 class PersonSerializer(serializers.ModelSerializer):
