@@ -16,6 +16,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         many=False,
         queryset=Person.objects.all(),
         view_name='api:person-detail',
+        allow_null=True,
     )
     url = serializers.HyperlinkedIdentityField(view_name='api:user-detail')
 
