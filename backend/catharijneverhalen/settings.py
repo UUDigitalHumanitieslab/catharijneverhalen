@@ -101,3 +101,7 @@ STATIC_URL = '/app/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, '..', 'frontend', 'app'),
 ]
+
+REST_FRAMEWORK = {
+    'PAGE_SIZE': 100,
+}
