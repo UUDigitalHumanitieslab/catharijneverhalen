@@ -3,6 +3,23 @@ import inspect
 from rest_framework import permissions
 
 
+class PermissionFix(object):
+    """
+        This class addresses a shortcoming in permissions.BasePermission.
+        
+        Use as a mixin, to ensure that a Permission class defaults to
+        the has_permission method when there is no special object
+        permission method.
+    """
+    def has_object_permission(self, request, view, obj):
+        return self.has_permission(request, view)
+
+
+class IsAdminUser(PermissionFix, permissions.IsAdminUser):
+    """ Fixed version of IsAdminUser. """
+    pass
+
+
 class IsOwner(permissions.BasePermission):
     """
     Object-level permission to only allow owners of an object.
