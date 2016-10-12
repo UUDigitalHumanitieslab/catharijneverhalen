@@ -54,3 +54,6 @@ class Or(permissions.BasePermission):
 
     def has_permission(self, request, view):
         return self.evaluate_permissions('has_permission', request, view)
+
+    def __call__(self):
+        return self
