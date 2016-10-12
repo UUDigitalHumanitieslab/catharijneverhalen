@@ -6,6 +6,7 @@ from . import views
 
 app_name = 'api'
 urlpatterns = format_suffix_patterns([
+    url(r'^$', views.api_root),
     url(r'^users/$', views.UserList.as_view(), name='user-list'),
     url(
         r'^users/(?P<pk>[0-9]+)/$',
