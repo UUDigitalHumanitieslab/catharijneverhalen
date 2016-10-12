@@ -11,23 +11,27 @@ from rest_framework import serializers
 from api.models import *
 
 
-class UserSerializer(serializers.ModelSerializer):
-    person = serializers.PrimaryKeyRelatedField(
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    person = serializers.HyperlinkedRelatedField(
         many=False,
         queryset=Person.objects.all(),
+        view_name='api:person-detail',
     )
+    url = serializers.HyperlinkedIdentityField(view_name='api:user-detail')
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'person')
+        fields = ('url', 'username', 'person')
 
 
-class PersonSerializer(serializers.ModelSerializer):
+class PersonSerializer(serializers.HyperlinkedModelSerializer):
     user = serializers.ReadOnlyField(source='user.username')
+    url = serializers.HyperlinkedIdentityField(view_name='api:person-detail')
     
     class Meta:
         model = Person
         fields = (
+            'url',
             'user',
             'name',
             'address_place',
