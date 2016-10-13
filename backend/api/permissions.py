@@ -33,7 +33,7 @@ class IsOwner(permissions.BasePermission):
         raise TypeError('{} model is not associated with a user or person'.format(type(obj).__name__))
 
 
-class ReadOnly(permissions.BasePermission):
+class ReadOnly(PermissionFix, permissions.BasePermission):
     """ Always allow read operations, never allow modifying operations. """
     def has_permission(self, request, view):
         return request.method in permissions.SAFE_METHODS
