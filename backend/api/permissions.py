@@ -39,6 +39,14 @@ class ReadOnly(permissions.BasePermission):
         return request.method in permissions.SAFE_METHODS
 
 
+class IsAnonCreate(PermissionFix, permissions.BasePermission):
+    """ Allow creation for unauthenticated users. """
+    def has_permission(self, request, view):
+        if request.method == "POST" and not request.user.is_authenticated():
+            return True
+        return False
+
+
 # Logic below was inspired on
 # https://github.com/caxap/rest_condition/blob/7d0f251ce24a5869f63317b2945643d03ab0c221/rest_condition/permissions.py
 
