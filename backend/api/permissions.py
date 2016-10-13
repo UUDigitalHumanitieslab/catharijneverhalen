@@ -22,8 +22,8 @@ class IsAdminUser(PermissionFix, permissions.IsAdminUser):
 
 class IsOwner(permissions.BasePermission):
     """
-    Object-level permission to only allow owners of an object.
-    Assumes the model instance has a `user` or `person` attribute.
+        Object-level permission to only allow owners of an object.
+        Assumes the model instance has a `user` or `person` attribute.
     """
     def has_object_permission(self, request, view, obj):
         if hasattr(obj, 'user'):
@@ -57,10 +57,10 @@ def _is_factory(obj):
 
 class Or(permissions.BasePermission):
     """
-    Provides a simple way to define composite permissions where only
-    one of the operands needs to accept.
-    Example of usage:
-    >>> composed = Or(Perm1, Perm2, Perm3)
+        Provides a simple way to define composite permissions where only
+        one of the operands needs to accept.
+        Example of usage:
+        >>> composed = Or(Perm1, Perm2, Perm3)
     """
     
     def __init__(self, *perms):
