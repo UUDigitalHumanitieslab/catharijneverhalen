@@ -14,15 +14,30 @@ from api.models import *
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     person = serializers.HyperlinkedRelatedField(
         many=False,
-        queryset=Person.objects.all(),
         view_name='api:person-detail',
         allow_null=True,
+        read_only=True,
     )
-    url = serializers.HyperlinkedIdentityField(view_name='api:user-detail')
+    url = serializers.HyperlinkedIdentityField(
+        view_name='api:user-detail',
+        read_only=True,
+    )
 
     class Meta:
         model = User
-        fields = ('url', 'username', 'person')
+        fields = ('url', 'username', 'email', 'password', 'person')
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
+    
+    def create(self, data):
+        user = User.objects.create(
+            username=data['username'],
+            email=data['email'],
+        )
+        user.set_password(data['password'])
+        user.save()
+        return user
 
 
 class PersonSerializer(serializers.HyperlinkedModelSerializer):
