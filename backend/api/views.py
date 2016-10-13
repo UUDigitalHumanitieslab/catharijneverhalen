@@ -19,10 +19,10 @@ def api_root(request, format=None):
     })
 
 
-class UserList(generics.ListAPIView):
+class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (IsAdminUser,)
+    permission_classes = (Or(IsAnonCreate, IsAdminUser),)
 
 
 class UserDetail(generics.RetrieveAPIView):
