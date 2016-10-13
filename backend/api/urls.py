@@ -1,22 +1,14 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 
-from rest_framework.urlpatterns import format_suffix_patterns
+from rest_framework.routers import DefaultRouter
 
 from . import views
 
+router = DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'persons', views.PersonViewSet)
+
 app_name = 'api'
-urlpatterns = format_suffix_patterns([
-    url(r'^$', views.api_root),
-    url(r'^users/$', views.UserList.as_view(), name='user-list'),
-    url(
-        r'^users/(?P<pk>[0-9]+)/$',
-        views.UserDetail.as_view(),
-        name='user-detail',
-    ),
-    url(r'^persons/$', views.PersonList.as_view(), name='person-list'),
-    url(
-        r'^persons/(?P<pk>[0-9]+)/$',
-        views.PersonDetail.as_view(),
-        name='person-detail',
-    ),
-])
+urlpatterns = [
+    url(r'^', include(router.urls)),
+]
