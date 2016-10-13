@@ -9,7 +9,7 @@ class PermissionFix(object):
         
         Use as a mixin, to ensure that a Permission class defaults to
         the has_permission method when there is no special object
-        permission method.
+        permission method. Should be the first parent class.
     """
     def has_object_permission(self, request, view, obj):
         return self.has_permission(request, view)
