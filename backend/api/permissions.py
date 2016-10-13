@@ -53,6 +53,11 @@ class IsAnonCreate(PermissionFix, permissions.BasePermission):
         return False
 
 
+class IsAuthenticated(PermissionFix, permissions.IsAuthenticated):
+    """ Fixed version of IsAuthenticated. """
+    pass
+
+
 # Logic below was inspired on
 # https://github.com/caxap/rest_condition/blob/7d0f251ce24a5869f63317b2945643d03ab0c221/rest_condition/permissions.py
 
