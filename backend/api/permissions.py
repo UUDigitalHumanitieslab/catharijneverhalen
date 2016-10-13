@@ -42,7 +42,9 @@ class ReadOnly(PermissionFix, permissions.BasePermission):
 class IsAnonCreate(PermissionFix, permissions.BasePermission):
     """ Allow creation for unauthenticated users. """
     def has_permission(self, request, view):
-        if request.method == "POST" and not request.user.is_authenticated():
+        if request.user.is_authenticated():
+            return False
+        if request.method == "POST":
             return True
         return False
 
