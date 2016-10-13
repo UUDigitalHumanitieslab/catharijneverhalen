@@ -1,5 +1,7 @@
 import inspect
 
+from django.contrib.auth.models import User
+
 from rest_framework import permissions
 
 
@@ -26,7 +28,9 @@ class IsOwner(permissions.BasePermission):
         Assumes the model instance has a `user` or `person` attribute.
     """
     def has_object_permission(self, request, view, obj):
-        if hasattr(obj, 'user'):
+        if type(obj) == User:
+            return obj == request.user
+        elif hasattr(obj, 'user'):
             return obj.user == request.user
         elif hasattr(obj, 'person'):
             return obj.person.user == request.user
