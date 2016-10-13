@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter
 
 from api import views
 
-router = DefaultRouter()
+router = DefaultRouter(schema_title='Catharijneverhalen API')
 router.register(r'users', views.UserViewSet)
 router.register(r'persons', views.PersonViewSet)
 
