@@ -33,6 +33,16 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 class PersonSerializer(serializers.HyperlinkedModelSerializer):
     username = serializers.ReadOnlyField(source='user.username')
+    education_level = serializers.SlugRelatedField(
+        slug_field='name',
+        queryset=EducationLevel.objects.all(),
+        allow_null=True,
+    )
+    marital_status = serializers.SlugRelatedField(
+        slug_field='name',
+        queryset=MaritalStatus.objects.all(),
+        allow_null=True,
+    )
     
     class Meta:
         model = Person
