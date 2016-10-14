@@ -12,22 +12,13 @@ from api.models import *
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    person = serializers.HyperlinkedRelatedField(
-        many=False,
-        view_name='api:person-detail',
-        allow_null=True,
-        read_only=True,
-    )
-    url = serializers.HyperlinkedIdentityField(
-        view_name='api:user-detail',
-        read_only=True,
-    )
-
     class Meta:
         model = User
         fields = ('url', 'username', 'email', 'password', 'person')
         extra_kwargs = {
-            'password': {'write_only': True}
+            'url': {'view_name': 'api:user-detail'},
+            'password': {'write_only': True},
+            'person': {'view_name': 'api:person-detail', 'read_only': True},
         }
     
     def create(self, data):
