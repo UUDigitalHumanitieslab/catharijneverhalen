@@ -119,7 +119,7 @@ class Story(models.Model):
         on_delete=models.PROTECT,
         related_name='stories',
     )
-    creation_date = models.DateTimeField(default=datetime.datetime.today)
+    creation_date = models.DateTimeField(auto_now_add=True)
     introduction = models.TextField(blank=True)
     FORMAT = 'text/plain'
     language = 'NL'

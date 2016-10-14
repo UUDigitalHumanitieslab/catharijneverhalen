@@ -39,7 +39,4 @@ class StoryViewSet(viewsets.ModelViewSet):
     permission_classes = (Or(ReadOnly, IsAdminUser, IsOwner),)
     
     def perform_create(self, serializer):
-        serializer.save(
-            author=self.request.user.person,
-            creation_date=datetime.datetime.now(),
-        )
+        serializer.save(author=self.request.user.person)

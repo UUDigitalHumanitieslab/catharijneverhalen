@@ -116,5 +116,4 @@ class StorySerializer(serializers.HyperlinkedModelSerializer):
         extra_kwargs = {
             'url': {'view_name': 'api:story-detail'},
             'author': {'view_name': 'api:person-detail', 'read_only': True},
-            'creation_date': {'read_only': True},
         }
