@@ -11,6 +11,9 @@ class Category(models.Model):
     
     class Meta():
         abstract = True
+    
+    def __unicode__(self):
+        return self.name
 
 
 class Person(models.Model):
