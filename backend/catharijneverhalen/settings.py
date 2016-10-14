@@ -102,6 +102,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, '..', 'frontend', 'app'),
 ]
 
+MEDIA_ROOT = 'media'
+MEDIA_URL = '/media/'
+
 REST_FRAMEWORK = {
     'PAGE_SIZE': 100,
 }
