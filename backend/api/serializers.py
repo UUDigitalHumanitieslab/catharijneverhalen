@@ -48,8 +48,11 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
             'gender',
             'nationality',
             'family_composition',
+            'education_level',
             'occupation',
+            'marital_status',
             'religious_background',
+            'portrait',
         )
         extra_kwargs = {
             'url': {'view_name': 'api:person-detail'},
