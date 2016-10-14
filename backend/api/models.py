@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 
 class Category(models.Model):
     """ Abstract base for models that represent category levels. """
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, unique=True)
     
     class Meta():
         abstract = True
