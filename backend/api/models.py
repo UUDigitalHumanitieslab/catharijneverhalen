@@ -93,7 +93,7 @@ class Story(models.Model):
         creator:      `author`
         date:         `creation_date`, `edit.date for edit in edits`
         description:  `introduction`
-        format:       `FORMAT`
+        format:       `format`
         identifier:   REST API serializer .url
         language:     `language`
         publisher:    URL of the application
@@ -121,7 +121,7 @@ class Story(models.Model):
     )
     creation_date = models.DateTimeField(auto_now_add=True)
     introduction = models.TextField(blank=True)
-    FORMAT = 'text/plain'
+    format = 'text/plain'
     language = 'NL'
     subject = models.URLField(blank=True, null=True, max_length=254)
     title = models.CharField(blank=True, max_length=254)

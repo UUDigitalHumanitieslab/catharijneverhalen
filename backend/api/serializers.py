@@ -107,7 +107,7 @@ class StorySerializer(serializers.HyperlinkedModelSerializer):
             'username',
             'creation_date',
             'introduction',
-            'FORMAT',
+            'format',
             'language',
             'subject',
             'title',
