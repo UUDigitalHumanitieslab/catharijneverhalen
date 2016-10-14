@@ -117,3 +117,8 @@ class StorySerializer(serializers.HyperlinkedModelSerializer):
             'url': {'view_name': 'api:story-detail'},
             'author': {'view_name': 'api:person-detail', 'read_only': True},
         }
+    
+    def update(self, instance, data):
+        editor = data.pop('editor')
+        StoryEdit.objects.create(story=instance, editor=editor)
+        return super(StorySerializer, self).update(instance, data)

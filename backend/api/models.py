@@ -144,7 +144,7 @@ class StoryEdit(models.Model):
         on_delete=models.CASCADE,
         related_name='edits',
     )
-    date = models.DateTimeField(editable=False, default=datetime.datetime.now)
+    date = models.DateTimeField(auto_now_add=True)
     editor = models.ForeignKey(
         'Person',
         on_delete=models.PROTECT,

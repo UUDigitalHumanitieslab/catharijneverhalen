@@ -40,3 +40,6 @@ class StoryViewSet(viewsets.ModelViewSet):
     
     def perform_create(self, serializer):
         serializer.save(author=self.request.user.person)
+    
+    def perform_update(self, serializer):
+        serializer.save(editor=self.request.user.person)
