@@ -32,14 +32,14 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class PersonSerializer(serializers.HyperlinkedModelSerializer):
-    user = serializers.ReadOnlyField(source='user.username')
-    url = serializers.HyperlinkedIdentityField(view_name='api:person-detail')
+    username = serializers.ReadOnlyField(source='user.username')
     
     class Meta:
         model = Person
         fields = (
             'url',
             'user',
+            'username',
             'name',
             'address_place',
             'birth_year',
@@ -51,3 +51,7 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
             'occupation',
             'religious_background',
         )
+        extra_kwargs = {
+            'url': {'view_name': 'api:person-detail'},
+            'user': {'view_name': 'api:user-detail', 'read_only': True},
+        }
