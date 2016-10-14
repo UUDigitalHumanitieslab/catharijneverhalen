@@ -34,7 +34,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class ParentOccupationSerializer(serializers.ModelSerializer):
     """ Serializer meant for embedding into PersonSerializer. """
     parent = serializers.SlugRelatedField(
-        slug_field='Name',
+        slug_field='name',
         queryset=ParentOccupation.objects.all(),
     )
     
