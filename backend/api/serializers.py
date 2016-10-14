@@ -102,6 +102,7 @@ class StorySerializer(serializers.HyperlinkedModelSerializer):
             'url',
             'place',
             'year',
+            'year_end',
             'author',
             'username',
             'creation_date',

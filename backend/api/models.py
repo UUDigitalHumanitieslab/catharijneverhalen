@@ -89,7 +89,7 @@ class Story(models.Model):
     
         Mapping of the Dublin Core terms.
         contributor:  `editors`
-        coverage:     `place`, `year`
+        coverage:     `place`, `year`, `year_end`
         creator:      `author`
         date:         `creation_date`, `edit.date for edit in edits`
         description:  `introduction`
@@ -112,7 +112,8 @@ class Story(models.Model):
         related_name='edited_stories',
     )
     place = models.CharField(blank=True, max_length=254)
-    year = models.DurationField(blank=True, null=True)
+    year = models.SmallIntegerField(null=True, blank=True)
+    year_end = models.SmallIntegerField(null=True, blank=True)
     author = models.ForeignKey(
         'Person',
         on_delete=models.PROTECT,
