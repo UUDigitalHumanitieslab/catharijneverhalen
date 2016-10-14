@@ -94,7 +94,7 @@ class Story(models.Model):
         date:         `creation_date`, `edit.date for edit in edits`
         description:  `introduction`
         format:       `FORMAT`
-        identifier:   TODO (URL of REST API location)
+        identifier:   REST API serializer .url
         language:     `language`
         publisher:    URL of the application
         relation:     not applicable

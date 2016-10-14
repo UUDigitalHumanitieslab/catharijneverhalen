@@ -7,6 +7,7 @@ from api import views
 router = DefaultRouter(schema_title='Catharijneverhalen API')
 router.register(r'users', views.UserViewSet)
 router.register(r'persons', views.PersonViewSet)
+router.register(r'stories', views.StoryViewSet)
 
 app_name = 'api'
 urlpatterns = [

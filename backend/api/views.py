@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth.models import User
 
 from rest_framework import viewsets, throttling
@@ -29,3 +31,15 @@ class PersonViewSet(viewsets.ModelViewSet):
     
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+
+class StoryViewSet(viewsets.ModelViewSet):
+    queryset = Story.objects.all()
+    serializer_class = StorySerializer
+    permission_classes = (Or(ReadOnly, IsAdminUser, IsOwner),)
+    
+    def perform_create(self, serializer):
+        serializer.save(
+            author=self.request.user.person,
+            creation_date=datetime.datetime.now(),
+        )

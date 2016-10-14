@@ -77,10 +77,12 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
             'marital_status',
             'religious_background',
             'portrait',
+            'stories',
         )
         extra_kwargs = {
             'url': {'view_name': 'api:person-detail'},
             'user': {'view_name': 'api:user-detail', 'read_only': True},
+            'stories': {'view_name': 'api:story-detail'},
         }
     
     def create(self, data):
@@ -89,3 +91,29 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
         for parent_occupation in parent_occupations_data:
             ParentOccupation.objects.create(person=person, **parent_occupation)
         return person
+
+
+class StorySerializer(serializers.HyperlinkedModelSerializer):
+    username = serializers.ReadOnlyField(source='author.user.username')
+    
+    class Meta:
+        model = Story
+        fields = (
+            'url',
+            'place',
+            'year',
+            'author',
+            'username',
+            'creation_date',
+            'introduction',
+            'FORMAT',
+            'language',
+            'subject',
+            'title',
+            'content',
+        )
+        extra_kwargs = {
+            'url': {'view_name': 'api:story-detail'},
+            'author': {'view_name': 'api:person-detail', 'read_only': True},
+            'creation_date': {'read_only': True},
+        }
