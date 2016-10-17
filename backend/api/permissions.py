@@ -22,10 +22,12 @@ class IsAdminUser(PermissionFix, permissions.IsAdminUser):
     pass
 
 
-class IsOwner(permissions.BasePermission):
+class IsOwner(permissions.IsAuthenticated):
     """
         Object-level permission to only allow owners of an object.
-        Assumes the model instance has a `user` or `person` attribute.
+        
+        Assumes the model instance has a `get_owner` method, or is a User.
+        Unauthenticated users cannot be owners.
     """
     def has_object_permission(self, request, view, obj):
         if hasattr(obj, 'get_owner'):
