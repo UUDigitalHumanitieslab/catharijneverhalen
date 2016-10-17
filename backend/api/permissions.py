@@ -27,8 +27,15 @@ class IsOwner(permissions.BasePermission):
         Object-level permission to only allow owners of an object.
         Assumes the model instance has a `user` or `person` attribute.
     """
+
+    def __init__(self, *args, **kwargs):
+        self.owner_field = kwargs.pop('owner_field', None)
+        super(IsOwner, self).__init__(*args, **kwargs)
+
     def has_object_permission(self, request, view, obj):
-        if type(obj) == User:
+        if self.owner_field is not None and hasattr(obj, self.owner_field):
+            return getattr(obj, self.owner_field) == request.user
+        elif type(obj) == User:
             return obj == request.user
         elif hasattr(obj, 'user'):
             return obj.user == request.user
