@@ -121,8 +121,24 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
         return person
 
 
+class UrlAttachmentSerializer(serializers.HyperlinkedModelSerializer):
+    """ Serializer meant for embedding into StorySerializer. """
+    class Meta:
+        model = UrlStoryAttachment
+        fields = ('attachment',)
+
+
+class ImageAttachmentSerializer(serializers.HyperlinkedModelSerializer):
+    """ Serializer meant for embedding into StorySerializer. """
+    class Meta:
+        model = ImageStoryAttachment
+        fields = ('attachment',)
+
+
 class StorySerializer(serializers.HyperlinkedModelSerializer):
     username = serializers.ReadOnlyField(source='author.user.username')
+    url_attachments = UrlAttachmentSerializer(many=True, read_only=True)
+    image_attachments = ImageAttachmentSerializer(many=True, read_only=True)
     edits = EditSerializer(
         many=True,
         read_only=True,
@@ -145,6 +161,8 @@ class StorySerializer(serializers.HyperlinkedModelSerializer):
             'subject',
             'title',
             'content',
+            'url_attachments',
+            'image_attachments',
             'edits',
         )
         extra_kwargs = {
