@@ -11,3 +11,4 @@ __pycache__
 .cache
 settings.py
 !/backend/catharijneverhalen/settings.py
+/backend/media

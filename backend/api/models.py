@@ -7,14 +7,18 @@ from django.contrib.auth.models import User
 
 class Category(models.Model):
     """ Abstract base for models that represent category levels. """
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, unique=True)
     
     class Meta():
         abstract = True
+    
+    def __str__(self):
+        return self.name
 
 
 class Person(models.Model):
     """ Person description similar to the approach in MCC AdLib. """
+    
     GENDER_CHOICES = (
         (1, 'female'),
         (2, 'male'),
@@ -52,7 +56,13 @@ class Person(models.Model):
         blank=True,
     )
     religious_background = models.CharField(blank=True, max_length=126)
-    portrait = models.ImageField(upload_to="portraits")
+    portrait = models.ImageField(upload_to="portraits", blank=True)
+    
+    def __str__(self):
+        return self.name
+    
+    def get_owner(self):
+        return self.user
 
 
 class EducationLevel(Category):
@@ -75,6 +85,9 @@ class ParentOccupation(models.Model):
         on_delete=models.PROTECT,
     )
     occupation = models.CharField(max_length=126)
+    
+    def get_owner(self):
+        return self.person.user
 
 
 class Parent(Category):
@@ -86,12 +99,12 @@ class Story(models.Model):
     
         Mapping of the Dublin Core terms.
         contributor:  `editors`
-        coverage:     `place`, `year`
+        coverage:     `place`, `year`, `year_end`
         creator:      `author`
         date:         `creation_date`, `edit.date for edit in edits`
         description:  `introduction`
-        format:       `FORMAT`
-        identifier:   TODO (URL of REST API location)
+        format:       `format`
+        identifier:   REST API serializer .url
         language:     `language`
         publisher:    URL of the application
         relation:     not applicable
@@ -109,15 +122,16 @@ class Story(models.Model):
         related_name='edited_stories',
     )
     place = models.CharField(blank=True, max_length=254)
-    year = models.DurationField(blank=True, null=True)
+    year = models.SmallIntegerField(null=True, blank=True)
+    year_end = models.SmallIntegerField(null=True, blank=True)
     author = models.ForeignKey(
         'Person',
         on_delete=models.PROTECT,
         related_name='stories',
     )
-    creation_date = models.DateTimeField(default=datetime.datetime.today)
+    creation_date = models.DateTimeField(auto_now_add=True)
     introduction = models.TextField(blank=True)
-    FORMAT = 'text/plain'
+    format = 'text/plain'
     language = 'NL'
     subject = models.URLField(blank=True, null=True, max_length=254)
     title = models.CharField(blank=True, max_length=254)
@@ -131,6 +145,12 @@ class Story(models.Model):
         blank=True,
         null=True,
     )
+    
+    def __str__(self):
+        return self.title
+    
+    def get_owner(self):
+        return self.author.user
 
 
 class StoryEdit(models.Model):
@@ -140,7 +160,7 @@ class StoryEdit(models.Model):
         on_delete=models.CASCADE,
         related_name='edits',
     )
-    date = models.DateTimeField(editable=False, default=datetime.datetime.now)
+    date = models.DateTimeField(auto_now_add=True)
     editor = models.ForeignKey(
         'Person',
         on_delete=models.PROTECT,
@@ -150,16 +170,21 @@ class StoryEdit(models.Model):
 
 class UrlStoryAttachment(models.Model):
     """ Supporting model for attaching remote media to Stories. """
+
     story = models.ForeignKey(
         'Story',
         on_delete=models.CASCADE,
         related_name='url_attachments',
     )
     attachment = models.URLField(max_length=254)
+    
+    def get_owner(self):
+        return self.story.author.user
 
 
 class ImageStoryAttachment(models.Model):
     """ Supporting model for attaching local images to Stories. """
+
     story = models.ForeignKey(
         'Story',
         on_delete=models.SET_NULL,
@@ -167,3 +192,6 @@ class ImageStoryAttachment(models.Model):
         null=True,
     )
     attachment = models.ImageField(upload_to="illustrations")
+    
+    def get_owner(self):
+        return self.story.author.user

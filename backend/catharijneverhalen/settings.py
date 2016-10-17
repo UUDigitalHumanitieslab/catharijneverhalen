@@ -20,6 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 INSTALLED_APPS = [
     'api.apps.ApiConfig',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -100,3 +101,10 @@ STATIC_URL = '/app/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, '..', 'frontend', 'app'),
 ]
+
+MEDIA_ROOT = 'media'
+MEDIA_URL = '/media/'
+
+REST_FRAMEWORK = {
+    'PAGE_SIZE': 100,
+}
