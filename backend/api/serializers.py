@@ -12,6 +12,18 @@ from rest_framework.reverse import reverse
 from api.models import *
 
 
+class FieldFilterMixin(object):
+    """ Mixin for serializers to allow field selection at instantiation time."""
+    def filter_fields(self, parent, *args, **kwargs):
+        fields = kwargs.pop('fields', None)
+        parent.__init__(*args, **kwargs)
+        if fields is not None:
+            requested = set(fields)
+            present = set(self.fields.keys())
+            for field_name in present - requested:
+                self.fields.pop(field_name)
+
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
@@ -32,7 +44,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         return user
 
 
-class EditSerializer(serializers.HyperlinkedModelSerializer):
+class EditSerializer(FieldFilterMixin, serializers.HyperlinkedModelSerializer):
     """ Serializer meant for embedding into Story and Person serializers. """
     username = serializers.ReadOnlyField(source='editor.user.username')
     
@@ -45,13 +57,7 @@ class EditSerializer(serializers.HyperlinkedModelSerializer):
         }
     
     def __init__(self, *args, **kwargs):
-        fields = kwargs.pop('fields', None)
-        super(EditSerializer, self).__init__(*args, **kwargs)
-        if fields is not None:
-            requested = set(fields)
-            present = set(self.fields.keys())
-            for field_name in present - requested:
-                self.fields.pop(field_name)
+        self.filter_fields(super(EditSerializer, self), *args, **kwargs)
 
 
 class ParentOccupationSerializer(serializers.ModelSerializer):
