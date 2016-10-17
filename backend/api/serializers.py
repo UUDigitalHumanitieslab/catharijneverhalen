@@ -31,6 +31,28 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         return user
 
 
+class EditSerializer(serializers.HyperlinkedModelSerializer):
+    """ Serializer meant for embedding into Story and Person serializers. """
+    username = serializers.ReadOnlyField(source='editor.user.username')
+    
+    class Meta:
+        model = StoryEdit
+        fields = ('story', 'date', 'editor', 'username')
+        extra_kwargs = {
+            'story': {'view_name': 'api:story-detail'},
+            'editor': {'view_name': 'api:person-detail'},
+        }
+    
+    def __init__(self, *args, **kwargs):
+        fields = kwargs.pop('fields', None)
+        super(EditSerializer, self).__init__(*args, **kwargs)
+        if fields is not None:
+            requested = set(fields)
+            present = set(self.fields.keys())
+            for field_name in present - requested:
+                self.fields.pop(field_name)
+
+
 class ParentOccupationSerializer(serializers.ModelSerializer):
     """ Serializer meant for embedding into PersonSerializer. """
     parent = serializers.SlugRelatedField(
@@ -56,6 +78,11 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
         queryset=MaritalStatus.objects.all(),
         allow_null=True,
     )
+    edits = EditSerializer(
+        many=True,
+        read_only=True,
+        fields=('story', 'date'),
+    )
     
     class Meta:
         model = Person
@@ -78,6 +105,7 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
             'religious_background',
             'portrait',
             'stories',
+            'edits',
         )
         extra_kwargs = {
             'url': {'view_name': 'api:person-detail'},
@@ -95,6 +123,11 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
 
 class StorySerializer(serializers.HyperlinkedModelSerializer):
     username = serializers.ReadOnlyField(source='author.user.username')
+    edits = EditSerializer(
+        many=True,
+        read_only=True,
+        fields=('date', 'editor', 'username'),
+    )
     
     class Meta:
         model = Story
@@ -112,6 +145,7 @@ class StorySerializer(serializers.HyperlinkedModelSerializer):
             'subject',
             'title',
             'content',
+            'edits',
         )
         extra_kwargs = {
             'url': {'view_name': 'api:story-detail'},
