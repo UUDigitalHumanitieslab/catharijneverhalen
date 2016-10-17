@@ -7,6 +7,7 @@
 from django.contrib.auth.models import User
 
 from rest_framework import serializers
+from rest_framework.reverse import reverse
 
 from api.models import *
 
@@ -121,15 +122,44 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
         return person
 
 
+class NestedHyperlink(serializers.HyperlinkedRelatedField):
+    """ Custom hyperlinked fields for nested views. """
+    
+    def __init__(self, *args, **kwargs):
+        parent_path = kwargs.pop('parent_path')
+        self.parent_chain = parent_path.split('.')
+        self.parent_lookup = '__'.join(self.parent_chain)
+        super(NestedHyperlink, self).__init__(*args, **kwargs)
+    
+    def get_parent_pk(self, obj):
+        for attribute in self.parent_chain:
+            obj = getattr(obj, attribute)
+        return obj
+    
+    def get_url(self, obj, view, request, format):
+        url_kwargs = {
+            'parent_pk': self.get_parent_pk(obj),
+            'pk': obj.id,
+        }
+        return reverse(view, kwargs=url_kwargs, request=request, format=format)
+    
+    def get_object(self, view, args, kwargs):
+        lookup_kwargs = {
+            self.parent_lookup: kwargs['parent_pk'],
+            'id': kwargs['pk'],
+        }
+        return self.get_queryset().get(**lookup_kwargs)
+
+
 class UrlAttachmentSerializer(serializers.HyperlinkedModelSerializer):
-    """ Serializer meant for embedding into StorySerializer. """
+    """ Serializer meant standalone and for embedding into StorySerializer. """
     class Meta:
         model = UrlStoryAttachment
         fields = ('attachment',)
 
 
 class ImageAttachmentSerializer(serializers.HyperlinkedModelSerializer):
-    """ Serializer meant for embedding into StorySerializer. """
+    """ Serializer meant standalone and for embedding into StorySerializer. """
     class Meta:
         model = ImageStoryAttachment
         fields = ('attachment',)
