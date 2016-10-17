@@ -56,7 +56,7 @@ class Person(models.Model):
         blank=True,
     )
     religious_background = models.CharField(blank=True, max_length=126)
-    portrait = models.ImageField(upload_to="portraits")
+    portrait = models.ImageField(upload_to="portraits", blank=True)
     
     def get_owner(self):
         return self.user
