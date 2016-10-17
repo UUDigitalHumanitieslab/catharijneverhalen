@@ -18,6 +18,7 @@ class Category(models.Model):
 
 class Person(models.Model):
     """ Person description similar to the approach in MCC AdLib. """
+    
     GENDER_CHOICES = (
         (1, 'female'),
         (2, 'male'),
@@ -56,6 +57,9 @@ class Person(models.Model):
     )
     religious_background = models.CharField(blank=True, max_length=126)
     portrait = models.ImageField(upload_to="portraits")
+    
+    def get_owner(self):
+        return self.user
 
 
 class EducationLevel(Category):
@@ -78,6 +82,9 @@ class ParentOccupation(models.Model):
         on_delete=models.PROTECT,
     )
     occupation = models.CharField(max_length=126)
+    
+    def get_owner(self):
+        return self.person.user
 
 
 class Parent(Category):
@@ -135,6 +142,9 @@ class Story(models.Model):
         blank=True,
         null=True,
     )
+    
+    def get_owner(self):
+        return self.author.user
 
 
 class StoryEdit(models.Model):
@@ -154,16 +164,21 @@ class StoryEdit(models.Model):
 
 class UrlStoryAttachment(models.Model):
     """ Supporting model for attaching remote media to Stories. """
+
     story = models.ForeignKey(
         'Story',
         on_delete=models.CASCADE,
         related_name='url_attachments',
     )
     attachment = models.URLField(max_length=254)
+    
+    def get_owner(self):
+        return self.story.author.user
 
 
 class ImageStoryAttachment(models.Model):
     """ Supporting model for attaching local images to Stories. """
+
     story = models.ForeignKey(
         'Story',
         on_delete=models.SET_NULL,
@@ -171,3 +186,6 @@ class ImageStoryAttachment(models.Model):
         null=True,
     )
     attachment = models.ImageField(upload_to="illustrations")
+    
+    def get_owner(self):
+        return self.story.author.user

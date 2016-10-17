@@ -38,9 +38,7 @@ class PersonViewSet(viewsets.ModelViewSet):
 class StoryViewSet(viewsets.ModelViewSet):
     queryset = Story.objects.all()
     serializer_class = StorySerializer
-    permission_classes = (
-        Or(ReadOnly, IsAdminUser, IsOwner(owner_field='author')),
-    )
+    permission_classes = (Or(ReadOnly, IsAdminUser, IsOwner),)
     
     def perform_create(self, serializer):
         serializer.save(author=self.request.user.person)
