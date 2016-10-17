@@ -128,12 +128,22 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
         return person
 
 
-class UrlAttachmentSerializer(
+class AttachmentSerializer(
     FieldFilterMixin,
     serializers.HyperlinkedModelSerializer,
 ):
-    """ Serializer meant standalone and for embedding into StorySerializer. """
+    """ Base class for both types of attachment serializers. """
 
+    def __init__(self, *args, **kwargs):
+        self.filter_fields(
+            super(AttachmentSerializer, self),
+            *args,
+            **kwargs,
+        )
+
+
+class UrlAttachmentSerializer(AttachmentSerializer):
+    """ Serializer meant standalone and for embedding into StorySerializer. """
     class Meta:
         model = UrlStoryAttachment
         fields = ('url', 'story', 'attachment')
@@ -141,21 +151,10 @@ class UrlAttachmentSerializer(
             'url': {'view_name': 'api:urlstoryattachment-detail'},
             'story': {'view_name': 'api:story-detail'},
         }
-    
-    def __init__(self, *args, **kwargs):
-        self.filter_fields(
-            super(UrlAttachmentSerializer, self),
-            *args,
-            **kwargs,
-        )
 
 
-class ImageAttachmentSerializer(
-    FieldFilterMixin,
-    serializers.HyperlinkedModelSerializer,
-):
+class ImageAttachmentSerializer(AttachmentSerializer):
     """ Serializer meant standalone and for embedding into StorySerializer. """
-
     class Meta:
         model = ImageStoryAttachment
         fields = ('url', 'story', 'attachment')
@@ -163,13 +162,6 @@ class ImageAttachmentSerializer(
             'url': {'view_name': 'api:imagestoryattachment-detail'},
             'story': {'view_name': 'api:story-detail'},
         }
-    
-    def __init__(self, *args, **kwargs):
-        self.filter_fields(
-            super(ImageAttachmentSerializer, self),
-            *args,
-            **kwargs,
-        )
 
 
 class StorySerializer(serializers.HyperlinkedModelSerializer):
