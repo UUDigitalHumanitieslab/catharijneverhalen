@@ -58,6 +58,9 @@ class Person(models.Model):
     religious_background = models.CharField(blank=True, max_length=126)
     portrait = models.ImageField(upload_to="portraits", blank=True)
     
+    def __str__(self):
+        return self.name
+    
     def get_owner(self):
         return self.user
 
@@ -142,6 +145,9 @@ class Story(models.Model):
         blank=True,
         null=True,
     )
+    
+    def __str__(self):
+        return self.title
     
     def get_owner(self):
         return self.author.user
