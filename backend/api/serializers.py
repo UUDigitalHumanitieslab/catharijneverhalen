@@ -6,7 +6,7 @@
 
 from django.contrib.auth.models import User
 
-from rest_framework import serializers
+from rest_framework import serializers, exceptions
 from rest_framework.reverse import reverse
 
 from api.models import *
@@ -139,6 +139,28 @@ class AttachmentSerializer(
             super(AttachmentSerializer, self),
             *args,
             **kwargs,
+        )
+    
+    def create(self, data):
+        creator = data.pop('creator')
+        # Check whether the referenced story is owned by the creator.
+        # Using permissions or querysets for this purpose is virtually
+        # impossible, so we do it here, in the serializer.
+        if creator.is_staff or (data['story'].get_owner() == creator):
+            return super(AttachmentSerializer, self).create(data)
+        raise exceptions.PermissionDenied(
+            detail='Story is not owned by current user.',
+        )
+    
+    def update(self, instance, data):
+        editor = data.pop('editor')
+        # Check whether the referenced story is owned by the editor.
+        # Using permissions or querysets for this purpose is virtually
+        # impossible, so we do it here, in the serializer.
+        if editor.is_staff or (data['story'].get_owner() == editor):
+            return super(AttachmentSerializer, self).update(instance, data)
+        raise exceptions.PermissionDenied(
+            detail='Story is not owned by current user.',
         )
 
 

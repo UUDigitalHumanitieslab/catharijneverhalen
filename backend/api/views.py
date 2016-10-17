@@ -51,9 +51,21 @@ class UrlAttachmentViewSet(viewsets.ModelViewSet):
     queryset = UrlStoryAttachment.objects.all()
     serializer_class = UrlAttachmentSerializer
     permission_classes = (Or(ReadOnly, IsAdminUser, IsOwner),)
+    
+    def perform_create(self, serializer):
+        serializer.save(creator=self.request.user)
+    
+    def perform_update(self, serializer):
+        serializer.save(editor=self.request.user)
 
 
 class ImageAttachmentViewSet(viewsets.ModelViewSet):
     queryset = ImageStoryAttachment.objects.all()
     serializer_class = ImageAttachmentSerializer
     permission_classes = (Or(ReadOnly, IsAdminUser, IsOwner),)
+    
+    def perform_create(self, serializer):
+        serializer.save(creator=self.request.user)
+    
+    def perform_update(self, serializer):
+        serializer.save(editor=self.request.user)
