@@ -110,7 +110,7 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
         extra_kwargs = {
             'url': {'view_name': 'api:person-detail'},
             'user': {'view_name': 'api:user-detail', 'read_only': True},
-            'stories': {'view_name': 'api:story-detail'},
+            'stories': {'view_name': 'api:story-detail', 'read_only': True},
         }
     
     def create(self, data):
