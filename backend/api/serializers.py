@@ -138,7 +138,7 @@ class AttachmentSerializer(
         self.filter_fields(
             super(AttachmentSerializer, self),
             *args,
-            **kwargs,
+            **kwargs
         )
     
     def create(self, data):
