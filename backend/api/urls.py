@@ -14,4 +14,5 @@ router.register(r'image-attachments', views.ImageAttachmentViewSet)
 app_name = 'api'
 urlpatterns = [
     url(r'^', include(router.urls)),
+    url(r'^gettoken/$', views.gettoken),
 ]

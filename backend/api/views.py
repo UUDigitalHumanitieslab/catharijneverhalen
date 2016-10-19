@@ -1,15 +1,22 @@
 from datetime import datetime
 
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 from rest_framework import viewsets, throttling, status
-from rest_framework.decorators import detail_route
+from rest_framework.decorators import list_route, api_view
 from rest_framework.response import Response
 
 from api.models import *
 from api.serializers import *
 from api.permissions import *
 from api.filters import *
+
+
+@ensure_csrf_cookie
+@api_view(['GET', 'HEAD'])
+def gettoken(request):
+    return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class CreateUserThrottle(throttling.UserRateThrottle):
