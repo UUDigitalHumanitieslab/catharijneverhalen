@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import ensure_csrf_cookie
 
@@ -30,6 +31,47 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = (Or(IsAnonCreate, IsAuthenticated),)
     filter_backends = (IsAdminOrOwnerFilter,)
     throttle_classes = (CreateUserThrottle,)
+    
+    @list_route(methods=['post'])
+    def identity(self, request):
+        user = request.user
+        if user.is_authenticated():
+            serializer = self.get_serializer(request.user)
+            return Response(serializer.data)
+        return Response({
+            'detail': 'Not currently logged in.',
+        }, status=status.HTTP_401_UNAUTHORIZED)
+    
+    @list_route(methods=['post'])
+    def login(self, request):
+        try:
+            username = request.data['username']
+        except KeyError as e:
+            return Response({
+                'username': 'Failed to provide a username.',
+            }, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            password = request.data['password']
+        except KeyError as e:
+            return Response({
+                'password': 'Failed to provide a password.',
+            }, status=status.HTTP_400_BAD_REQUEST)
+        user = authenticate(username=username, password=password)
+        if user is None:
+            return Response({
+                'detail': 'Credentials did not match an existing account.',
+            }, status=status.HTTP_401_UNAUTHORIZED)
+        elif user.is_active:
+            login(request, user)
+            return Response(self.get_serializer(user).data)
+        return Response({
+            'detail': 'Account has been disabled',
+        }, status=status.HTTP_401_UNAUTHORIZED)
+    
+    @list_route(methods=['post'])
+    def logout(self, request):
+        logout(request)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class PersonViewSet(viewsets.ModelViewSet):
