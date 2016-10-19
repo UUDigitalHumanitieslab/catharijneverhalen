@@ -10,33 +10,33 @@
 			<h3>Maak een account aan</h3>
 			<table class=table style="text-align: left;">
 				<tr>
-					<td><label for=login>Emailadres:</label></td>
-					<td><input name=login id=login type=email placeholder="voorbeeld@domein.xyz" required size=30></td>
+					<td><label for=email>Emailadres:</label></td>
+					<td><input name=email id=login type=email placeholder="voorbeeld@domein.xyz" required size=30 ng-model="credentials.email"></td>
 				</tr>
 				<tr>
 					<td></td>
-					<td><label for=login>Uw emailadres wordt niet aan andere bezoekers getoond.</label></td>
+					<td><label for=email>Uw emailadres wordt niet aan andere bezoekers getoond.</label></td>
 				</tr>
 				<tr>
 					<td><label for=password>Wachtwoord:</label></td>
-					<td><input name=password id=password type=password maxlength=40 size=30 required placeholder="&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;"></td>
+					<td><input name=password id=password type=password size=30 required placeholder="&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;" ng-model="credentials.password"></td>
 				</tr>
 				<tr>
 					<td></td>
 					<td><label for=password>Kies een uniek wachtwoord. Hoe langer het wachtwoord, hoe beter. Er mogen spaties en leestekens in zitten.</label></td>
 				</tr>
 				<tr>
-					<td><label for=name>Gebruikersnaam:</label></td>
-					<td><input name=name id=name type=text size=30 placeholder=Ingrid></td>
+					<td><label for=username>Gebruikersnaam:</label></td>
+					<td><input name=username id=username type=text size=30 placeholder=Ingrid ng-model="credentials.username"></td>
 				</tr>
 				<tr>
 					<td></td>
-					<td><label for=name>Deze naam verschijnt bij uw herinneringen op uw profiel. Dit hoeft niet uw echte naam te zijn.</label></td>
+					<td><label for=username>Deze naam verschijnt bij uw herinneringen op uw profiel. Dit hoeft niet uw echte naam te zijn.</label></td>
 				</tr>
 			</table>
 			<p>Door u aan te melden, gaat u akkoord met onze <a href="#/voorwaarden">voorwaarden</a>.</p>
-			<!--<button type=submit ng-click="">Aanmelden</button>-->
-			<p><a href="#/herinneringofprofiel" class=button>Aanmelden</a></p>
+			<button type=submit ng-click="register(credentials)">Aanmelden</button>
+			<!-- <p><a href="#/herinneringofprofiel" class=button>Aanmelden</a></p> -->
 		</form>
 	</article>
 </div>
