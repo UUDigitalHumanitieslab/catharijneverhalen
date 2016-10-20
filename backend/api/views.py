@@ -32,7 +32,7 @@ class UserViewSet(viewsets.ModelViewSet):
     filter_backends = (IsAdminOrOwnerFilter,)
     throttle_classes = (CreateUserThrottle,)
     
-    @list_route(methods=['post'])
+    @list_route(methods=['get'])
     def identity(self, request):
         user = request.user
         if user.is_authenticated():

@@ -12,12 +12,12 @@ angular.module('catharijne.user', ['catharijne.csrf', 'catharijne.resource'])
 			url: '/api/users/logout/',
 		},
 		identity: {
-			method: 'post',
+			method: 'get',
 			url: '/api/users/identity/',
 		},
 	});
 	var service = {};
-	service.identity = User.identity({});
+	service.identity = User.identity();
 	service.register = function(credentials, success, fail) {
 		return service.identity = User.save(null, credentials, success, fail);
 	};
