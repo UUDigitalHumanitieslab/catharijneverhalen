@@ -10,16 +10,18 @@
 			<h3>Welkom terug</h3>
 			<table class=table style="text-align: left;">
 				<tr>
-					<td><label for=login>Emailadres:</label></td>
-					<td><input name=login id=login type=email placeholder="voorbeeld@domein.xyz" required size=30></td>
+					<td><label for=username>Gebruikersnaam:</label></td>
+					<td><input name=username id=username type=text placeholder="Ingrid" required size=30 ng-model="credentials.username"></td>
 				</tr>
 				<tr>
 					<td><label for=password>Wachtwoord:</label></td>
-					<td><input name=password id=password type=password maxlength=40 size=30 required placeholder="&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;"></td>
+					<td><input name=password id=password type=password size=30 required placeholder="&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;" ng-model="credentials.password"></td>
 				</tr>
 			</table>
-			<!--<button type=submit ng-click="">Inloggen</button>-->
-			<a href="#/herinneringofprofiel" class=button>Inloggen</a>
+			<button type=submit ng-click="login(credentials)">Inloggen</button>
+			<label ng-show=serverRejectedCredentials class=error>Uw gebruikersnaam of uw wachtwoord klopt niet. Probeert u het nog eens.</label>
+			<label ng-show=accountDisabled class=error>Uw account is geblokkeerd. Neem contact op met het museum voor assistentie.</label>
+			<label ng-show=serverMessage class=error>De server weigerde uw loginpoging met de volgende reden: {{serverMessage}}</label>
 		</form>
 	</article>
 </div>
