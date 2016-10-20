@@ -10,6 +10,20 @@
 			<h3>Maak een account aan</h3>
 			<table class=table style="text-align: left;">
 				<tr>
+					<td><label for=username>Gebruikersnaam:</label></td>
+					<td><input name=username id=username type=text size=30 placeholder=Ingrid required ng-model="credentials.username" ng-model-options="{debounce: {blur: 0, default: 500}}"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<label for=username>Deze naam verschijnt bij uw herinneringen op uw profiel. Dit hoeft niet uw echte naam te zijn.</label>
+						<span ng-show="form.$submitted || form.username.$touched">
+							<label for=username ng-show="form.username.$error.required" class=error>Het is noodzakelijk dat u een gebruikersnaam kiest.</label>
+							<label for=username ng-show="serverRejectedUsername" class=error>Deze gebruikersnaam is helaas al in gebruik. Kies een andere naam.</label>
+						</span>
+					</td>
+				</tr>
+				<tr>
 					<td><label for=email>Emailadres:</label></td>
 					<td><input name=email id=login type=email placeholder="voorbeeld@domein.xyz" required size=30 ng-model="credentials.email" ng-model-options="{debounce: {blur: 0, default: 500}}"></td>
 				</tr>
@@ -47,20 +61,6 @@
 						<label for=password2>Voer hetzelfde wachtwoord nogmaals in.</label>
 						<span ng-show="form.$submitted || form.password2.$touched">
 							<label for=password2 ng-show="form.password2.$error.pattern" class=error>De wachtwoorden komen niet overeen.</label>
-						</span>
-					</td>
-				</tr>
-				<tr>
-					<td><label for=username>Gebruikersnaam:</label></td>
-					<td><input name=username id=username type=text size=30 placeholder=Ingrid required ng-model="credentials.username" ng-model-options="{debounce: {blur: 0, default: 500}}"></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>
-						<label for=username>Deze naam verschijnt bij uw herinneringen op uw profiel. Dit hoeft niet uw echte naam te zijn.</label>
-						<span ng-show="form.$submitted || form.username.$touched">
-							<label for=username ng-show="form.username.$error.required" class=error>Het is noodzakelijk dat u een gebruikersnaam kiest.</label>
-							<label for=username ng-show="serverRejectedUsername" class=error>Deze gebruikersnaam is helaas al in gebruik. Kies een andere naam.</label>
 						</span>
 					</td>
 				</tr>
