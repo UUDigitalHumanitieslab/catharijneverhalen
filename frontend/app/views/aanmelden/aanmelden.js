@@ -17,6 +17,7 @@ angular.module('catharijne.aanmelden', ['ngRoute', 'catharijne.user'])
 		if (xhrResponse.data.username) $scope.serverRejectedUsername = true;
 		if (xhrResponse.data.email) $scope.serverRejectedEmail = true;
 		if (xhrResponse.data.password) $scope.serverRejectedPassword = true;
+		$scope.pending = false;
 	}
 	$scope.credentials = {};
 	$scope.replaceFrom = /[^a-zA-Z0-9_ ]/g;
@@ -25,6 +26,7 @@ angular.module('catharijne.aanmelden', ['ngRoute', 'catharijne.user'])
 		$scope.serverRejectedUsername = false;
 		$scope.serverRejectedEmail = false;
 		$scope.serverRejectedPassword = false;
+		$scope.pending = true;
 		user.register(credentials, registerSuccess, registerFail);
 	};
 }]);

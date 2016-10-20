@@ -66,8 +66,7 @@
 				</tr>
 			</table>
 			<p>Door u aan te melden, gaat u akkoord met onze <a href="#/voorwaarden">voorwaarden</a>.</p>
-			<button type=submit ng-click="register(credentials)">Aanmelden</button>
-			<!-- <p><a href="#/herinneringofprofiel" class=button>Aanmelden</a></p> -->
+			<button type=submit ng-click="register(credentials)" ng-disabled="pending || form.$invalid">Aanmelden</button>
 		</form>
 	</article>
 </div>

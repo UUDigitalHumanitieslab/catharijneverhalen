@@ -29,6 +29,7 @@ angular.module('catharijne.inloggen', ['ngRoute'])
 					$scope.serverMessage += xhrResponse.data[key] + ' ';
 				}
 			}
+			$scope.pending = false;
 		}
 		$scope.credentials = {};
 		$scope.login = function(credentials) {
@@ -36,6 +37,7 @@ angular.module('catharijne.inloggen', ['ngRoute'])
 			$scope.serverMessage = '';
 			$scope.serverRejectedCredentials = false;
 			$scope.accountDisabled = false;
+			$scope.pending = true;
 		}
 	},
 ]);
