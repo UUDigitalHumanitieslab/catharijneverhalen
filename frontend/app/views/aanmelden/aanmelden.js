@@ -11,6 +11,7 @@ angular.module('catharijne.aanmelden', ['ngRoute', 'catharijne.user'])
 
 .controller('RegisterCtrl', ['$scope', '$location', 'user', function($scope, $location, user) {
 	function registerSuccess() {
+		user.login($scope.credentials);
 		$location.path('/herinneringofprofiel');
 	}
 	function registerFail(xhrResponse) {
