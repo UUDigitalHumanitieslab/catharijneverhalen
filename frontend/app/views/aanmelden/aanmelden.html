@@ -25,7 +25,7 @@
 				</tr>
 				<tr>
 					<td><label for=password>Wachtwoord:</label></td>
-					<td><input name=password id=password type=password size=30 minlength=8 required placeholder="&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;" ng-model="credentials.password" ng-model-options="{debounce: {blur: 0, default: 500}}"></td>
+					<td><input name=password id=password type=password size=30 minlength=8 required placeholder="&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;" ng-model="credentials.password" ng-model-options="{debounce: {blur: 0, default: 500}}" ng-change="passwordCheck=form.password.$viewValue.replace(replaceFrom, replaceTo)"></td>
 				</tr>
 				<tr>
 					<td></td>
@@ -37,6 +37,18 @@
 						</span>
 					</td>
 				</tr>
+				<tr>
+					<td><label for=password2>Controle:</label></td>
+					<td><input name=password2 id=password2 type=password size=30 required placeholder="&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;" ng-model="password2" ng-model-options="{debounce: {blur: 0, default: 500}}" ng-pattern="passwordCheck"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<label for=password2>Voer hetzelfde wachtwoord nogmaals in.</label>
+						<span ng-show="form.$submitted || form.password2.$touched">
+							<label for=password2 ng-show="form.password2.$error.pattern" class=error>De wachtwoorden komen niet overeen.</label>
+						</span>
+					</td>
 				</tr>
 				<tr>
 					<td><label for=username>Gebruikersnaam:</label></td>
