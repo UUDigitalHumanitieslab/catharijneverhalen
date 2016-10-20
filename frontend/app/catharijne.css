@@ -410,6 +410,16 @@ figure.app-location {
     line-height: 30px;
 }
 
+input.ng-touched.ng-invalid,
+textarea.ng-touched.ng-invalid {
+    background-color: #F87D75;
+}
+
+input.ng-touched.ng-valid,
+textarea.ng-touched.ng-valid {
+    background-color: #baffa9;
+}
+
 /* End insertions by DHL */
 
 
@@ -1320,6 +1330,14 @@ figure.full-width figcaption {
 
 .form fieldset fieldset {
     margin: 0;
+}
+
+label.error {
+    display: block;
+    padding: 1ex;
+    border: 2px solid #F22728;
+    border-radius: 1ex;
+    background-color: #F87D75;
 }
 
 /*
