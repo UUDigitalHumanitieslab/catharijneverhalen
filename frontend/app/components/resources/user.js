@@ -11,37 +11,21 @@ angular.module('catharijne.user', ['catharijne.csrf', 'catharijne.resource'])
 			method: 'post',
 			url: '/api/users/logout/',
 		},
-		activate: {
+		identity: {
 			method: 'post',
 			url: '/api/users/identity/',
 		},
 	});
 	var service = {};
-	service.currentUser = User.activate({}, null, function activateFail() {
-		service.currentUser = null;
-	});
+	service.identity = User.identity({});
 	service.register = function(credentials, success, fail) {
-		service.logout(function preRegisterSuccess() {
-			service.currentUser = User.save(null, credentials, success, function registerFail(response) {
-				service.currentUser = null;
-				if (fail) fail(response);
-			})
-		});
+		return service.identity = User.save(null, credentials, success, fail);
 	};
 	service.login = function(credentials, success, fail) {
-		service.logout(function preLoginSuccess() {
-			service.currentUser = User.login(null, credentials, success, function loginFail(response) {
-				service.currentUser = null;
-				if (fail) fail(response);
-			});
-		});
+		return service.identity = User.login(null, credentials, success, fail);
 	};
-	service.logout = function(success) {
-		if (service.currentUser !== null) {
-			service.currentUser.$promise.then(function preLogoutSuccess() {
-				service.currentUser.$logout(null, {}, success);
-			});
-		} else if (success) success();
-	}
+	service.logout = function(credentials, success, fail) {
+		return service.identity = User.logout(null, credentials, success, fail);
+	};
 	return service;
 }]);
