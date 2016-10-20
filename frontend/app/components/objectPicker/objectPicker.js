@@ -22,8 +22,12 @@ angular.module(
 		object.get({url: objectUrl}, function updateSuccess(obj) {
 			$scope.object = obj;
 			$scope.objectUrl = objectUrl;
+			$scope.background = {
+				'background-image': 'url("image/' + obj.image + '")',
+			};
 		}, function updateFail() {
 			$scope.object = $scope.objectUrl = undefined;
+			$scope.background = {};
 		});
 	};
 	function transformObject(obj) {

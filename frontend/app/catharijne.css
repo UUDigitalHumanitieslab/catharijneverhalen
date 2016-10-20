@@ -24,12 +24,24 @@
 
 figure.app-object-picker {
     width: auto;
-    min-height: 400px;
     border: 2px black solid;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+figure.app-object-picker > div:first-child {
+    width: 100%;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+figure.app-object-picker > div:first-child > button {
+    z-index: 1;
 }
 
 .app-object-picker div.row {
