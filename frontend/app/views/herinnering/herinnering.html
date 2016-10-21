@@ -1,0 +1,26 @@
+<div class="row">
+	<article class="block-pageheader-fullwidth small">
+		<div class=container-image>
+			<img ng-src="{{subject && ('image/' + subject.image) || story.imageAttachments && story.imageAttachments[0].attachment}}"></img>
+			<div class="overlay-top"></div>
+			<div class="overlay-bottom"></div>
+		</div>
+		<div class=container-title>
+			<h3>Herinnering</h3>
+			<h1>{{story.title}}</h1>
+		</div>
+	</article>
+</div>
+<div class="row">
+	<article class=block-text>
+		<h3 ng-if=subject>Een herinnering bij {{subject.title}}</h3>
+		<p ng-if=subject>{{subject.creator || 'maker onbekend'}}, {{subject.dateRange || 'datum onbekend'}}</p>
+		<div class="container-wrapper">
+			<div class="container-text content">
+				<p>Bijgedragen door {{story.username}}.</p>
+				<p ng-if="story.introduction"><strong>{{story.introduction}}</strong></p>
+				<div ng-bind-html=formattedContent></div>
+			</div>
+		</div>
+	</article>
+</div>

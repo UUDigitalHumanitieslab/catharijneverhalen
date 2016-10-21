@@ -10,8 +10,8 @@ angular.module('catharijne.toevoegen', ['ngRoute', 'catharijne.story'])
 }])
 
 .controller('StoryFormCtrl', [
-	'$scope', '$routeParams', 'story',
-	function storyFormController($scope, $routeParams, story) {
+	'$scope', '$routeParams', 'story', '$location',
+	function storyFormController($scope, $routeParams, story, $location) {
 		var storyPk = $routeParams.pk;
 		if (storyPk) {
 			$scope.story = story.get({pk: storyPk});
@@ -22,6 +22,9 @@ angular.module('catharijne.toevoegen', ['ngRoute', 'catharijne.story'])
 			});
 		} else {
 			$scope.story = new story();
+		}
+		function storySaveSuccess(instance) {
+			$location.path('/herinnering/' + instance.pk);
 		}
 		function storySaveFail(xhr) {
 			switch (xhr.status) {
@@ -51,9 +54,9 @@ angular.module('catharijne.toevoegen', ['ngRoute', 'catharijne.story'])
 				$scope.story.year_end = Number(years[2]);
 			}
 			if ($scope.story.url) {
-				$scope.story.$update().catch(storySaveFail);
+				$scope.story.$update().then(storySaveSuccess, storySaveFail);
 			} else {
-				$scope.story.$save().catch(storySaveFail);
+				$scope.story.$save().then(storySaveSuccess, storySaveFail);
 			}
 		};
 	},
