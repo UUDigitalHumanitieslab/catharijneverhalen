@@ -11,7 +11,7 @@ angular.module('catharijne.object', ['catharijne.resource'])
 	function transform(data, headers, status) {
 		if (angular.isArray(data) && 200 <= status && status < 300) {
 			_.forEach(data, function(obj) {
-				obj.url = base + '#' + obj.inventoryID;
+				obj.url = base + '#' + encodeURIComponent(obj.inventoryID);
 			});
 		}
 		return data;
