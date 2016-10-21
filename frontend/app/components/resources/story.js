@@ -10,20 +10,11 @@ angular.module('catharijne.story', ['catharijne.resource'])
 			}
 			return data;
 		}
-		return $resource('/api/stories/', {}, {
+		return $resource('/api/stories/:pk/', {pk: '@pk'}, {
 			query: {
 				method: 'get',
 				isArray: true,
 				transformResponse: appendTransform.response(transform),
-			},
-			get: {
-				url: ':url',
-				method: 'get',
-			},
-			update: {
-				url: ':url',
-				params: {url: '@url'},
-				method: 'put',
 			},
 		});
 	},

@@ -208,6 +208,7 @@ class StorySerializer(serializers.HyperlinkedModelSerializer):
         model = Story
         fields = (
             'url',
+            'pk',
             'place',
             'year',
             'year_end',
