@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('catharijne.user', ['catharijne.csrf', 'catharijne.resource'])
+angular.module('catharijne.user', ['catharijne.resource'])
 .factory('user', ['$resource', function createUserService($resource) {
 	var User = $resource('/api/users/', {}, {
 		login: {
