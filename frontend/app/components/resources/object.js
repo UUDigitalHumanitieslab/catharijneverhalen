@@ -1,29 +1,27 @@
 'use strict';
 
 angular.module('catharijne.object', ['catharijne.resource'])
-.service('object', ['$resource', '$http', '$q', '$location', function($resource, $http, $q, $location) {
+.service('object', ['$resource', 'appendTransform', '$q', '$location', function($resource, appendTransform, $q, $location) {
 	// This service builds a $resource-like interface.
 	var scheme = $location.protocol();
 	var host = $location.host();
 	var port = $location.port();
 	var portPart = (port === 80 || port === 443 ? '' : ':' + port);
 	var base = scheme + '://' + host + portPart + '/app/demo_objects.json';
-	var transforms = $http.defaults.transformResponse;
-	if (! angular.isArray(transforms)) transforms = [transforms];
-	transforms = transforms.concat(function transform(data, headers, status) {
+	function transform(data, headers, status) {
 		if (angular.isArray(data) && 200 <= status && status < 300) {
 			_.forEach(data, function(obj) {
 				obj.url = base + '#' + obj.inventoryID;
 			});
 		}
 		return data;
-	})
+	}
 	var resource = $resource(base, {}, {
 		query: {
 			method: 'get',
 			isArray: true,
 			cache: true,
-			transformResponse: transforms,
+			transformResponse: appendTransform.response(transform),
 		},
 	});
 	var objectList = resource.query();
