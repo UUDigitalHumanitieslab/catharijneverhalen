@@ -30,7 +30,7 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = (Or(IsAnonCreate, IsAuthenticated),)
     filter_backends = (IsAdminOrOwnerFilter,)
-    throttle_classes = (CreateUserThrottle,)
+    # throttle_classes = (CreateUserThrottle,)
     
     @list_route(methods=['get'])
     def identity(self, request):
