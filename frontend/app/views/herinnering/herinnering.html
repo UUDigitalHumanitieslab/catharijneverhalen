@@ -1,28 +1,47 @@
 <div class="row">
 	<article class="block-pageheader-fullwidth small">
 		<div class=container-image>
-			<img ng-src="{{subject && ('image/' + subject.image) || story.imageAttachments && story.imageAttachments[0].attachment}}"></img>
+			<img ng-src="{{subject && ('image/' + subject.image) || story.imageAttachments && story.imageAttachments[0].attachment}}" style="width: 100%">
 			<div class="overlay-top"></div>
 			<div class="overlay-bottom"></div>
 		</div>
-		<div class=container-title>
-			<h3>Herinnering</h3>
-			<h1>{{story.title}}</h1>
+	</article>
+</div>
+<div class=row>
+	<article class=block-intro>
+		<span class="line-start line-end">Herinnering</span>
+		<h1 class="divider special">{{story.title}}</h1>
+		<div class=intro ng-if="story.introduction">
+			<p>{{story.introduction}}</p>
 		</div>
 	</article>
 </div>
-<div class="row">
-	<article class=block-text>
-		<h3 ng-if=subject>Een herinnering bij {{subject.title}}</h3>
-		<p ng-if=subject>{{subject.creator || 'maker onbekend'}}, {{subject.dateRange || 'datum onbekend'}}</p>
+<div class=row>
+	<article class=block-text-noimage>
+		<div class=container-wrapper>
+			<div class="container-text content">
+				<dl>
+					<dt ng-if="story.subject">Herinnering bij</dt>
+					<dd ng-if="story.subject">
+						{{subject.title}}
+						<br>
+						{{subject.creator || 'maker onbekend'}}, {{subject.dateRange || 'datum onbekend'}}
+					</dd>
+					<dt>Bijgedragen door</dt>
+					<dd>{{story.username}}</dd>
+					<dt ng-if="story.place || story.year">Speelt zich af in</dt>
+					<dd ng-if="story.place || story.year">{{story.place}}{{story.place && story.year && ', ' || ''}}{{story.year}}</dd>
+				</dl>
+			</div>
+		</div>
+	</article>
+</div>
+<div class="row" ng-repeat="section in formatContent">
+	<article class=block-text-noimage>
+		<h3 ng-if="section.header">{{section.header}}</h3>
 		<div class="container-wrapper">
 			<div class="container-text content">
-				<p>Bijgedragen door {{story.username}}.</p>
-				<p ng-if="story.introduction"><strong>{{story.introduction}}</strong></p>
-				<ng-repeat ng-repeat="part in formatContent">
-					<h4 ng-if="part.format === 'header'">{{part.text}}</h4>
-					<p ng-if="part.format === 'paragraph'">{{part.text}}</p>
-				</ng-repeat>
+				<p ng-repeat="paragraph in section.paragraphs">{{paragraph}}</p>
 			</div>
 		</div>
 	</article>
