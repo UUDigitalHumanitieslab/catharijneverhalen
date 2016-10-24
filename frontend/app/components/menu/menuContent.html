@@ -4,9 +4,10 @@
 			<div class="overlay-top"></div>
 			<ul>
 				<li><a href="#/home">Home</a></li>
-				<li><a href="#/aanmelden">Aanmelden</a></li>
-				<li><a href="#/inloggen">Inloggen</a></li>
-				<li><a href="#/profiel">Mijn profiel</a></li>
+				<li ng-show="!user.identity.url"><a href="#/aanmelden">Aanmelden</a></li>
+				<li ng-show="!user.identity.url"><a href="#/inloggen">Inloggen</a></li>
+				<li><a href="#/meedoen?next=/profiel">Mijn profiel</a></li>
+				<li><a href="#/meedoen?next=/toevoegen">Verhaal bijdragen</a></li>
 			</ul>
 		</nav>
 	</div>
