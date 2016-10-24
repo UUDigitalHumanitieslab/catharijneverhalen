@@ -4,9 +4,32 @@ angular.module('catharijne.story', ['catharijne.resource'])
 .service('story', [
 	'$resource', 'appendTransform',
 	function storyService($resource, appendTransform) {
-		function transform(data, headers, status) {
+		function transformStoryOut(data, headers) {
+			if (data.year) {
+				var years = String(data.year).match(/(\d{4})-(\d{4})/);
+				if (years) {
+					data.year = Number(years[1]);
+					data.year_end = Number(years[2]);
+				} else {
+					data.year_end = null;
+				}
+			}
+			return data;
+		}
+		function transformStoryIn(data, headers, status) {
+			if (200 <= status && status < 300) {
+				if (data.year && data.year_end) {
+					data.year = [data.year, data.year_end].join('-');
+				}
+			}
+			return data;
+		}
+		function transformList(data, headers, status) {
 			if (200 <= status && status < 300) {
 				data = data.results;
+				_.forEach(data, function transformListDetail(item) {
+					transformStoryIn(item, headers, status);
+				});
 			}
 			return data;
 		}
@@ -14,7 +37,19 @@ angular.module('catharijne.story', ['catharijne.resource'])
 			query: {
 				method: 'get',
 				isArray: true,
-				transformResponse: appendTransform.response(transform),
+				transformResponse: appendTransform.response(transformList),
+			},
+			get: {
+				method: 'get',
+				transformResponse: appendTransform.response(transformStoryIn),
+			},
+			save: {
+				method: 'post',
+				transformRequest: appendTransform.request(transformStoryOut),
+			},
+			update: {
+				method: 'put',
+				transformRequest: appendTransform.request(transformStoryOut),
 			},
 		});
 	},

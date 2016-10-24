@@ -15,11 +15,6 @@ angular.module('catharijne.toevoegen', ['ngRoute', 'catharijne.story'])
 		var storyPk = $routeParams.pk;
 		if (storyPk) {
 			$scope.story = story.get({pk: storyPk});
-			$scope.story.$promise.then(function fetchSuccess(instance) {
-				if (instance.year && instance.year_end) {
-					instance.year = [instance.year,instance.year_end].join('-');
-				}
-			});
 		} else {
 			$scope.story = new story();
 		}
@@ -51,13 +46,6 @@ angular.module('catharijne.toevoegen', ['ngRoute', 'catharijne.story'])
 			$scope.serverUnauthorized = false;
 			$scope.otherServerError = false;
 			$scope.pending = true;
-			if ($scope.story.year) {
-				var years = $scope.story.year.match(/(\d{4})-(\d{4})/);
-				if (years) {
-					$scope.story.year = Number(years[1]);
-					$scope.story.year_end = Number(years[2]);
-				}
-			}
 			if ($scope.story.url) {
 				$scope.story.$update().then(storySaveSuccess, storySaveFail);
 			} else {
