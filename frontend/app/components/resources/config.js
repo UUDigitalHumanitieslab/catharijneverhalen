@@ -13,8 +13,12 @@ angular.module('catharijne.resource', ['ngResource', 'catharijne.csrf'])
 		if (! angular.isArray(existing)) existing = [existing];
 		return existing.concat(addition);
 	}
+	function prepend(existing, addition) {
+		if (! angular.isArray(addition)) addition = [addition];
+		return addition.concat(existing);
+	}
 	var service = {};
 	service.response = _.bind(append, service, defaultResponse);
-	service.request = _.bind(append, service, defaultRequest);
+	service.request = _.bind(prepend, service, defaultRequest);
 	return service;
 }]);
