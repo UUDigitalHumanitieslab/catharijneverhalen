@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('catharijne.toevoegen', ['ngRoute', 'catharijne.story'])
-
-.config(['$routeProvider', function($routeProvider) {
+angular.module('catharijne.toevoegen', [
+	'ngRoute',
+	'catharijne.story',
+	'catharijne.objectPicker',
+]).config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/toevoegen/:pk?', {
 		templateUrl: 'views/toevoegen/toevoegen.html',
 		controller: 'StoryFormCtrl'
 	});
-}])
-
-.controller('StoryFormCtrl', [
+}]).controller('StoryFormCtrl', [
 	'$scope', '$routeParams', 'story', '$location',
 	function storyFormController($scope, $routeParams, story, $location) {
 		var storyPk = $routeParams.pk;
