@@ -20,18 +20,7 @@
 				<div class="container-logo">
 					<a href="#/" class="button home">Museum Catharijneconvent</a>
 				</div>
-				<div class="container-button">
-					<div ng-controller="MenuStatus" class="button menu js-togglemenu see-me" ng-click="toggleMenu()">
-						<span>Menu</span>
-						<div class="hamburger">
-							<div class="wrapper">
-								<div class="top"></div>
-								<div class="center"></div>
-								<div class="bottom"></div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<app-menu-button></app-menu-button>
 			</div>
 		</header>
 		
@@ -42,20 +31,8 @@
 		<div class="container" ng-view></div>
 	</div>
 	
-	<div class="container-nav-search js-menu">
-		<div class="wrapper">
-			<nav class="nav-main">
-				<div class="overlay-top"></div>
-				<ul>
-					<li><a href="#/home">Home</a></li>
-					<li><a href="#/aanmelden">Aanmelden</a></li>
-					<li><a href="#/inloggen">Inloggen</a></li>
-					<li><a href="#/profiel">Mijn profiel</a></li>
-				</ul>
-			</nav>
-		</div>
-	</div>
-
+	<app-menu-content></app-menu-content>
+	
 	<footer class="footer-main">
 		<div class="wrapper">
 			<div>Catharijneverhalen: v<span app-version></span></div>

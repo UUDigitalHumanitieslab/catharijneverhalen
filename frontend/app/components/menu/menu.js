@@ -1,29 +1,50 @@
 'use strict';
 
-angular.module('catharijne.menu', [])
-
-.controller('MenuStatus', ['$scope', '$document', function($scope, $document) {
-	$scope.menuOpen = false;
-	
-	$scope.openMenu = function() {
-		$scope.menuOpen = true;
-		$document.find('body').addClass('menu-open');
+angular.module('catharijne.menu', [
+	'catharijne.user',
+]).service('menu', [
+	'$rootScope', '$document',
+	function menuService($rootScope, $document) {
+		var service = {};
+		service.menuOpen = false;
+		service.openMenu = function() {
+			service.menuOpen = true;
+			$document.find('body').addClass('menu-open');
+		};
+		service.closeMenu = function() {
+			service.menuOpen = false;
+			$document.find('body').removeClass('menu-open');
+		};
+		service.toggleMenu = function() {
+			if (service.menuOpen) {
+				service.closeMenu();
+			} else {
+				service.openMenu();
+			}
+		};
+		$rootScope.$on('$routeChangeSuccess', function() {
+			service.closeMenu();
+		});
+		return service;
+	},
+]).controller('MenuCtrl', [
+	'$scope', 'menu', 'user',
+	function menuController($scope, menu, user) {
+		$scope.menu = menu;
+		$scope.user = user;
+	},
+]).directive('appMenuButton', function menuButtonDirective() {
+	return {
+		scope: {},
+		templateUrl: 'components/menu/menuButton.html',
+		controller: 'MenuCtrl',
+		// replace: true,
 	};
-	
-	$scope.closeMenu = function() {
-		$scope.menuOpen = false;
-		$document.find('body').removeClass('menu-open');
+}).directive('appMenuContent', function menuContentDirective() {
+	return {
+		scope: {},
+		templateUrl: 'components/menu/menuContent.html',
+		controller: 'MenuCtrl',
+		// replace: true,
 	};
-	
-	$scope.toggleMenu = function() {
-		if ($scope.menuOpen) {
-			$scope.closeMenu();
-		} else {
-			$scope.openMenu();
-		}
-	};
-	
-	$scope.$on('$routeChangeSuccess', function() {
-		$scope.closeMenu();
-	});
-}]);
+});
