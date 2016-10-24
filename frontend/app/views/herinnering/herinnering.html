@@ -19,7 +19,10 @@
 			<div class="container-text content">
 				<p>Bijgedragen door {{story.username}}.</p>
 				<p ng-if="story.introduction"><strong>{{story.introduction}}</strong></p>
-				<div ng-bind-html=formattedContent></div>
+				<ng-repeat ng-repeat="part in formatContent">
+					<h4 ng-if="part.format === 'header'">{{part.text}}</h4>
+					<p ng-if="part.format === 'paragraph'">{{part.text}}</p>
+				</ng-repeat>
 			</div>
 		</div>
 	</article>

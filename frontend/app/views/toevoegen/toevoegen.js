@@ -23,6 +23,9 @@ angular.module('catharijne.toevoegen', ['ngRoute', 'catharijne.story'])
 		} else {
 			$scope.story = new story();
 		}
+		if (! $scope.story.content) {
+			$scope.story.content = 'Beschrijf hier uw herinnering (maximaal 500 woorden). Gebruik witregels om alinea’s te scheiden. Een alinea van minder dan tien woorden wordt weergegeven als een kopje. Voorbeeld:\n\nDit is een alinea van meer dan tien woorden. U sluit deze af met een witregel door twee keer op enter te drukken.\n\nDit wordt een kopje\n\nNa bovenstaande witregel gaat het verhaal weer verder met een alinea van meer dan tien woorden.';
+		}
 		function storySaveSuccess(instance) {
 			$location.path('/herinnering/' + instance.pk);
 		}
@@ -48,10 +51,12 @@ angular.module('catharijne.toevoegen', ['ngRoute', 'catharijne.story'])
 			$scope.serverUnauthorized = false;
 			$scope.otherServerError = false;
 			$scope.pending = true;
-			var years = $scope.story.year.match(/(\d{4})-(\d{4})/);
-			if (years) {
-				$scope.story.year = Number(years[1]);
-				$scope.story.year_end = Number(years[2]);
+			if ($scope.story.year) {
+				var years = $scope.story.year.match(/(\d{4})-(\d{4})/);
+				if (years) {
+					$scope.story.year = Number(years[1]);
+					$scope.story.year_end = Number(years[2]);
+				}
 			}
 			if ($scope.story.url) {
 				$scope.story.$update().then(storySaveSuccess, storySaveFail);

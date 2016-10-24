@@ -14,28 +14,22 @@ angular.module('catharijne.herinnering', [
 	function memoryController($scope, story, object, $routeParams) {
 		function formatStory(input) {
 			if (!input) return;
-			var replacement = {
-				'&': '&amp;',
-				'<': '&lt;',
-				'>': '&gt;'
-			};
-			function replaceTag(tag) {
-				return replacement[tag] || tag;
-			}
-			input.replace(/[&<>]/g, replaceTag);
 			var parts = input.split('\n\n');
-			var formatted = _.map(parts, function format(text) {
+			return _.map(parts, function format(text) {
+				var result = {
+					'text': text,
+					'format': 'paragraph',
+				};
 				if (text.trim().split(/\s+/, 12).length < 10) {
-					return '<h4>' + text + '</h4>';
+					result.format = 'header';
 				}
-				return '<p>' + text + '</p>';
+				return result;
 			});
-			return formatted.join();
 		}
 		$scope.story = story.get({pk: $routeParams.pk});
 		$scope.story.$promise.then(function getSubject(storyInstance) {
 			$scope.subject = object.get({url: storyInstance.subject});
-			$scope.formattedContent = formatStory(storyInstance.content);
+			$scope.formatContent = formatStory(storyInstance.content);
 		});
 	},
 ]);
