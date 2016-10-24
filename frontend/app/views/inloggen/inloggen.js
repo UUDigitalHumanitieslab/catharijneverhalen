@@ -10,10 +10,10 @@ angular.module('catharijne.inloggen', ['ngRoute'])
 }])
 
 .controller('LoginCtrl', [
-	'$scope', '$location', 'user',
-	function loginController($scope, $location, user) {
+	'$scope', '$location', 'user', '$routeParams',
+	function loginController($scope, $location, user, $routeParams) {
 		function loginSuccess() {
-			$location.path('/herinneringofprofiel');
+			$location.path($routeParams.next || '/herinneringofprofiel');
 		}
 		function loginFail(xhrResponse) {
 			if (xhrResponse.data.detail) {
