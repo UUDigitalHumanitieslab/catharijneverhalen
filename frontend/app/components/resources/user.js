@@ -27,5 +27,10 @@ angular.module('catharijne.user', ['catharijne.resource'])
 	service.logout = function(credentials, success, fail) {
 		return service.identity = User.logout(null, credentials, success, fail);
 	};
+	service.whenAuthenticated = function(callback) {
+		service.identity.$promise.then(function loginCheck(userInstance) {
+			if (userInstance.url) callback(userInstance);
+		});
+	};
 	return service;
 }]);
