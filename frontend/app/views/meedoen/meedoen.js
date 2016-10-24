@@ -11,6 +11,7 @@ angular.module('catharijne.meedoen', ['ngRoute', 'catharijne.user'])
 	'$scope', '$routeParams', 'user', '$location',
 	function participateController($scope, $routeParams, user, $location) {
 		user.whenAuthenticated(function forward() {
+			$location.replace();
 			if ($routeParams.next) {
 				$location.url($routeParams.next);
 			} else {
