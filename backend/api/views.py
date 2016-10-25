@@ -4,8 +4,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import ensure_csrf_cookie
 
-from rest_framework import viewsets, throttling, status
+from rest_framework import viewsets, throttling, status, mixins
 from rest_framework.decorators import list_route, api_view
+from rest_framework.decorators import throttle_classes, permission_classes
 from rest_framework.response import Response
 
 from api.models import *
@@ -25,12 +26,30 @@ class CreateUserThrottle(throttling.UserRateThrottle):
     rate = '10/day'
 
 
-class UserViewSet(viewsets.ModelViewSet):
+@api_view(['POST'])
+@throttle_classes((CreateUserThrottle,))
+@permission_classes((IsAnonCreate,))
+def create_user(request):
+    """ Manual view instead of UserViewSet.create because of throttling. """
+    serializer = UserSerializer(data=request.data, context={'request': request})
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserViewSet(
+    # This list basically means "a ModelViewSet without model creation".
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
+    viewsets.GenericViewSet,
+):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (Or(IsAnonCreate, IsAuthenticated),)
     filter_backends = (IsAdminOrOwnerFilter,)
-    # throttle_classes = (CreateUserThrottle,)
     
     @list_route(methods=['get'])
     def identity(self, request):

@@ -15,11 +15,15 @@ angular.module('catharijne.user', ['catharijne.resource'])
 			method: 'get',
 			url: '/api/users/identity/',
 		},
+		register: {
+			method: 'post',
+			url: '/api/users/register/',
+		},
 	});
 	var service = {};
 	service.identity = User.identity();
 	service.register = function(credentials, success, fail) {
-		return User.save(null, credentials, success, fail);
+		return User.register(null, credentials, success, fail);
 	};
 	service.login = function(credentials, success, fail) {
 		return service.identity = User.login(null, credentials, success, fail);
