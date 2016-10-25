@@ -3199,16 +3199,18 @@ label.error {
 }
 
 
+/* Changes by DHL */
+
 button,
 .button {
-    position: absolute;
+    position: relative;
     display: inline-block;
     padding: 10px 34px 8px 24px;
     background-color: transparent;
-    border: 2px solid #fff;
+    border: 2px solid #363E46;
     margin: 0 20px 40px 0;
     font-family: "CaeciliaCom-76BoldItalic", Georgia, "Times New Roman", Times, serif;
-    color: #fff;
+    color: #363E46;
     -webkit-transition: all 0.25s ease-in-out;
     -moz-transition: all 0.25s ease-in-out;
     transition: all 0.25s ease-in-out;
@@ -3234,7 +3236,30 @@ button:after,
 }
 
 
-/* Insertions by DHL */
+button:hover,
+.button:hover {
+    color: #fff;
+    background-color: #363E46;
+    text-decoration: none;
+}
+
+
+.home .block-intro .button,
+.home .block-intro button,
+.block-cta .button,
+.block-cta button {
+    border-color: #fff;
+    color: #fff;
+}
+
+.home .block-intro .button:hover,
+.home .block-intro button:hover,
+.block-cta .button:hover,
+.block-cta button:hover {
+    background-color: #fff;
+    color: #363E46;
+}
+
 
 .block-form button,
 .block-overview button,
@@ -3243,18 +3268,7 @@ button:after,
     position: relative;
     left: 0;
     right: 0;
-    border-color: #363E46;
-    color: #363E46;
 }
-
-.block-form button:hover,
-.block-overview button:hover,
-.block-overview .button:hover {
-    background-color: #363E46;
-    color: #fff;
-}
-
-/* End insertions by DHL */
 
 
 .row button, .row
@@ -3263,13 +3277,7 @@ button:after,
     text-overflow: ellipsis;
 }
 
-
-button:hover,
-.button:hover {
-    color: #363E46;
-    background-color: #fff;
-    text-decoration: none;
-}
+/* End changes by DHL */
 
 
 button.button-submit,
