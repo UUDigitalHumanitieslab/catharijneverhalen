@@ -13,7 +13,6 @@ angular.module('catharijne.aanmelden', ['ngRoute', 'catharijne.user'])
 	'$scope', '$location', 'user', '$routeParams',
 	function($scope, $location, user, $routeParams) {
 		function registerSuccess() {
-			user.login($scope.credentials);
 			$location.path($routeParams.next || '/herinneringofprofiel');
 		}
 		function registerFail(xhrResponse) {

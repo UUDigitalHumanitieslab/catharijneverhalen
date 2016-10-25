@@ -34,6 +34,11 @@ def create_user(request):
     serializer = UserSerializer(data=request.data, context={'request': request})
     if serializer.is_valid():
         serializer.save()
+        user = authenticate(
+            username=request.data['username'],
+            password=request.data['password'],
+        )
+        login(request, user)
         return Response(serializer.data)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
