@@ -30,4 +30,7 @@ angular.module('catharijne.resource', ['ngResource', 'catharijne.csrf'])
 		var portPart = (port === 80 || port === 443 ? '' : ':' + port);
 		return scheme + '://' + host + portPart;
 	},
-]);
+]).value('extractPk', function extractPk(url) {
+	var match = url.match(/\/(\d+)\/$/);
+	if (match) return match[1];
+});
