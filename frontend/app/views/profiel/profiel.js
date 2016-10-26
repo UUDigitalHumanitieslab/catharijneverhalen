@@ -10,12 +10,12 @@ angular.module('catharijne.profiel', [
 		controller: 'ProfileCtrl',
 	});
 }]).controller('ProfileCtrl', [
-	'$routeParams', '$scope', 'user', 'person',
-	function profileController($routeParams, $scope, user, person) {
+	'$routeParams', '$scope', 'user', 'person', 'extractPk',
+	function profileController($routeParams, $scope, user, person, extractPk) {
 		function initScope(userInstance) {
 			var username = $routeParams.username || userInstance.username;
 			if (username === userInstance.username) {
-				$scope.self = person.get({url: userInstance.person});
+				$scope.self = person.get({pk: extractPk(userInstance.person)});
 			}
 			$scope.username = username;
 		}
