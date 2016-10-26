@@ -21,4 +21,13 @@ angular.module('catharijne.resource', ['ngResource', 'catharijne.csrf'])
 	service.response = _.bind(append, service, defaultResponse);
 	service.request = _.bind(prepend, service, defaultRequest);
 	return service;
-}]);
+}]).factory('currentOrigin', [
+	'$location',
+	function currentOriginFactory($location) {
+		var scheme = $location.protocol();
+		var host = $location.host();
+		var port = $location.port();
+		var portPart = (port === 80 || port === 443 ? '' : ':' + port);
+		return scheme + '://' + host + portPart;
+	},
+]);
