@@ -10,24 +10,23 @@ angular.module('catharijne.profiel', [
 		controller: 'ProfileCtrl',
 	});
 }]).controller('ProfileCtrl', [
-	'$routeParams', '$scope',
-	function profileController($routeParams, $scope) {
-		var username = $routeParams.username || user.identity.username;
-		if (username && username === user.identity.username) {
-			
+	'$routeParams', '$scope', 'user', 'person',
+	function profileController($routeParams, $scope, user, person) {
+		function initScope(userInstance) {
+			var username = $routeParams.username || userInstance.username;
+			if (username === userInstance.username) {
+				$scope.self = person.get({url: userInstance.person});
+			}
+			$scope.username = username;
 		}
-	
+		user.identity.$promise.then(initScope);
 		$scope.storiesPreview = {
-			title: 'Mijn verhalen',
-			imageUrl: 'verhalenvoorbeeld.jpg',
-			href: '/profiel',
-			linkText: 'Bewerk',
+			title: 'Herinneringen',
+			linkText: 'Bekijk',
 		};
 		$scope.collectionsPreview = {
-			title: 'Mijn collecties',
-			imageUrl: 'collectiesvoorbeeld.jpg',
-			href: '/profiel',
-			linkText: 'Bewerk',
+			title: 'Collecties',
+			linkText: 'Binnenkort',
 		};
 	},
 ]);
