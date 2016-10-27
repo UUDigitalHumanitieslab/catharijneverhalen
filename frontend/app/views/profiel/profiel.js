@@ -4,6 +4,7 @@ angular.module('catharijne.profiel', [
 	'ngRoute',
 	'catharijne.user',
 	'catharijne.person',
+	'catharijne.profiel.bewerken',
 ]).config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/profiel/:username?', {
 		templateUrl: 'views/profiel/profiel.html',
