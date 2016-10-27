@@ -29,6 +29,9 @@ angular.module('catharijne.person', [
 			}
 			return data;
 		}
+		function stripPortraitField(data, headers) {
+			return _.omit(data, 'portrait');
+		}
 		return $resource('/api/persons/' + ':pk/', {pk: '@pk'}, {
 			query: {
 				method: 'get',
@@ -37,6 +40,14 @@ angular.module('catharijne.person', [
 			},
 			get: {
 				method: 'get',
+				transformResponse: appendTransform.response(augment),
+			},
+			updateNoImage: {
+				method: 'patch',
+				transformRequest: appendTransform.request([
+					stripPortraitField,
+					unaugment,
+				]),
 				transformResponse: appendTransform.response(augment),
 			},
 		});
