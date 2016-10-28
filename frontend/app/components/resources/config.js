@@ -6,7 +6,7 @@ angular.module('catharijne.resource', ['ngResource', 'catharijne.csrf'])
 	$resourceProvider.defaults.actions.update = {
 		method: 'PUT',
 	};
-}]).service('appendTransform', ['$http', function appendTransformService($http) {
+}]).factory('appendTransform', ['$http', function appendTransformService($http) {
 	var defaultResponse = $http.defaults.transformResponse;
 	var defaultRequest = $http.defaults.transformRequest;
 	function append(existing, addition) {

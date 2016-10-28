@@ -2,7 +2,7 @@
 
 angular.module('catharijne.object', [
 	'catharijne.resource',
-]).service('object', [
+]).factory('object', [
 	'$resource', 'appendTransform', '$q', 'currentOrigin',
 	function($resource, appendTransform, $q, currentOrigin) {
 		// This service builds a $resource-like interface.

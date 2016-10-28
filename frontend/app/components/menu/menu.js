@@ -2,7 +2,7 @@
 
 angular.module('catharijne.menu', [
 	'catharijne.user',
-]).service('menu', [
+]).factory('menu', [
 	'$rootScope', '$document',
 	function menuService($rootScope, $document) {
 		var service = {};

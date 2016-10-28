@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('catharijne.story', ['catharijne.resource'])
-.service('story', [
+.factory('story', [
 	'$resource', 'appendTransform',
 	function storyService($resource, appendTransform) {
 		function transformStoryOut(data, headers) {
@@ -53,7 +53,7 @@ angular.module('catharijne.story', ['catharijne.resource'])
 			},
 		});
 	},
-]).service('urlAttachment', [
+]).factory('urlAttachment', [
 	'$resource',
 	function urlAttachmentService($resource) {
 		return $resource('/api/url-attachments/', {url: '@url'}, {
@@ -71,7 +71,7 @@ angular.module('catharijne.story', ['catharijne.resource'])
 			},
 		});
 	},
-]).service('imageAttachment', [
+]).factory('imageAttachment', [
 	'$resource', '$http', '$q',
 	function imageAttachmentService($resource, $http, $q) {
 		// This resource is special, as the save method takes a form as data.
