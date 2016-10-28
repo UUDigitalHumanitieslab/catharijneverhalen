@@ -36,14 +36,14 @@ angular.module('catharijne.menu', [
 ]).directive('appMenuButton', function menuButtonDirective() {
 	return {
 		scope: {},
-		templateUrl: 'components/menu/menuButton.html',
+		templateUrl: 'components/nav/menuButton.html',
 		controller: 'MenuCtrl',
 		// replace: true,
 	};
 }).directive('appMenuContent', function menuContentDirective() {
 	return {
 		scope: {},
-		templateUrl: 'components/menu/menuContent.html',
+		templateUrl: 'components/nav/menuContent.html',
 		controller: 'MenuCtrl',
 		// replace: true,
 	};
