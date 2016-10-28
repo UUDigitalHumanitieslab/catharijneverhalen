@@ -23,6 +23,14 @@ angular.module('catharijne.person', [
 			}
 			return data;
 		}
+		function unaugmentForm(form) {
+			var birthDateField = angular.element(form.querySelector('#birth_date'));
+			var value = birthDateField.val();
+			if (value && value.length === 4) {
+				birthDateField.prop('name', 'birth_year');
+			}
+			return form;
+		}
 		function unwrapPaginated(data, headers, status) {
 			if (200 <= status && status < 300 && data.results) {
 				return _.map(data.results, augment);
@@ -56,12 +64,7 @@ angular.module('catharijne.person', [
 			// Bind to a person instance before use.
 			var instance = this;
 			var pk = params.pk || instance.pk;
-			var formData = new FormData(form);
-			var birth_date = formData.get('birth_date');
-			if (birth_date && birth_date.length === 4) {
-				formData.set('birth_year', birth_date);
-				formData.set('birth_date', null);
-			}
+			var formData = new FormData(unaugmentForm(form));
 			instance.$resolved = false;
 			instance.$promise = $http.put(path + pk + '/', formData, {
 				headers: {'Content-Type': undefined},

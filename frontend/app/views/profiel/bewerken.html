@@ -4,7 +4,7 @@
 		<div class="overlay-bottom"></div>
 	</article>
 </div>
-<form class="form" name=form>
+<form class="form" name=form id="main-form">
 	<div class="row">
 		<article class="block-form">
 			<label class=error ng-show=loginFirst>
@@ -78,6 +78,7 @@
 				</label>
 			</span>
 			<!-- TODO: education_level -->
+			<input type=hidden name=education_level ng-model="my.education_level">
 			<label>
 				Beroep
 				<input type=text name=occupation id=occupation maxlength=126 placeholder="brandweerman" ng-model="my.occupation">
@@ -88,6 +89,7 @@
 				</label>
 			</span>
 			<!-- TODO: marital_status -->
+			<input type=hidden name=marital_status ng-model="my.marital_status">
 			<label>
 				Religieuze achtergrond
 				<input type=text name=religious_background id=religious_background maxlength=126 placeholder="protestants" ng-model="my.religious_background">

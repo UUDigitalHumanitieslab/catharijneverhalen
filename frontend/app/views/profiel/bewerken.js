@@ -33,6 +33,7 @@ angular.module('catharijne.profiel.bewerken', [
 			$location.url('/profiel');
 		}
 		function submitFail(xhr) {
+			console.log(xhr);
 			switch (xhr.status) {
 			case 400:
 				$scope.clientError = xhr.data;
@@ -50,10 +51,11 @@ angular.module('catharijne.profiel.bewerken', [
 			$scope.pending = true;
 			$scope.clientError = false;
 			$scope.serverError = false;
-			if ($scope.form.portrait.$isEmpty()) {
-				$scope.my.$updateNoImage().then(submitSuccess, submitFail);
+			if (angular.element(document.querySelector('#portrait')).val()) {
+				var formElement = document.querySelector('#main-form');
+				$scope.my.$update(formElement).then(submitSuccess, submitFail);
 			} else {
-				$scope.my.$update($scope.form).then(submitSuccess, submitFail);
+				$scope.my.$updateNoImage().then(submitSuccess, submitFail);
 			}
 		};
 	},

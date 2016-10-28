@@ -74,7 +74,7 @@ class ParentOccupationSerializer(serializers.ModelSerializer):
 
 class PersonSerializer(serializers.HyperlinkedModelSerializer):
     username = serializers.ReadOnlyField(source='user.username')
-    parent_occupations = ParentOccupationSerializer(many=True)
+    parent_occupations = ParentOccupationSerializer(many=True, read_only=True)
     education_level = serializers.SlugRelatedField(
         slug_field='name',
         queryset=EducationLevel.objects.all(),
@@ -119,13 +119,6 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
             'user': {'view_name': 'api:user-detail', 'read_only': True},
             'stories': {'view_name': 'api:story-detail', 'read_only': True},
         }
-    
-    def create(self, data):
-        parent_occupations_data = data.pop('parent_occupations')
-        person = super(PersonSerializer, self).create(data)
-        for parent_occupation in parent_occupations_data:
-            ParentOccupation.objects.create(person=person, **parent_occupation)
-        return person
 
 
 class AttachmentSerializer(
