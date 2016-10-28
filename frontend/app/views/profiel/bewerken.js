@@ -2,12 +2,14 @@
 
 angular.module('catharijne.profiel.bewerken', [
 	'catharijne.person',
+	'catharijne.authRedirect',
 ]).config([
-	'$routeProvider',
-	function profileEditConfig($routeProvider) {
+	'$routeProvider', 'authGuard',
+	function profileEditConfig($routeProvider, authGuard) {
 		$routeProvider.when('/profiel/bewerken', {
 			templateUrl: 'views/profiel/bewerken.html',
 			controller: 'ProfileEditCtrl',
+			resolve: {redirect: authGuard},
 		});
 	},
 ]).controller('ProfileEditCtrl', [
@@ -20,10 +22,7 @@ angular.module('catharijne.profiel.bewerken', [
 			$scope.my = person.get({pk: extractPk(userInstance.person)});
 			$scope.my.$promise.then(initDetails);
 		}
-		function initFail() {
-			$scope.loginFirst = true;
-		}
-		user.identity.$promise.then(initScope, initFail);
+		user.identity.$promise.then(initScope);
 		$scope.genderOptions = {
 			1: 'vrouw',
 			2: 'man',

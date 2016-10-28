@@ -1,9 +1,14 @@
 'use strict';
 
-angular.module('catharijne.herinneringofprofiel', ['ngRoute'])
-
-.config(['$routeProvider', function($routeProvider) {
-	$routeProvider.when('/herinneringofprofiel', {
-		templateUrl: 'views/herinneringofprofiel/herinneringofprofiel.html'
-	});
-}]);
+angular.module('catharijne.herinneringofprofiel', [
+	'ngRoute',
+	'catharijne.authRedirect',
+]).config([
+	'$routeProvider', 'authGuard',
+	function($routeProvider, authGuard) {
+		$routeProvider.when('/herinneringofprofiel', {
+			templateUrl: 'views/herinneringofprofiel/herinneringofprofiel.html',
+			resolve: {redirect: authGuard},
+		});
+	},
+]);

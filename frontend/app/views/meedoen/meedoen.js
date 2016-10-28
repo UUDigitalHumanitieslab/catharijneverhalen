@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('catharijne.meedoen', ['ngRoute', 'catharijne.user'])
+angular.module('catharijne.meedoen', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/meedoen', {
@@ -8,16 +8,8 @@ angular.module('catharijne.meedoen', ['ngRoute', 'catharijne.user'])
 		controller: 'ParticipateCtrl',
 	});
 }]).controller('ParticipateCtrl', [
-	'$scope', '$routeParams', 'user', '$location',
-	function participateController($scope, $routeParams, user, $location) {
-		user.whenAuthenticated(function forward() {
-			$location.replace();
-			if ($routeParams.next) {
-				$location.url($routeParams.next);
-			} else {
-				$location.url('/herinneringofprofiel');
-			}
-		});
+	'$scope', '$routeParams',
+	function participateController($scope, $routeParams) {
 		$scope.next = $routeParams.next;
 	},
 ]);

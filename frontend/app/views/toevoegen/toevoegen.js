@@ -4,10 +4,12 @@ angular.module('catharijne.toevoegen', [
 	'ngRoute',
 	'catharijne.story',
 	'catharijne.objectPicker',
-]).config(['$routeProvider', function($routeProvider) {
+	'catharijne.authRedirect',
+]).config(['$routeProvider', 'authGuard', function($routeProvider, authGuard) {
 	$routeProvider.when('/toevoegen/:pk?', {
 		templateUrl: 'views/toevoegen/toevoegen.html',
-		controller: 'StoryFormCtrl'
+		controller: 'StoryFormCtrl',
+		resolve: {redirection: authGuard},
 	});
 }]).controller('StoryFormCtrl', [
 	'$scope', '$routeParams', 'story', '$location',
