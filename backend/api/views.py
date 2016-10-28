@@ -53,7 +53,7 @@ class UserViewSet(
 ):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (Or(IsAnonCreate, IsAuthenticated),)
+    permission_classes = (Or(ReadOnly, IsAnonCreate, IsAuthenticated),)
     filter_backends = (IsAdminOrOwnerFilter,)
     
     @list_route(methods=['get'])
@@ -62,9 +62,7 @@ class UserViewSet(
         if user.is_authenticated():
             serializer = self.get_serializer(request.user)
             return Response(serializer.data)
-        return Response({
-            'detail': 'Not currently logged in.',
-        }, status=status.HTTP_401_UNAUTHORIZED)
+        return Response(status=status.HTTP_204_NO_CONTENT)
     
     @list_route(methods=['post'])
     def login(self, request):
