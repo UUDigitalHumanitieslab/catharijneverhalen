@@ -110,6 +110,7 @@ class StoryViewSet(viewsets.ModelViewSet):
     queryset = Story.objects.all()
     serializer_class = StorySerializer
     permission_classes = (Or(ReadOnly, IsAdminUser, IsOwner),)
+    filter_fields = ('author', 'subject')
     
     def perform_create(self, serializer):
         serializer.save(author=self.request.user.person)
