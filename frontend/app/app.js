@@ -15,6 +15,7 @@ angular.module('catharijne', [
 	'catharijne.toevoegen',
 	'catharijne.herinnering',
 	'catharijne.herinneringen',
+	'catharijne.voorwerpen',
 ]).
 config(['$routeProvider', function($routeProvider) {
 	$routeProvider.otherwise({redirectTo: '/home'});
