@@ -9,6 +9,7 @@ angular.module('catharijne', [
 	'catharijne.meedoen',
 	'catharijne.aanmelden',
 	'catharijne.inloggen',
+	'catharijne.uitloggen',
 	'catharijne.herinneringofprofiel',
 	'catharijne.profiel',
 	'catharijne.toevoegen',
