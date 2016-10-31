@@ -41,5 +41,5 @@ angular.module(
 	}, function fail(response) {
 		$log.debug(response);
 	});
-	$scope.update();
+	$scope.update($scope.objectUrl);
 });
