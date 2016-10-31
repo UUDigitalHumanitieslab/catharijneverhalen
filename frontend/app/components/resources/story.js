@@ -37,10 +37,12 @@ angular.module('catharijne.story', ['catharijne.resource'])
 			query: {
 				method: 'get',
 				isArray: true,
+				cache: true,
 				transformResponse: appendTransform.response(transformList),
 			},
 			get: {
 				method: 'get',
+				cache: true,
 				transformResponse: appendTransform.response(transformStoryIn),
 			},
 			save: {
