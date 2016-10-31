@@ -42,7 +42,20 @@ angular.module('catharijne.herinneringen', [
 		}
 		function prepareMemories(storyList) {
 			$scope.memories = _.map(storyList, prepareMemory);
+			if ($scope.memories.length) {
+				if ($routeParams.author) {
+					$scope.author = storyList[0].username;
+				}
+				if ($routeParams.subject) {
+					object.get({
+						url: storyList[0].subject,
+					}).$promise.then(function subjectTitleFetch(objectInstance) {
+						$scope.subjectTitle = objectInstance.title;
+					});
+				}
+			}
 		}
-		story.query().$promise.then(prepareMemories);
+		var search = _.pick($routeParams, ['author', 'subject']);
+		story.query(search).$promise.then(prepareMemories);
 	},
 ]);

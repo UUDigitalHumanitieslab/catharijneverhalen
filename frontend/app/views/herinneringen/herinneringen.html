@@ -8,7 +8,7 @@
 	<article class="block-intro">
 		<h1 class="divider special">Herinneringen</h1>
 		<div class="intro">
-			<p>Hier ziet u de herinneringen die bezoekers hebben bijgedragen.</p>
+			<p ng-if="memories && memories.length">Hier ziet u de herinneringen die {{ author && author + ' heeft' || 'bezoekers hebben' }} bijgedragen{{ subjectTitle && ' over ' + subjectTitle }}.</p>
 			<a href="#/toevoegen" class="button">Draag bij!</a>
 		</div>
 		<div class="overlay-bottom"></div>
