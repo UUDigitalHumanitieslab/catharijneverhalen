@@ -30,29 +30,14 @@ angular.module(
 			$scope.background = {};
 		});
 	};
-	function transformObject(obj) {
-		var dateRange = obj.dateRange, creator = obj.creator;
-		if (typeof dateRange === 'string') {
-			dateRange = dateRange.trim();
-		}
-		if (typeof creator === 'string') {
-			creator = creator.trim();
-		}
-		creator = creator || 'Maker onbekend';
-		dateRange = dateRange || 'datum onbekend';
-		return {
-			imageUrl: 'image/' + obj.image,
-			title: obj.title,
-			description: creator + ', ' + dateRange,
-			linkText: 'Kies',
-			click: function() {
-				$scope.update(obj.url);
-				$scope.picking = false;
-			},
+	object.asDescriptions(function handleClick(description) {
+		description.linkText = 'Kies';
+		description.click = function() {
+			$scope.update(description.url);
+			$scope.picking = false;
 		};
-	}
-	object.query().$promise.then(function success(list) {
-		$scope.objectDescriptions = _.map(list, transformObject);
+	}).then(function success(list) {
+		$scope.objectDescriptions = list;
 	}, function fail(response) {
 		$log.debug(response);
 	});

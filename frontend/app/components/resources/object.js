@@ -7,20 +7,36 @@ angular.module('catharijne.object', [
 	function($resource, appendTransform, $q, currentOrigin) {
 		// This service builds a $resource-like interface.
 		var base = currentOrigin + '/app/demo_objects.json';
-		function transform(data, headers, status) {
+		function transformRaw(data, headers, status) {
 			if (angular.isArray(data) && 200 <= status && status < 300) {
 				_.forEach(data, function(obj) {
+					_.forOwn(obj, function trim(value, key) {
+						if (typeof value !== 'string') return;
+						obj[key] = value.trim();
+					});
 					obj.url = base + '#' + encodeURIComponent(obj.inventoryID);
 				});
 			}
 			return data;
+		}
+		function object2description(obj, enrich) {
+			var creator = obj.creator || 'Maker onbekend';
+			var dateRange = obj.dateRange || 'datum onbekend';
+			var description = {
+				url: obj.url,
+				imageUrl: 'image/' + obj.image,
+				title: obj.title,
+				description: creator + ', ' + dateRange,
+			};
+			enrich(description);
+			return description;
 		}
 		var resource = $resource(base, {}, {
 			query: {
 				method: 'get',
 				isArray: true,
 				cache: true,
-				transformResponse: appendTransform.response(transform),
+				transformResponse: appendTransform.response(transformRaw),
 			},
 		});
 		var objectList = resource.query();
@@ -51,6 +67,13 @@ angular.module('catharijne.object', [
 			});
 			object.$promise.then(success, fail);
 			return object;
+		};
+		service.asDescriptions = function asDescriptions(callback) {
+			return objectList.$promise.then(_.partial(_.map, _, _.partial(
+				object2description,
+				_,
+				callback
+			)));
 		};
 		return service;
 	},
