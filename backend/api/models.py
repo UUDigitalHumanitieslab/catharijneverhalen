@@ -146,6 +146,9 @@ class Story(models.Model):
         null=True,
     )
     
+    class Meta:
+        ordering = ('-creation_date',)
+    
     def __str__(self):
         return self.title
     
