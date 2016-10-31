@@ -16,7 +16,7 @@ angular.module('catharijne.voorwerpen', [
 	function objectsController(object, $scope) {
 		function prepareItem(item) {
 			item.linkText = 'Bekijk';
-			item.href = '#/voorwerp/' + encodeURIComponent(item.url);
+			item.href = '#/voorwerp?url=' + encodeURIComponent(item.url);
 		}
 		function initScope(objectList) {
 			$scope.objects = objectList;
