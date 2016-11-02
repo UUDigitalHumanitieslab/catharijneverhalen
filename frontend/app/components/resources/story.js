@@ -66,9 +66,9 @@ angular.module('catharijne.story', ['catharijne.resource'])
 		// This resource is special, as the save method takes a form as data.
 		var base = '/api/image-attachments/';
 		var service = $resource(base + ':pk/', {pk: '@pk'});
-		service.save = function saveImage(params, form, success, fail) {
+		function saveImage(params, form, success, fail) {
 			var formData = new FormData(form);
-			var result = new service();
+			var result = this;
 			result.$resolved = false;
 			result.$promise = $http.post(base, formData, {
 				headers: {'Content-Type': undefined},
@@ -81,6 +81,13 @@ angular.module('catharijne.story', ['catharijne.resource'])
 				result.$resolved = true;
 			});
 			return result;
+		};
+		service.save = function serviceClassSave(params, form, success, fail) {
+			var result = new service();
+			return _.bind(saveImage, result)(params, form, success, fail);
+		};
+		service.prototype.$save = function serviceInstanceSave(form, success, fail) {
+			return _.bind(saveImage, this, {})(form, success, fail).$promise;
 		};
 		delete service.update;
 		delete service.prototype.$update;
