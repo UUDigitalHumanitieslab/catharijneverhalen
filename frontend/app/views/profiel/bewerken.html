@@ -1,0 +1,144 @@
+<div class="row no-background">
+	<article class="block-pageheader-fullwidth small">
+		<div class="overlay-top"></div>
+		<div class="overlay-bottom"></div>
+	</article>
+</div>
+<form class="form" name=form id="main-form">
+	<div class="row">
+		<article class="block-form">
+			<h2>Persoonlijke details</h2>
+			<p>Dank voor het invullen van uw gegevens. Museum Catharijneconvent gaat hier zorgvuldig mee om.</p>
+			<figure ng-show="my.portrait" style="float: right;">
+				<h4>Huidige foto</h4>
+				<img ng-src="{{my.portrait}}" style="max-width: 100px;">
+				<figcaption>{{portraitFileName}}</figcaption>
+			</figure>
+			<label>
+				Profielfoto
+				<input name=portrait id=portrait type=file accept="image/*,.jpeg,.jpg,.png,.gif" capture>
+			</label>
+			<span ng-show="form.$submitted || form.portrait.$touched">
+				<label for=portrait class=error ng-show="form.portrait.$error.accept || clientError && clientError.portrait">Kies een JPEG-, PNG- of GIF-bestand, of maak een foto met uw camera.</label>
+			</span>
+			<label>
+				Volledige naam
+				<input name=name id=name type=text maxlength=254 ng-model="my.name" placeholder="Hendrik Jacobus Maria Jansen">
+			</label>
+			<span ng-show="form.$submitted || form.name.$touched">
+				<label for=name class=error ng-show="form.name.$error.maxlength || clientError && clientError.name">Helaas kunnen wij geen namen opslaan die langer zijn dan 254 tekens. Kunt u wellicht initialen gebruiken om uw naam korter te maken?</label>
+			</span>
+			<label>
+				Woonplaats
+				<input type=text name=address_place id=address_place maxlength=126 ng-model="my.address_place" placeholder="Utrecht">
+			</label>
+			<span ng-show="form.$submitted || form.address_place.$touched">
+				<label for=address_place class=error ng-show="form.address_place.$error.maxlength || clientError && clientError.address_place">
+					Helaas kunnen wij geen plaatsnamen opslaan die langer zijn dan 126 tekens. Kunt u de naam wellicht afkorten?
+				</label>
+			</span>
+			<label>
+				Geboortedatum
+				<input type=text name=birth_date id=birth_date pattern="\d{4}(-\d{2}-\d{2})?" ng-model="my.birth_date" placeholder="jjjj-mm-dd">
+			</label>
+			<label ng-class="{error: (form.$submitted || form.birth_date.$touched) && (form.birth_date.$error.pattern || clientError && (clientError.birth_date || clientError.birth_year))}">
+				U kunt kiezen of u alleen uw viercijferig geboortejaar invoert of de volledige geboortedatum.
+			</label>
+			<label>
+				Geboorteplaats
+				<input type=text name=birth_place id=birth_place maxlength=126 ng-model="my.birth_place" placeholder="Utrecht">
+			</label>
+			<span ng-show="form.$submitted || form.birth_place.$touched">
+				<label for="birth_place" class=error ng-show="form.birth_place.$error.maxlength || clientError && clientError.birth_place">
+					Helaas kunnen wij geen plaatsnamen opslaan die langer zijn dan 126 tekens. Kunt u de naam wellicht afkorten?
+				</label>
+			</span>
+			<label>
+				Geslacht
+				<select name=gender id=gender ng-model="my.gender" ng-options="value as key for (key, value) in genderOptions">
+					<option value=""></option>
+				</select>
+			</label>
+			<span ng-show="form.$submitted || form.gender.$touched">
+				<label for=gender class=error ng-show="clientError && clientError.gender">
+					Uw invoer werd geweigerd om de volgende reden:<br>
+					<pre>{{clientError.gender}}</pre>
+				</label>
+			</span>
+			<label>
+				Nationaliteit
+				<input type=text name=nationality id=nationality maxlength=126 placeholder="Nederlandse" ng-model="my.nationality">
+			</label>
+			<span ng-show="form.$submitted || form.nationality.$touched">
+				<label for=nationality class=error ng-show="form.nationality.$error.maxlength || clientError && clientError.nationality">
+					De nationaliteit kan niet langer zijn dan 126 tekens.
+				</label>
+			</span>
+			<label>
+				Hoogst genoten opleiding
+				<select name=education_level id=education_level ng-model="my.education_level" ng-options="value for value in educationLevelList">
+					<option value=""></option>
+				</select>
+			</label>
+			<span ng-show="form.$submitted || form.education_level.$touched">
+				<label for=education_level class=error ng-show="clientError && clientError.education_level">
+					Uw invoer werd geweigerd om de volgende reden:<br>
+					<pre>{{clientError.education_level}}</pre>
+				</label>
+			</span>
+			<label>
+				Beroep
+				<input type=text name=occupation id=occupation maxlength=126 placeholder="brandweerman" ng-model="my.occupation">
+			</label>
+			<span ng-show="form.$submitted || form.occupation.$touched">
+				<label for=occupation class=error ng-show="form.occupation.$error.maxlength || clientError && clientError.occupation">
+					Het beroep kan niet langer zijn dan 126 tekens.
+				</label>
+			</span>
+			<label>
+				Burgerlijke staat
+				<select name=marital_status id=marital_status ng-model="my.marital_status" ng-options="value for value in maritalStatusList">
+					<option value=""></option>
+				</select>
+			</label>
+			<span ng-show="form.$submitted || form.marital_status.$touched">
+				<label for=marital_status class=error ng-show="clientError && clientError.marital_status">
+					Uw invoer werd geweigerd om de volgende reden:<br>
+					<pre>{{clientError.marital_status}}</pre>
+				</label>
+			</span>
+			<label>
+				Religieuze achtergrond
+				<input type=text name=religious_background id=religious_background maxlength=126 placeholder="protestants" ng-model="my.religious_background">
+			</label>
+			<span ng-show="form.$submitted || form.religious_background.$touched">
+				<label for=religious_background class=error ng-show="form.religious_background.$error.maxlength || clientError && clientError.religious_background">
+					Formuleert u alstublieft uw religieuze achtergrond in minder dan 126 tekens.
+				</label>
+			</span>
+			<label>
+				Vroegere gezinssamenstelling
+				<textarea name=family_composition id=family_composition placeholder="vader, moeder, 1 oudere broer, 2 oudere zussen, 3 jongere broers" ng-model="my.family_composition"></textarea>
+			</label>
+			<span ng-show="form.$submitted || form.family_composition.$touched">
+				<label for=family_composition class=error ng-show="clientError && clientError.family_composition">
+					Uw invoer werd geweigerd met de volgende reden:<br>
+					<pre>{{clientError.family_composition}}</pre>
+				</label>
+			</span>
+			<app-attachment-manager
+				meta="parentOccupations.meta"
+				field-list="parentOccupations.fields"
+				item-list="parentOccupations.items"
+			>Beroepen van uw ouders of verzorgers</app-attachment-manager>
+			<button type=submit ng-click="saveProfile()" ng-disabled="form.$invalid || pending">Opslaan</button>
+			<label class=error ng-show=unauthorized>
+				U heeft geen toestemming om dit profiel te bewerken. Misschien ben u in de tussentijd uitgelogd of misschien bent u ingelogd als een andere gebruiker dan degene van wie u het profiel probeert te bewerken. <a href="#/meedoen?next=/profiel/bewerken">Klik hier</a> om het opnieuw te proberen.
+			</label>
+			<label class=error ng-show=serverError>
+				Het is om technische redenen niet gelukt om uw bijdrage op te slaan. Als u ervoor kiest om dit probleem te melden, zou u dan de code in onderstaand tekstvak willen meesturen? Bij voorbaat dank.
+				<pre>{{serverError | json}}</pre>
+			</label>
+		</article>
+	</div>
+</form>

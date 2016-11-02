@@ -4,17 +4,19 @@
 angular.module('catharijne', [
 	'ngRoute',
 	'catharijne.menu',
-	'catharijne.block',
-	'catharijne.blocklist',
-	'catharijne.objectPicker',
 	'catharijne.version',
 	'catharijne.home',
 	'catharijne.meedoen',
 	'catharijne.aanmelden',
 	'catharijne.inloggen',
+	'catharijne.uitloggen',
 	'catharijne.herinneringofprofiel',
 	'catharijne.profiel',
-	'catharijne.toevoegen'
+	'catharijne.toevoegen',
+	'catharijne.herinnering',
+	'catharijne.herinneringen',
+	'catharijne.voorwerpen',
+	'catharijne.voorwerp',
 ]).
 config(['$routeProvider', function($routeProvider) {
 	$routeProvider.otherwise({redirectTo: '/home'});

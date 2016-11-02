@@ -1,27 +1,33 @@
 'use strict';
 
-angular.module('catharijne.profiel', ['ngRoute'])
-
-.config(['$routeProvider', function($routeProvider) {
-	$routeProvider.when('/profiel/:profileId?', {
+angular.module('catharijne.profiel', [
+	'ngRoute',
+	'catharijne.user',
+	'catharijne.person',
+	'catharijne.profiel.bewerken',
+]).config(['$routeProvider', function($routeProvider) {
+	$routeProvider.when('/profiel/:username?', {
 		templateUrl: 'views/profiel/profiel.html',
-		controller: 'ProfileCtrl'
+		controller: 'ProfileCtrl',
 	});
-}])
-
-.controller('ProfileCtrl', ['$routeParams', '$scope', function($routeParams, $scope) {
-	this.profileId = $routeParams.profileId;
-	
-	$scope.storiesPreview = {
-		title: 'Mijn verhalen',
-		imageUrl: 'verhalenvoorbeeld.jpg',
-		href: '/profiel',
-		linkText: 'Bewerk',
-	};
-	$scope.collectionsPreview = {
-		title: 'Mijn collecties',
-		imageUrl: 'collectiesvoorbeeld.jpg',
-		href: '/profiel',
-		linkText: 'Bewerk',
-	};
-}]);
+}]).controller('ProfileCtrl', [
+	'$routeParams', '$scope', 'user', 'person', 'extractPk',
+	function profileController($routeParams, $scope, user, person, extractPk) {
+		function initScope(userInstance) {
+			var username = $routeParams.username || userInstance.username;
+			if (username === userInstance.username) {
+				$scope.self = person.get({pk: extractPk(userInstance.person)});
+			}
+			$scope.username = username;
+		}
+		user.identity.$promise.then(initScope);
+		$scope.storiesPreview = {
+			title: 'Herinneringen',
+			linkText: 'Bekijk',
+		};
+		$scope.collectionsPreview = {
+			title: 'Collecties',
+			linkText: 'Binnenkort',
+		};
+	},
+]);

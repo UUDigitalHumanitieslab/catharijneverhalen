@@ -24,12 +24,24 @@
 
 figure.app-object-picker {
     width: auto;
-    min-height: 400px;
     border: 2px black solid;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+figure.app-object-picker > div:first-child {
+    width: 100%;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+figure.app-object-picker > div:first-child > button {
+    z-index: 1;
 }
 
 .app-object-picker div.row {
@@ -70,6 +82,64 @@ figure.app-location {
     bottom: 200px;             /* put on top of form */
     left: calc(50vw - 300px);  /* center on the page */
     z-index: 1;
+}
+
+/* Attachment manager form control */
+
+.modal, article.modal {
+    /* This one could probably be used more generally */
+    height: 480px;
+    width: 600px;
+    padding: 1em;
+    border: 2px solid black;
+    border-radius: 1em;
+    background: white;
+    overflow: scroll;
+    position: fixed;        /* no fixed because of animations */
+    bottom: 200px;             /* put on top of form */
+    left: calc(50vw - 300px);  /* center on the page */
+    z-index: 1;
+}
+
+button.close:after {
+    content: "×";
+}
+
+.modal button.close {
+    float: right;
+    margin: 0;
+}
+
+.app-attachment-manager {
+    margin: 0;
+    padding: 0;
+}
+
+.app-attachment-manager form {
+    display: table-row;
+}
+
+.app-attachment-manager form > * {
+    display: table-cell;
+}
+
+.app-attachment-manager form button {
+    padding-left: 10pt;
+    padding-right: 10pt;
+}
+
+.app-attachment-manager form button:after {
+    content: "";
+}
+
+.app-attachment-manager form button.add {
+    color: #97E302;
+    border-color: #97E302;
+}
+
+.app-attachment-manager form button.delete {
+    color: #E12201;
+    border-color: #E12201;
 }
 
 /*
@@ -408,6 +478,16 @@ figure.app-location {
 .form input[type="tel"], .form input[type="url"],
 .form select {
     line-height: 30px;
+}
+
+input.ng-touched.ng-invalid,
+textarea.ng-touched.ng-invalid {
+    background-color: #F87D75;
+}
+
+input.ng-touched.ng-valid,
+textarea.ng-touched.ng-valid {
+    background-color: #baffa9;
 }
 
 /* End insertions by DHL */
@@ -1320,6 +1400,14 @@ figure.full-width figcaption {
 
 .form fieldset fieldset {
     margin: 0;
+}
+
+label.error {
+    display: block;
+    padding: 1ex;
+    border: 2px solid #F22728;
+    border-radius: 1ex;
+    background-color: #F87D75;
 }
 
 /*
@@ -3169,16 +3257,18 @@ figure.full-width figcaption {
 }
 
 
+/* Changes by DHL */
+
 button,
 .button {
-    position: absolute;
+    position: relative;
     display: inline-block;
     padding: 10px 34px 8px 24px;
     background-color: transparent;
-    border: 2px solid #fff;
+    border: 2px solid #363E46;
     margin: 0 20px 40px 0;
     font-family: "CaeciliaCom-76BoldItalic", Georgia, "Times New Roman", Times, serif;
-    color: #fff;
+    color: #363E46;
     -webkit-transition: all 0.25s ease-in-out;
     -moz-transition: all 0.25s ease-in-out;
     transition: all 0.25s ease-in-out;
@@ -3204,7 +3294,30 @@ button:after,
 }
 
 
-/* Insertions by DHL */
+button:hover,
+.button:hover {
+    color: #fff;
+    background-color: #363E46;
+    text-decoration: none;
+}
+
+
+.home .block-intro .button,
+.home .block-intro button,
+.block-cta .button,
+.block-cta button {
+    border-color: #fff;
+    color: #fff;
+}
+
+.home .block-intro .button:hover,
+.home .block-intro button:hover,
+.block-cta .button:hover,
+.block-cta button:hover {
+    background-color: #fff;
+    color: #363E46;
+}
+
 
 .block-form button,
 .block-overview button,
@@ -3213,18 +3326,7 @@ button:after,
     position: relative;
     left: 0;
     right: 0;
-    border-color: #363E46;
-    color: #363E46;
 }
-
-.block-form button:hover,
-.block-overview button:hover,
-.block-overview .button:hover {
-    background-color: #363E46;
-    color: #fff;
-}
-
-/* End insertions by DHL */
 
 
 .row button, .row
@@ -3233,13 +3335,7 @@ button:after,
     text-overflow: ellipsis;
 }
 
-
-button:hover,
-.button:hover {
-    color: #363E46;
-    background-color: #fff;
-    text-decoration: none;
-}
+/* End changes by DHL */
 
 
 button.button-submit,

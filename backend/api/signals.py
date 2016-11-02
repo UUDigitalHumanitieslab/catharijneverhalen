@@ -8,4 +8,5 @@ from api.models import Person, Story, StoryEdit
 @receiver(signals.post_save, sender=User)
 def attach_person(sender, **kwargs):
     if kwargs['created']:
-        Person(user=kwargs['instance']).save()
+        user = kwargs['instance']
+        Person(user=user, name=user.username).save()

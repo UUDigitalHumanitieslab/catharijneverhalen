@@ -60,21 +60,39 @@ class EditSerializer(FieldFilterMixin, serializers.HyperlinkedModelSerializer):
         self.filter_fields(super(EditSerializer, self), *args, **kwargs)
 
 
+class ParentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Parent
+        fields = ('pk', 'name')
+
+
+class EducationLevelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EducationLevel
+        fields = ('pk', 'name')
+
+
+class MaritalStatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MaritalStatus
+        fields = ('pk', 'name')
+
+
 class ParentOccupationSerializer(serializers.ModelSerializer):
-    """ Serializer meant for embedding into PersonSerializer. """
+    """ Serializer meant standalone and for embedding into PersonSerializer. """
     parent = serializers.SlugRelatedField(
         slug_field='name',
-        queryset=ParentOccupation.objects.all(),
+        queryset=Parent.objects.all(),
     )
     
     class Meta:
         model = ParentOccupation
-        fields = ('parent', 'occupation')
+        fields = ('pk', 'parent', 'occupation')
 
 
 class PersonSerializer(serializers.HyperlinkedModelSerializer):
     username = serializers.ReadOnlyField(source='user.username')
-    parent_occupations = ParentOccupationSerializer(many=True)
+    parent_occupations = ParentOccupationSerializer(many=True, read_only=True)
     education_level = serializers.SlugRelatedField(
         slug_field='name',
         queryset=EducationLevel.objects.all(),
@@ -119,13 +137,6 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
             'user': {'view_name': 'api:user-detail', 'read_only': True},
             'stories': {'view_name': 'api:story-detail', 'read_only': True},
         }
-    
-    def create(self, data):
-        parent_occupations_data = data.pop('parent_occupations')
-        person = super(PersonSerializer, self).create(data)
-        for parent_occupation in parent_occupations_data:
-            ParentOccupation.objects.create(person=person, **parent_occupation)
-        return person
 
 
 class AttachmentSerializer(
@@ -168,9 +179,8 @@ class UrlAttachmentSerializer(AttachmentSerializer):
     """ Serializer meant standalone and for embedding into StorySerializer. """
     class Meta:
         model = UrlStoryAttachment
-        fields = ('url', 'story', 'attachment')
+        fields = ('pk', 'story', 'attachment')
         extra_kwargs = {
-            'url': {'view_name': 'api:urlstoryattachment-detail'},
             'story': {'view_name': 'api:story-detail'},
         }
 
@@ -179,9 +189,8 @@ class ImageAttachmentSerializer(AttachmentSerializer):
     """ Serializer meant standalone and for embedding into StorySerializer. """
     class Meta:
         model = ImageStoryAttachment
-        fields = ('url', 'story', 'attachment')
+        fields = ('pk', 'story', 'attachment')
         extra_kwargs = {
-            'url': {'view_name': 'api:imagestoryattachment-detail'},
             'story': {'view_name': 'api:story-detail'},
         }
 
@@ -191,12 +200,12 @@ class StorySerializer(serializers.HyperlinkedModelSerializer):
     url_attachments = UrlAttachmentSerializer(
         many=True,
         read_only=True,
-        fields=('url', 'attachment'),
+        fields=('pk', 'attachment'),
     )
     image_attachments = ImageAttachmentSerializer(
         many=True,
         read_only=True,
-        fields=('url', 'attachment'),
+        fields=('pk', 'attachment'),
     )
     edits = EditSerializer(
         many=True,
@@ -208,6 +217,7 @@ class StorySerializer(serializers.HyperlinkedModelSerializer):
         model = Story
         fields = (
             'url',
+            'pk',
             'place',
             'year',
             'year_end',
@@ -220,6 +230,7 @@ class StorySerializer(serializers.HyperlinkedModelSerializer):
             'subject',
             'title',
             'content',
+            'published',
             'url_attachments',
             'image_attachments',
             'edits',
