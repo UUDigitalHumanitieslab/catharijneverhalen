@@ -126,7 +126,11 @@
 					<pre>{{clientError.family_composition}}</pre>
 				</label>
 			</span>
-			<!-- TODO: parent_occupations -->
+			<app-attachment-manager
+				meta="parentOccupations.meta"
+				field-list="parentOccupations.fields"
+				item-list="parentOccupations.items"
+			>Beroepen van uw ouders of verzorgers</app-attachment-manager>
 			<button type=submit ng-click="saveProfile()" ng-disabled="form.$invalid || pending">Opslaan</button>
 			<label class=error ng-show=unauthorized>
 				U heeft geen toestemming om dit profiel te bewerken. Misschien ben u in de tussentijd uitgelogd of misschien bent u ingelogd als een andere gebruiker dan degene van wie u het profiel probeert te bewerken. <a href="#/meedoen?next=/profiel/bewerken">Klik hier</a> om het opnieuw te proberen.

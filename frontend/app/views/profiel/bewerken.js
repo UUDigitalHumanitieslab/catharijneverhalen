@@ -3,6 +3,7 @@
 angular.module('catharijne.profiel.bewerken', [
 	'catharijne.person',
 	'catharijne.authRedirect',
+	'catharijne.resource',
 ]).config([
 	'$routeProvider', 'authGuard',
 	function profileEditConfig($routeProvider, authGuard) {
@@ -13,14 +14,18 @@ angular.module('catharijne.profiel.bewerken', [
 		});
 	},
 ]).controller('ProfileEditCtrl', [
-	'$scope', 'user', 'extractPk', 'person', '$location',
-	'parentList', 'educationLevelList', 'maritalStatusList',
+	'$scope', 'user', 'extractPk', 'person', 'parentOccupation', '$location',
+	'parentList', 'educationLevelList', 'maritalStatusList', 'wrapWithResource',
 	function profileEditController(
 		$scope, user, extractPk, person, parentOccupation, $location,
-		parentList, educationLevelList, maritalStatusList
+		parentList, educationLevelList, maritalStatusList, wrapWithResource
 	) {
 		function initDetails(personInstance) {
 			$scope.portraitFileName = personInstance.portrait.match(/[^/]+$/)[0];
+			$scope.parentOccupations.items = _.map(
+				personInstance.parent_occupations,
+				_.partial(wrapWithResource, _, parentOccupation)
+			);
 		}
 		function initScope(userInstance) {
 			$scope.my = person.get({pk: extractPk(userInstance.person)});
@@ -34,6 +39,36 @@ angular.module('catharijne.profiel.bewerken', [
 		};
 		$scope.educationLevelList = educationLevelList;
 		$scope.maritalStatusList = maritalStatusList;
+		$scope.parentOccupations = {
+			meta: {
+				title: 'Beroepen van uw ouders',
+				info: 'Hier kunt de beroepen van uw ouders of verzorgers invullen.',
+				request: {
+					createParams: _.noop,
+					updateParams: _.noop,
+					deleteParams: _.noop,
+				},
+				resource: parentOccupation,
+				identifier: 'pk',
+				defaults: {},
+			},
+			fields: [
+				{
+					type: 'select',
+					options: parentList,
+					name: 'parent',
+					required: true,
+				},
+				{
+					type: 'text',
+					name: 'occupation',
+					maxlength: 126,
+					placeholder: 'loodgieter',
+					required: true,
+					size: 20,
+				},
+			],
+		};
 		function submitSuccess() {
 			$location.url('/profiel');
 		}
