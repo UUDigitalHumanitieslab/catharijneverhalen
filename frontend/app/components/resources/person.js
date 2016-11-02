@@ -87,4 +87,9 @@ angular.module('catharijne.person', [
 		};
 		return person;
 	},
+]).factory('parentOccupation', [
+	'$resource',
+	function parentOccupationFactory($resource) {
+		return $resource('/api/parent-occupations/:pk/', {pk: '@pk'});
+	},
 ]);

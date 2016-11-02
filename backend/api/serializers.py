@@ -61,15 +61,15 @@ class EditSerializer(FieldFilterMixin, serializers.HyperlinkedModelSerializer):
 
 
 class ParentOccupationSerializer(serializers.ModelSerializer):
-    """ Serializer meant for embedding into PersonSerializer. """
+    """ Serializer meant standalone and for embedding into PersonSerializer. """
     parent = serializers.SlugRelatedField(
         slug_field='name',
-        queryset=ParentOccupation.objects.all(),
+        queryset=Parent.objects.all(),
     )
     
     class Meta:
         model = ParentOccupation
-        fields = ('parent', 'occupation')
+        fields = ('pk', 'parent', 'occupation')
 
 
 class PersonSerializer(serializers.HyperlinkedModelSerializer):

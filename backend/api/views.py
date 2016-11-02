@@ -106,6 +106,22 @@ class PersonViewSet(viewsets.ModelViewSet):
         serializer.save(user=self.request.user)
 
 
+class ParentOccupationViewSet(
+    # ModelViewSet supporting only CUD operations.
+    mixins.CreateModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
+    viewsets.GenericViewSet,
+):
+    queryset = ParentOccupation.objects.all()
+    serializer_class = ParentOccupationSerializer
+    permission_classes = (IsAuthenticated,)
+    filter_backends = (IsAdminOrOwnerFilter,)
+    
+    def perform_create(self, serializer):
+        serializer.save(person=self.request.user.person)
+
+
 class StoryViewSet(viewsets.ModelViewSet):
     queryset = Story.objects.all()
     serializer_class = StorySerializer
