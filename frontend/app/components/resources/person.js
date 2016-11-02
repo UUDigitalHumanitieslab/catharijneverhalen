@@ -17,7 +17,7 @@ angular.module('catharijne.person', [
 			return data;
 		}
 		function unaugment(data, headers) {
-			if (data.birth_date && data.birth_date.length === 4) {
+			if (data.birth_date && (data.birth_date.length === 4 || typeof data.birth_date === 'number')) {
 				data.birth_year = data.birth_date;
 				data.birth_date = null;
 			}
@@ -26,7 +26,7 @@ angular.module('catharijne.person', [
 		function unaugmentForm(form) {
 			var birthDateField = angular.element(form.querySelector('#birth_date'));
 			var value = birthDateField.val();
-			if (value && value.length === 4) {
+			if (value && (value.length === 4 || typeof value === 'number')) {
 				birthDateField.prop('name', 'birth_year');
 			}
 			return form;
