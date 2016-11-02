@@ -33,4 +33,7 @@ angular.module('catharijne.resource', ['ngResource', 'catharijne.csrf'])
 ]).value('extractPk', function extractPk(url) {
 	var match = url.match(/\/(\d+)\/$/);
 	if (match) return match[1];
+}).value('wrapWithResource', function wrapWithResource(item, Resource) {
+	var instance = new Resource();
+	return _.assign(instance, item);
 });

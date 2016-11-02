@@ -6,6 +6,7 @@ angular.module('catharijne.toevoegen', [
 	'catharijne.objectPicker',
 	'catharijne.authRedirect',
 	'catharijne.attachmentManager',
+	'catharijne.resource',
 ]).config(['$routeProvider', 'authGuard', function($routeProvider, authGuard) {
 	$routeProvider.when('/toevoegen/:pk?', {
 		templateUrl: 'views/toevoegen/toevoegen.html',
@@ -14,10 +15,10 @@ angular.module('catharijne.toevoegen', [
 	});
 }]).controller('StoryFormCtrl', [
 	'$scope', '$routeParams', '$location',
-	'story', 'imageAttachment', 'urlAttachment',
+	'story', 'imageAttachment', 'urlAttachment', 'wrapWithResource',
 	function storyFormController(
 		$scope, $routeParams, $location,
-		story, imageAttachment, urlAttachment
+		story, imageAttachment, urlAttachment, wrapWithResource
 	) {
 		var storyPk = $routeParams.pk;
 		if (storyPk) {
@@ -72,10 +73,6 @@ angular.module('catharijne.toevoegen', [
 				$scope.story.$save().then(storySaveSuccess, storySaveFail);
 			}
 		};
-		function plainObjectToResourceInstance(item, Resource) {
-			var instance = new Resource();
-			return _.assign(instance, item);
-		}
 		$scope.images = {
 			meta: {
 				multipart: true,
@@ -99,7 +96,7 @@ angular.module('catharijne.toevoegen', [
 				},
 			],
 			items: _.map($scope.story.image_attachments, _.partial(
-				plainObjectToResourceInstance,
+				wrapWithResource,
 				_,
 				imageAttachment
 			)),
@@ -123,7 +120,7 @@ angular.module('catharijne.toevoegen', [
 				},
 			],
 			items: _.map($scope.story.url_attachments, _.partial(
-				plainObjectToResourceInstance,
+				wrapWithResource,
 				_,
 				urlAttachment
 			)),
