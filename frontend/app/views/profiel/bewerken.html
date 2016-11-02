@@ -74,8 +74,18 @@
 					De nationaliteit kan niet langer zijn dan 126 tekens.
 				</label>
 			</span>
-			<!-- TODO: education_level -->
-			<input type=hidden name=education_level ng-model="my.education_level">
+			<label>
+				Hoogst genoten opleiding
+				<select name=education_level id=education_level ng-model="my.education_level" ng-options="value for value in educationLevelList">
+					<option value=""></option>
+				</select>
+			</label>
+			<span ng-show="form.$submitted || form.education_level.$touched">
+				<label for=education_level class=error ng-show="clientError && clientError.education_level">
+					Uw invoer werd geweigerd om de volgende reden:<br>
+					<pre>{{clientError.education_level}}</pre>
+				</label>
+			</span>
 			<label>
 				Beroep
 				<input type=text name=occupation id=occupation maxlength=126 placeholder="brandweerman" ng-model="my.occupation">
@@ -85,8 +95,18 @@
 					Het beroep kan niet langer zijn dan 126 tekens.
 				</label>
 			</span>
-			<!-- TODO: marital_status -->
-			<input type=hidden name=marital_status ng-model="my.marital_status">
+			<label>
+				Burgerlijke staat
+				<select name=marital_status id=marital_status ng-model="my.marital_status" ng-options="value for value in maritalStatusList">
+					<option value=""></option>
+				</select>
+			</label>
+			<span ng-show="form.$submitted || form.marital_status.$touched">
+				<label for=marital_status class=error ng-show="clientError && clientError.marital_status">
+					Uw invoer werd geweigerd om de volgende reden:<br>
+					<pre>{{clientError.marital_status}}</pre>
+				</label>
+			</span>
 			<label>
 				Religieuze achtergrond
 				<input type=text name=religious_background id=religious_background maxlength=126 placeholder="protestants" ng-model="my.religious_background">

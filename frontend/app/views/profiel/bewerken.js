@@ -14,7 +14,11 @@ angular.module('catharijne.profiel.bewerken', [
 	},
 ]).controller('ProfileEditCtrl', [
 	'$scope', 'user', 'extractPk', 'person', '$location',
-	function profileEditController($scope, user, extractPk, person, $location) {
+	'parentList', 'educationLevelList', 'maritalStatusList',
+	function profileEditController(
+		$scope, user, extractPk, person, $location,
+		educationLevelList, maritalStatusList
+	) {
 		function initDetails(personInstance) {
 			$scope.portraitFileName = personInstance.portrait.match(/[^/]+$/)[0];
 		}
@@ -28,6 +32,8 @@ angular.module('catharijne.profiel.bewerken', [
 			2: 'man',
 			3: 'anders',
 		};
+		$scope.educationLevelList = educationLevelList;
+		$scope.maritalStatusList = maritalStatusList;
 		function submitSuccess() {
 			$location.url('/profiel');
 		}
