@@ -161,9 +161,8 @@ class UrlAttachmentSerializer(AttachmentSerializer):
     """ Serializer meant standalone and for embedding into StorySerializer. """
     class Meta:
         model = UrlStoryAttachment
-        fields = ('url', 'story', 'attachment')
+        fields = ('pk', 'story', 'attachment')
         extra_kwargs = {
-            'url': {'view_name': 'api:urlstoryattachment-detail'},
             'story': {'view_name': 'api:story-detail'},
         }
 
@@ -172,9 +171,8 @@ class ImageAttachmentSerializer(AttachmentSerializer):
     """ Serializer meant standalone and for embedding into StorySerializer. """
     class Meta:
         model = ImageStoryAttachment
-        fields = ('url', 'story', 'attachment')
+        fields = ('pk', 'story', 'attachment')
         extra_kwargs = {
-            'url': {'view_name': 'api:imagestoryattachment-detail'},
             'story': {'view_name': 'api:story-detail'},
         }
 
@@ -184,12 +182,12 @@ class StorySerializer(serializers.HyperlinkedModelSerializer):
     url_attachments = UrlAttachmentSerializer(
         many=True,
         read_only=True,
-        fields=('url', 'attachment'),
+        fields=('pk', 'attachment'),
     )
     image_attachments = ImageAttachmentSerializer(
         many=True,
         read_only=True,
-        fields=('url', 'attachment'),
+        fields=('pk', 'attachment'),
     )
     edits = EditSerializer(
         many=True,
