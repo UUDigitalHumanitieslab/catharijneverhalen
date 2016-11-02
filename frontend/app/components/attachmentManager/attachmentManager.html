@@ -22,7 +22,17 @@
 				ng-repeat="(key, value) in meta.defaults"
 			>
 			<label ng-repeat="field in fieldList">
+				<select
+					ng-if="field.type === 'select'"
+					ng-attr-name="{{field.name}}"
+					ng-options="value for value in field.options"
+					ng-attr-required="{{field.required}}"
+					ng-attr-value="{{field.value}}"
+				>
+					<option value="{{field.placeholder}}"></option>
+				</select>
 				<input
+					ng-if="field.type !== 'select'"
 					ng-attr-type="{{field.type}}"
 					ng-attr-name="{{field.name}}"
 					ng-disabled="item.$pending || item.$resolved"
@@ -66,7 +76,18 @@
 				ng-disabled="item.$pending"
 			>verwijder</button>
 			<label ng-repeat="field in fieldList">
+				<select
+					ng-if="field.type === 'select'"
+					ng-attr-name="{{field.name}}"
+					ng-model="item[field.name]"
+					ng-options="value for value in field.options"
+					ng-attr-required="{{field.required}}"
+					ng-attr-value="{{field.value}}"
+				>
+					<option value="{{field.placeholder}}"></option>
+				</select>
 				<input
+					ng-if="field.type !== 'select'"
 					ng-attr-type="{{field.type}}"
 					ng-attr-name="{{field.name}}"
 					ng-model="item[field.name]"
