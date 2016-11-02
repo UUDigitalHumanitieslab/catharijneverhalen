@@ -25,11 +25,11 @@ angular.module('catharijne.toevoegen', [
 			$scope.links.meta.defaults.story = $scope.story.url;
 		}
 		function initDetails(storyInstance) {
-			$scope.story.images.items = _.map(
+			$scope.images.items = _.map(
 				$scope.story.image_attachments,
 				_.partial(wrapWithResource, _, imageAttachment)
 			);
-			$scope.story.links.items = _.map(
+			$scope.links.items = _.map(
 				$scope.story.url_attachments,
 				_.partial(wrapWithResource, _, urlAttachment)
 			);
