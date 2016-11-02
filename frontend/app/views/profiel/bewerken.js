@@ -16,8 +16,8 @@ angular.module('catharijne.profiel.bewerken', [
 	'$scope', 'user', 'extractPk', 'person', '$location',
 	'parentList', 'educationLevelList', 'maritalStatusList',
 	function profileEditController(
-		$scope, user, extractPk, person, $location,
-		educationLevelList, maritalStatusList
+		$scope, user, extractPk, person, parentOccupation, $location,
+		parentList, educationLevelList, maritalStatusList
 	) {
 		function initDetails(personInstance) {
 			$scope.portraitFileName = personInstance.portrait.match(/[^/]+$/)[0];
