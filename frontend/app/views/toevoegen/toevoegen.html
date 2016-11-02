@@ -40,7 +40,16 @@
 					<textarea name="story" ng-model="story.content" style="height: 30em;"></textarea>
 				</label>
 				<fieldset>
-					<!-- <input type=button ng-model="story.media" value="Voeg media toe"> -->
+					<app-attachment-manager
+						meta="images.meta"
+						field-list="images.fields"
+						item-list="images.items"
+					>Voeg eigen foto&rsquo;s toe</app-attachment-manager>
+					<app-attachment-manager
+						meta="links.meta"
+						field-list="links.fields"
+						item-list="links.items"
+					>Voeg links toe</app-attachment-manager>
 					<button class=button-submit ng-click="saveStory()" ng-disabled="pending || form.$invalid">Ik heb mijn verhaal verteld</button>
 					<label class=error ng-show="serverRemarks">
 						Uw bijdrage werd geweigerd om de volgende redenen:

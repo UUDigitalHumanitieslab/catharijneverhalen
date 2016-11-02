@@ -5,6 +5,7 @@ angular.module('catharijne.toevoegen', [
 	'catharijne.story',
 	'catharijne.objectPicker',
 	'catharijne.authRedirect',
+	'catharijne.attachmentManager',
 ]).config(['$routeProvider', 'authGuard', function($routeProvider, authGuard) {
 	$routeProvider.when('/toevoegen/:pk?', {
 		templateUrl: 'views/toevoegen/toevoegen.html',
@@ -12,8 +13,12 @@ angular.module('catharijne.toevoegen', [
 		resolve: {redirection: authGuard},
 	});
 }]).controller('StoryFormCtrl', [
-	'$scope', '$routeParams', 'story', '$location',
-	function storyFormController($scope, $routeParams, story, $location) {
+	'$scope', '$routeParams', '$location',
+	'story', 'imageAttachment', 'urlAttachment',
+	function storyFormController(
+		$scope, $routeParams, $location,
+		story, imageAttachment, urlAttachment
+	) {
 		var storyPk = $routeParams.pk;
 		if (storyPk) {
 			$scope.story = story.get({pk: storyPk});
@@ -54,6 +59,62 @@ angular.module('catharijne.toevoegen', [
 			} else {
 				$scope.story.$save().then(storySaveSuccess, storySaveFail);
 			}
+		};
+		function plainObjectToResourceInstance(item, Resource) {
+			var instance = new Resource();
+			return _.assign(instance, item);
+		}
+		$scope.images = {
+			meta: {
+				multipart: true,
+				title: 'Foto’s',
+				info: 'Hier kunt u eigen foto’s toevoegen aan uw herinnering.',
+				request: {
+					createParams: _.noop,
+					updateParams: _.noop,
+					deleteParams: _.noop,
+				},
+				resource: imageAttachment,
+				identifier: 'pk',
+				defaults: {story: $scope.story.url},
+			},
+			fields: [
+				{
+					type: 'file',
+					name: 'attachment',
+					accept: 'image/*,.jpg,.jpeg,.png,.gif',
+					required: true,
+				},
+			],
+			items: _.map($scope.story.image_attachments, _.partial(
+				plainObjectToResourceInstance,
+				_,
+				imageAttachment
+			)),
+		};
+		$scope.links = {
+			meta: {
+				title: 'Links',
+				info: 'Hier kunt u externe links toevoegen, bijvoorbeeld naar een opname van uw verhaal op YouTube of SoundCloud.',
+				request: $scope.images.meta.request,
+				resource: urlAttachment,
+				identifier: 'pk',
+				defaults: {story: $scope.story.url},
+			},
+			fields: [
+				{
+					type: 'url',
+					name: 'attachment',
+					maxlength: 254,
+					placeholder: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+					required: true,
+				},
+			],
+			items: _.map($scope.story.url_attachments, _.partial(
+				plainObjectToResourceInstance,
+				_,
+				urlAttachment
+			)),
 		};
 	},
 ]);
