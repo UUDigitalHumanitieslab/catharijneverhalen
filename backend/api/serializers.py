@@ -212,6 +212,7 @@ class StorySerializer(serializers.HyperlinkedModelSerializer):
             'subject',
             'title',
             'content',
+            'published',
             'url_attachments',
             'image_attachments',
             'edits',

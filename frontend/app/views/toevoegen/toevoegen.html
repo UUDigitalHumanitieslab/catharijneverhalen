@@ -39,6 +39,10 @@
 					Mijn herinnering
 					<textarea name="content" ng-model="story.content" style="height: 30em;"></textarea>
 				</label>
+				<label>
+					<input type=checkbox name=published ng-model="story.published">
+					Dit verhaal is klaar om te publiceren.
+				</label>
 				<fieldset>
 					<app-attachment-manager
 						meta="images.meta"

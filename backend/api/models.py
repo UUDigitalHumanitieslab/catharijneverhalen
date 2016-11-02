@@ -145,6 +145,7 @@ class Story(models.Model):
         blank=True,
         null=True,
     )
+    published = models.BooleanField(default=False)
     
     class Meta:
         ordering = ('-creation_date',)
