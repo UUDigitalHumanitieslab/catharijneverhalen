@@ -25,6 +25,18 @@ angular.module('catharijne.toevoegen', [
 		} else {
 			$scope.story = new story();
 			$scope.story.subject = $routeParams.subject;
+			// Save the empty story to the server so it has a URL.
+			var stopListening = $scope.$watch('form.content', function initialSave(newValue) {
+				if (newValue !== undefined) {
+					// The last NgModelController of the scope was instantiated.
+					// This ensures that all required fields are serialized.
+					$scope.story.$save().then(function passUrlToAttachments() {
+						$scope.images.meta.defaults.story = $scope.story.url;
+						$scope.links.meta.defaults.story = $scope.story.url;
+					});
+					stopListening();
+				}
+			});
 		}
 		if (! $scope.story.content) {
 			$scope.story.content = 'Beschrijf hier uw herinnering (maximaal 500 woorden). Gebruik witregels om alinea’s te scheiden. Een alinea van minder dan tien woorden wordt weergegeven als een kopje. Voorbeeld:\n\nDit is een alinea van meer dan tien woorden. U sluit deze af met een witregel door twee keer op enter te drukken.\n\nDit wordt een kopje\n\nNa bovenstaande witregel gaat het verhaal weer verder met een alinea van meer dan tien woorden.';
