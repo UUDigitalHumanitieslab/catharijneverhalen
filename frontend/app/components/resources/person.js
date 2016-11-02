@@ -92,4 +92,43 @@ angular.module('catharijne.person', [
 	function parentOccupationFactory($resource) {
 		return $resource('/api/parent-occupations/:pk/', {pk: '@pk'});
 	},
+]).factory('baseListResource', [
+	'$http', 'appendTransform',
+	function baseListResourceFactory($http, appendTransform) {
+		// This fetches a read-only list over AJAX.
+		// The interface to some extend mimics $resource.
+		function transformData(data, headers, status) {
+			if (200 <= status && status < 300) {
+				if (data.results) data = data.results;
+				return _.map(data, _.partial(_.get, _, 'name'));
+			}
+			return data;
+		}
+		function fillList(list, xhr) {
+			list.push.apply(list, xhr.data);
+			return list;
+		}
+		return function createListResource(endpoint) {
+			var list = [];
+			$http.get(endpoint, {
+				transformResponse: appendTransform.response(transformData),
+			}).then(_.partial(fillList, list));
+			return list;
+		};
+	},
+]).factory('parentList', [
+	'baseListResource',
+	function parentListFactory(baseListResource) {
+		return baseListResource('/api/parents/');
+	},
+]).factory('educationLevelList', [
+	'baseListResource',
+	function parentListFactory(baseListResource) {
+		return baseListResource('/api/education-levels/');
+	},
+]).factory('maritalStatusList', [
+	'baseListResource',
+	function parentListFactory(baseListResource) {
+		return baseListResource('/api/marital-statuses/');
+	},
 ]);

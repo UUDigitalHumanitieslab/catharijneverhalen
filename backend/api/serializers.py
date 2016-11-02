@@ -60,6 +60,24 @@ class EditSerializer(FieldFilterMixin, serializers.HyperlinkedModelSerializer):
         self.filter_fields(super(EditSerializer, self), *args, **kwargs)
 
 
+class ParentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Parent
+        fields = ('pk', 'name')
+
+
+class EducationLevelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EducationLevel
+        fields = ('pk', 'name')
+
+
+class MaritalStatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MaritalStatus
+        fields = ('pk', 'name')
+
+
 class ParentOccupationSerializer(serializers.ModelSerializer):
     """ Serializer meant standalone and for embedding into PersonSerializer. """
     parent = serializers.SlugRelatedField(

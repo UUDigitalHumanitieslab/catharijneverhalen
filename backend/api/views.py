@@ -122,6 +122,21 @@ class ParentOccupationViewSet(
         serializer.save(person=self.request.user.person)
 
 
+class ParentViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    queryset = Parent.objects.all()
+    serializer_class = ParentSerializer
+
+
+class EducationLevelViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    queryset = EducationLevel.objects.all()
+    serializer_class = EducationLevelSerializer
+
+
+class MaritalStatusViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    queryset = MaritalStatus.objects.all()
+    serializer_class = MaritalStatusSerializer
+
+
 class StoryViewSet(viewsets.ModelViewSet):
     queryset = Story.objects.all()
     serializer_class = StorySerializer
