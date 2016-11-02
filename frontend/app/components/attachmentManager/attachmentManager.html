@@ -1,0 +1,96 @@
+<div class="form app-attachment-manager">
+	<button ng-click="active=true" ng-transclude></button>
+	<article class="block-form modal" ng-show="active">
+		<button ng-click="active=false" class="close">Sluit</button>
+		<h3>{{meta.title}}</h3>
+		<p>{{meta.info}}</p>
+		<form
+			ng-if="meta.multipart"
+			ng-repeat="item in itemList"
+			name="{{formName($index)}}"
+			id="{{formName($index)}}"
+		>
+			<button
+				class=delete
+				ng-click="remove(item, $index)"
+				ng-disabled="item.$pending"
+			>verwijder</button>
+			<input
+				type=hidden
+				ng-attr-name="{{key}}"
+				ng-attr-value="{{value}}"
+				ng-repeat="(key, value) in meta.defaults"
+			>
+			<label ng-repeat="field in fieldList">
+				<input
+					ng-attr-type="{{field.type}}"
+					ng-attr-name="{{field.name}}"
+					ng-disabled="item.$pending || item.$resolved"
+					ng-attr-accept="{{field.accept}}"
+					ng-attr-capture="{{field.capture}}"
+					ng-attr-inputmode="{{field.inputmode}}"
+					ng-attr-list="{{field.list}}"
+					ng-attr-max="{{field.max}}"
+					ng-attr-maxlength="{{field.maxlength}}"
+					ng-attr-min="{{field.min}}"
+					ng-attr-minlength="{{field.minlength}}"
+					ng-attr-pattern="{{field.pattern}}"
+					ng-attr-placeholder="{{field.placeholder}}"
+					ng-attr-required="{{field.required}}"
+					ng-attr-size="{{field.size}}"
+					ng-attr-spellcheck="{{field.spellcheck}}"
+					ng-attr-step="{{field.step}}"
+					ng-attr-value="{{field.value}}"
+				>
+				<img
+					ng-if="field.type === 'file' && field.accept && field.accept.includes('image') && item[field.name]"
+					ng-src="item[field.name]"
+				>
+			</label>
+			<button
+				class=add
+				ng-click="submitForm(item, $index)"
+				ng-disabled="formCtrl($index).$invalid || item.$pending"
+				ng-if="!item.$resolved"
+			>bewaar</button>
+		</form>
+		<form
+			ng-if="!meta.multipart"
+			ng-repeat="item in itemList"
+			name="{{formName($index)}}"
+			id="{{formName($index)}}"
+		>
+			<button
+				class=delete
+				ng-click="remove(item, $index)"
+				ng-disabled="item.$pending"
+			>verwijder</button>
+			<label ng-repeat="field in fieldList">
+				<input
+					ng-attr-type="{{field.type}}"
+					ng-attr-name="{{field.name}}"
+					ng-model="item[field.name]"
+					ng-attr-inputmode="{{field.inputmode}}"
+					ng-attr-list="{{field.list}}"
+					ng-attr-max="{{field.max}}"
+					ng-attr-maxlength="{{field.maxlength}}"
+					ng-attr-min="{{field.min}}"
+					ng-attr-minlength="{{field.minlength}}"
+					ng-attr-pattern="{{field.pattern}}"
+					ng-attr-placeholder="{{field.placeholder}}"
+					ng-attr-required="{{field.required}}"
+					ng-attr-size="{{field.size}}"
+					ng-attr-spellcheck="{{field.spellcheck}}"
+					ng-attr-step="{{field.step}}"
+					ng-attr-value="{{field.value}}"
+				>
+			</label>
+			<button
+				class=add
+				ng-click="submitResource(item, $index)"
+				ng-disabled="formCtrl($index).$invalid || item.$pending"
+			>bewaar</button>
+		</form>
+		<button ng-click="insertNew()">Voeg nieuwe toe</button>
+	</article>
+</div>
