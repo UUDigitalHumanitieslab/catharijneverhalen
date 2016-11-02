@@ -20,9 +20,25 @@ angular.module('catharijne.toevoegen', [
 		$scope, $routeParams, $location,
 		story, imageAttachment, urlAttachment, wrapWithResource
 	) {
+		function passUrlToAttachments() {
+			$scope.images.meta.defaults.story = $scope.story.url;
+			$scope.links.meta.defaults.story = $scope.story.url;
+		}
+		function initDetails(storyInstance) {
+			$scope.story.images.items = _.map(
+				$scope.story.image_attachments,
+				_.partial(wrapWithResource, _, imageAttachment)
+			);
+			$scope.story.links.items = _.map(
+				$scope.story.url_attachments,
+				_.partial(wrapWithResource, _, urlAttachment)
+			);
+			passUrlToAttachments();
+		}
 		var storyPk = $routeParams.pk;
 		if (storyPk) {
 			$scope.story = story.get({pk: storyPk});
+			$scope.story.$promise.then(initDetails);
 		} else {
 			$scope.story = new story();
 			$scope.story.subject = $routeParams.subject;
@@ -31,10 +47,7 @@ angular.module('catharijne.toevoegen', [
 				if (newValue !== undefined) {
 					// The last NgModelController of the scope was instantiated.
 					// This ensures that all required fields are serialized.
-					$scope.story.$save().then(function passUrlToAttachments() {
-						$scope.images.meta.defaults.story = $scope.story.url;
-						$scope.links.meta.defaults.story = $scope.story.url;
-					});
+					$scope.story.$save().then(passUrlToAttachments);
 					stopListening();
 				}
 			});
@@ -85,7 +98,7 @@ angular.module('catharijne.toevoegen', [
 				},
 				resource: imageAttachment,
 				identifier: 'pk',
-				defaults: {story: $scope.story.url},
+				defaults: {},
 			},
 			fields: [
 				{
@@ -95,11 +108,7 @@ angular.module('catharijne.toevoegen', [
 					required: true,
 				},
 			],
-			items: _.map($scope.story.image_attachments, _.partial(
-				wrapWithResource,
-				_,
-				imageAttachment
-			)),
+			items: [],
 		};
 		$scope.links = {
 			meta: {
@@ -108,7 +117,7 @@ angular.module('catharijne.toevoegen', [
 				request: $scope.images.meta.request,
 				resource: urlAttachment,
 				identifier: 'pk',
-				defaults: {story: $scope.story.url},
+				defaults: {},
 			},
 			fields: [
 				{
@@ -119,11 +128,7 @@ angular.module('catharijne.toevoegen', [
 					required: true,
 				},
 			],
-			items: _.map($scope.story.url_attachments, _.partial(
-				wrapWithResource,
-				_,
-				urlAttachment
-			)),
+			items: [],
 		};
 	},
 ]);
