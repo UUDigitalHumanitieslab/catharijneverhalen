@@ -123,6 +123,10 @@ button.close:after {
     display: table-cell;
 }
 
+.app-attachment-manager form img {
+    max-height: 50px;
+}
+
 .app-attachment-manager form button {
     padding-left: 10pt;
     padding-right: 10pt;

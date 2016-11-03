@@ -32,10 +32,10 @@
 					<option value="{{field.placeholder}}"></option>
 				</select>
 				<input
-					ng-if="field.type !== 'select'"
+					ng-if="field.type !== 'select' && (field.type !== 'file' || !item[meta.identifier])"
 					ng-attr-type="{{field.type}}"
 					ng-attr-name="{{field.name}}"
-					ng-disabled="item.$pending || item.$resolved"
+					ng-disabled="item.$pending"
 					ng-attr-accept="{{field.accept}}"
 					ng-attr-capture="{{field.capture}}"
 					ng-attr-inputmode="{{field.inputmode}}"
@@ -54,14 +54,14 @@
 				>
 				<img
 					ng-if="field.type === 'file' && field.accept && field.accept.includes('image') && item[field.name]"
-					ng-src="item[field.name]"
+					ng-src="{{item[field.name]}}"
 				>
 			</label>
 			<button
 				class=add
 				ng-click="submitForm(item, $index)"
 				ng-disabled="formCtrl($index).$invalid || item.$pending"
-				ng-if="!item.$resolved"
+				ng-if="!item[meta.identifier]"
 			>bewaar</button>
 		</form>
 		<form
