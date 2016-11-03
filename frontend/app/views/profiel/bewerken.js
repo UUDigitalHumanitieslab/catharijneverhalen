@@ -21,7 +21,7 @@ angular.module('catharijne.profiel.bewerken', [
 		parentList, educationLevelList, maritalStatusList, wrapWithResource
 	) {
 		function initDetails(personInstance) {
-			$scope.portraitFileName = personInstance.portrait.match(/[^/]+$/)[0];
+			if (personInstance.portrait) $scope.portraitFileName = personInstance.portrait.match(/[^/]+$/)[0];
 			$scope.parentOccupations.items = _.map(
 				personInstance.parent_occupations,
 				_.partial(wrapWithResource, _, parentOccupation)
@@ -68,6 +68,7 @@ angular.module('catharijne.profiel.bewerken', [
 					size: 20,
 				},
 			],
+			items: [],
 		};
 		function submitSuccess() {
 			$location.url('/profiel');
