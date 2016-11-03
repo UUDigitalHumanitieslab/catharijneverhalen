@@ -6,6 +6,9 @@
 		<div class=intro ng-if="story.introduction">
 			<p>{{story.introduction}}</p>
 		</div>
+		<div class=content ng-if="!story.published" style="clear: both;">
+			Uw herinnering is nog niet gepubliceerd en is dus niet zichtbaar voor andere bezoekers van deze website.
+		</div>
 		<a class=button ng-href="{{'#/toevoegen/' + story.pk}}" ng-if="story.author === me.person">Bewerk mijn verhaal</a>
 	</article>
 </div>
