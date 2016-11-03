@@ -29,11 +29,18 @@
 	</article>
 </div>
 <div class="row" ng-repeat="section in formatContent">
-	<article class=block-text-noimage>
+	<article ng-class="{'block-text-noimage': !section.images, 'block-text-image': section.images, 'block-text-image-right': section.images}">
 		<h3 ng-if="section.header">{{section.header}}</h3>
 		<div class="container-wrapper">
 			<div class="container-text content">
 				<p ng-repeat="paragraph in section.paragraphs">{{paragraph}}</p>
+			</div>
+			<div class=container-image ng-if="section.images">
+				<div class=image-wrapper ng-repeat="image in section.images">
+					<a ng-href="{{image.attachment}}">
+						<picture><img ng-src="{{image.attachment}}"></picture>
+					</a>
+				</div>
 			</div>
 		</div>
 	</article>

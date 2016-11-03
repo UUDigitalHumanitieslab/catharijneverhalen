@@ -15,10 +15,11 @@ angular.module('catharijne.herinnering', [
 		function isHeader(text) {
 			return text.trim().split(/\s+/, 12).length < 10;
 		}
-		function formatStory(input) {
+		function formatStory(storyInstance) {
+			var content = storyInstance.content;
 			var sections = [];
-			if (!input) return sections;
-			var parts = input.split('\n\n');
+			if (!content) return sections;
+			var parts = content.split('\n\n');
 			var currentSection;
 			_.forEach(parts, function format(part) {
 				if (isHeader(part)) {
@@ -30,12 +31,21 @@ angular.module('catharijne.herinnering', [
 				}
 			});
 			sections.push(currentSection);
+			var images = storyInstance.image_attachments;
+			if (images) {
+				_.forEach(sections, function attachImages(section, index) {
+					if (index >= images.length) return false;
+					var end = index + 1;
+					if (end === sections.length) end = images.length;
+					section.images = images.slice(index, end);
+				});
+			}
 			return sections;
 		}
 		$scope.story = story.get({pk: $routeParams.pk});
 		$scope.story.$promise.then(function getSubject(storyInstance) {
 			$scope.subject = object.get({url: storyInstance.subject});
-			$scope.formatContent = formatStory(storyInstance.content);
+			$scope.formatContent = formatStory(storyInstance);
 		});
 	},
 ]);
