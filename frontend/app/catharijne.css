@@ -3859,6 +3859,17 @@ button.button-submit:hover,
 }
 
 
+/* DHL insertion */
+
+.block-pageheader-fullwidth.small.tiny {
+    height: 98px;
+    margin-bottom: 20px;
+    background-color: #ddd;
+}
+
+/* End DHL insertion */
+
+
 .block-pageheader-fullwidth.small {
     height: 150px;
     margin-bottom: 0;

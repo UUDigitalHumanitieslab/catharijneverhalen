@@ -11,6 +11,7 @@ angular.module('catharijne.banner', [
 		scope: {
 			image: '<',
 			large: '<',
+			tiny: '<',
 		},
 		// replace: true,
 	};
