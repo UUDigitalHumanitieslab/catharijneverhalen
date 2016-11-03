@@ -19,10 +19,12 @@ angular.module('catharijne.profiel', [
 	) {
 		function initScope(userInstance) {
 			var username = $routeParams.username || userInstance.username;
+			var pk = extractPk(userInstance.person);
 			if (username === userInstance.username) {
-				$scope.self = person.get({pk: extractPk(userInstance.person)});
+				$scope.self = person.get({'pk': pk});
 			}
 			$scope.username = username;
+			$scope.storiesPreview.href = '#/herinneringen?author=' + pk;
 		}
 		user.identity.$promise.then(initScope);
 		$scope.storiesPreview = {
