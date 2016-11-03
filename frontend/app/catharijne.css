@@ -387,7 +387,7 @@ button.close:after {
 
 .to-top:hover {
     background-color: #B69E54;
-    background-image: url("//catharijneconvent.nl/static/presentation/images/MCC_pattern_gold.jpg");
+    background-image: url("image/MCC_pattern_gold.jpg");
     color: #fff;
 }
 
@@ -646,56 +646,56 @@ textarea, input {
 *******************/
 @font-face {
     font-family: 'CaeciliaCom-55Roman';
-    src: url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_0_0.eot");
-    src: url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_0_0.eot?#iefix") format("embedded-opentype"), url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_0_0.woff") format("woff"), url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_0_0.ttf") format("truetype"), url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_0_0.svg#wf") format("svg");
+    src: url("font/2C4373_0_0.eot");
+    src: url("font/2C4373_0_0.eot?#iefix") format("embedded-opentype"), url("font/2C4373_0_0.woff") format("woff"), url("font/2C4373_0_0.ttf") format("truetype"), url("font/2C4373_0_0.svg#wf") format("svg");
 }
 
 @font-face {
     font-family: 'CaeciliaCom-56Italic';
-    src: url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_1_0.eot");
-    src: url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_1_0.eot?#iefix") format("embedded-opentype"), url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_1_0.woff") format("woff"), url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_1_0.ttf") format("truetype"), url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_1_0.svg#wf") format("svg");
+    src: url("font/2C4373_1_0.eot");
+    src: url("font/2C4373_1_0.eot?#iefix") format("embedded-opentype"), url("font/2C4373_1_0.woff") format("woff"), url("font/2C4373_1_0.ttf") format("truetype"), url("font/2C4373_1_0.svg#wf") format("svg");
 }
 
 @font-face {
     font-family: 'CaeciliaCom-45Light';
-    src: url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_2_0.eot");
-    src: url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_2_0.eot?#iefix") format("embedded-opentype"), url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_2_0.woff") format("woff"), url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_2_0.ttf") format("truetype"), url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_2_0.svg#wf") format("svg");
+    src: url("font/2C4373_2_0.eot");
+    src: url("font/2C4373_2_0.eot?#iefix") format("embedded-opentype"), url("font/2C4373_2_0.woff") format("woff"), url("font/2C4373_2_0.ttf") format("truetype"), url("font/2C4373_2_0.svg#wf") format("svg");
 }
 
 @font-face {
     font-family: 'CaeciliaCom-46LightItalic';
-    src: url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_3_0.eot");
-    src: url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_3_0.eot?#iefix") format("embedded-opentype"), url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_3_0.woff") format("woff"), url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_3_0.ttf") format("truetype"), url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_3_0.svg#wf") format("svg");
+    src: url("font/2C4373_3_0.eot");
+    src: url("font/2C4373_3_0.eot?#iefix") format("embedded-opentype"), url("font/2C4373_3_0.woff") format("woff"), url("font/2C4373_3_0.ttf") format("truetype"), url("font/2C4373_3_0.svg#wf") format("svg");
 }
 
 @font-face {
     font-family: 'CaeciliaCom-76BoldItalic';
-    src: url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_4_0.eot");
-    src: url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_4_0.eot?#iefix") format("embedded-opentype"), url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_4_0.woff") format("woff"), url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_4_0.ttf") format("truetype"), url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_4_0.svg#wf") format("svg");
+    src: url("font/2C4373_4_0.eot");
+    src: url("font/2C4373_4_0.eot?#iefix") format("embedded-opentype"), url("font/2C4373_4_0.woff") format("woff"), url("font/2C4373_4_0.ttf") format("truetype"), url("font/2C4373_4_0.svg#wf") format("svg");
 }
 
 @font-face {
     font-family: 'CaeciliaCom-75Bold';
-    src: url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_5_0.eot");
-    src: url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_5_0.eot?#iefix") format("embedded-opentype"), url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_5_0.woff") format("woff"), url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_5_0.ttf") format("truetype"), url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_5_0.svg#wf") format("svg");
+    src: url("font/2C4373_5_0.eot");
+    src: url("font/2C4373_5_0.eot?#iefix") format("embedded-opentype"), url("font/2C4373_5_0.woff") format("woff"), url("font/2C4373_5_0.ttf") format("truetype"), url("font/2C4373_5_0.svg#wf") format("svg");
 }
 
 @font-face {
     font-family: 'CaeciliaCom-85Heavy';
-    src: url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_6_0.eot");
-    src: url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_6_0.eot?#iefix") format("embedded-opentype"), url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_6_0.woff") format("woff"), url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_6_0.ttf") format("truetype"), url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_6_0.svg#wf") format("svg");
+    src: url("font/2C4373_6_0.eot");
+    src: url("font/2C4373_6_0.eot?#iefix") format("embedded-opentype"), url("font/2C4373_6_0.woff") format("woff"), url("font/2C4373_6_0.ttf") format("truetype"), url("font/2C4373_6_0.svg#wf") format("svg");
 }
 
 @font-face {
     font-family: 'CaeciliaCom-86HeavyItalic';
-    src: url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_7_0.eot");
-    src: url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_7_0.eot?#iefix") format("embedded-opentype"), url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_7_0.woff") format("woff"), url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_7_0.ttf") format("truetype"), url("//catharijneconvent.nl/static/presentation/webfonts/2C4373_7_0.svg#wf") format("svg");
+    src: url("font/2C4373_7_0.eot");
+    src: url("font/2C4373_7_0.eot?#iefix") format("embedded-opentype"), url("font/2C4373_7_0.woff") format("woff"), url("font/2C4373_7_0.ttf") format("truetype"), url("font/2C4373_7_0.svg#wf") format("svg");
 }
 
 @font-face {
     font-family: 'icons';
-    src: url("//catharijneconvent.nl/static/presentation/webfonts/icomoon/MCC.eot");
-    src: url("//catharijneconvent.nl/static/presentation/webfonts/MCC.eot?#iefix") format("embedded-opentype"), url("//catharijneconvent.nl/static/presentation/webfonts/MCC.woff") format("woff"), url("//catharijneconvent.nl/static/presentation/webfonts/MCC.ttf") format("truetype"), url("//catharijneconvent.nl/static/presentation/webfonts/MCC.svg") format("svg");
+    src: url("font/icomoon/MCC.eot");
+    src: url("font/MCC.eot?#iefix") format("embedded-opentype"), url("font/MCC.woff") format("woff"), url("font/MCC.ttf") format("truetype"), url("font/MCC.svg") format("svg");
     font-weight: normal;
     font-style: normal;
 }
@@ -2395,7 +2395,7 @@ label.error {
 
 
 .footer-main {
-    background: url("//catharijneconvent.nl/static/presentation/images/MCC_pattern_gold.jpg") #B69E54;
+    background: url("image/MCC_pattern_gold.jpg") #B69E54;
     padding: 20px 0 0;
     position: relative;
 }
@@ -4090,7 +4090,7 @@ button.button-submit:hover,
 
 
 .home .divider-story-bottom > div {
-    background: url("//catharijneconvent.nl/static/presentation/images/MCC_pattern_blue.jpg") #363E46;
+    background: url("image/MCC_pattern_blue.jpg") #363E46;
 }
 
 
@@ -4154,7 +4154,7 @@ button.button-submit:hover,
 
 .home .block-intro {
     padding: 20px;
-    background: url("//catharijneconvent.nl/static/presentation/images/MCC_pattern_blue.jpg") #363E46;
+    background: url("image/MCC_pattern_blue.jpg") #363E46;
     background-color: #363E46;
     margin-bottom: 40px;
 }
@@ -4237,7 +4237,7 @@ button.button-submit:hover,
 
 .block-quote {
     padding: 40px 20px;
-    background: url("//catharijneconvent.nl/static/presentation/images/MCC_pattern_blue.jpg") #363E46;
+    background: url("image/MCC_pattern_blue.jpg") #363E46;
     background-color: #363E46;
     text-align: center;
 }
@@ -4694,7 +4694,7 @@ footer .overlay-top {
         -webkit-transition: opacity 0.25s;
         -moz-transition: opacity 0.25s;
         transition: opacity 0.25s;
-        background: url("//catharijneconvent.nl/static/presentation/images/MCC_pattern_gold.jpg") #B69E54;
+        background: url("image/MCC_pattern_gold.jpg") #B69E54;
         opacity: 0;
         text-align: center;
     }
@@ -6144,7 +6144,7 @@ a:hover .container-info {
 /* Preload images */
 
 body:after {
-    content: url(//catharijneconvent.nl/static/presentation/images/close.png) url(//catharijneconvent.nl/static/presentation/images/prev.png) url(//catharijneconvent.nl/static/presentation/images/next.png);
+    content: url(image/close.png) url(image/prev.png) url(image/next.png);
     display: none;
 }
 
@@ -6621,7 +6621,7 @@ body:after {
 
 
 .block-cta {
-    background: url("//catharijneconvent.nl/static/presentation/images/MCC_pattern_blue.jpg") #363E46;
+    background: url("image/MCC_pattern_blue.jpg") #363E46;
     background-color: #363E46;
     padding-bottom: 0px !important;
 }
@@ -7792,7 +7792,7 @@ article.topitems .container-info {
     width: 450px;
     height: 100%;
     padding: 25px;
-    background: url("//catharijneconvent.nl/static/presentation/images/MCC_pattern_gold.jpg") #B69E54;
+    background: url("image/MCC_pattern_gold.jpg") #B69E54;
     overflow: auto;
     z-index: 2;
 }
@@ -7861,7 +7861,7 @@ article.topitems .container-info {
     width: 44px;
     height: 44px;
     margin-top: -22px;
-    background: url("//catharijneconvent.nl/static/presentation/images/MCC_pattern_gold.jpg") #B69E54;
+    background: url("image/MCC_pattern_gold.jpg") #B69E54;
     border: 0;
     z-index: 1;
 }
