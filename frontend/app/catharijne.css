@@ -127,9 +127,15 @@ button.close:after {
     max-height: 50px;
 }
 
+.app-attachment-manager form label {
+    padding: 0 1em;
+}
+
 .app-attachment-manager form button {
     padding-left: 10pt;
     padding-right: 10pt;
+    margin: 0;
+    margin-bottom: 1em;
 }
 
 .app-attachment-manager form button:after {
