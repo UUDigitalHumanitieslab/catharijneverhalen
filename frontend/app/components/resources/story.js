@@ -42,7 +42,6 @@ angular.module('catharijne.story', ['catharijne.resource'])
 			},
 			get: {
 				method: 'get',
-				cache: true,
 				transformResponse: appendTransform.response(transformStoryIn),
 			},
 			save: {
