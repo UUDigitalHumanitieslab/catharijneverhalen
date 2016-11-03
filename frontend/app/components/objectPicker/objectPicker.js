@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module(
-	'catharijne.objectPicker',
-	['catharijne.blocklist', 'catharijne.object'],
-).directive('appObjectPicker', function() {
+angular.module('catharijne.objectPicker', [
+	'catharijne.blocklist',
+	'catharijne.object',
+]).directive('appObjectPicker', function() {
 	return {
 		scope: {
 			objectUrl: '='
