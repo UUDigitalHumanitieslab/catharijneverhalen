@@ -9,6 +9,8 @@ from rest_framework.decorators import list_route, api_view
 from rest_framework.decorators import throttle_classes, permission_classes
 from rest_framework.response import Response
 
+from django_filters.rest_framework import DjangoFilterBackend
+
 from api.models import *
 from api.serializers import *
 from api.permissions import *
@@ -141,8 +143,8 @@ class StoryViewSet(viewsets.ModelViewSet):
     queryset = Story.objects.all()
     serializer_class = StorySerializer
     permission_classes = (Or(ReadOnly, IsAdminUser, IsOwner),)
-    filter_backends = (IsPublishedOrAuthorFilter,)
-    filter_fields = ('author', 'subject')
+    filter_backends = (IsPublishedOrAuthorFilter, DjangoFilterBackend)
+    filter_fields = ('author_id', 'subject')
     
     def perform_create(self, serializer):
         serializer.save(author=self.request.user.person)

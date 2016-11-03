@@ -43,7 +43,7 @@ angular.module('catharijne.herinneringen', [
 		function prepareMemories(storyList) {
 			$scope.memories = _.map(storyList, prepareMemory);
 			if ($scope.memories.length) {
-				if ($routeParams.author) {
+				if ($routeParams.author_id) {
 					$scope.author = storyList[0].username;
 				}
 				if ($routeParams.subject) {
@@ -55,7 +55,7 @@ angular.module('catharijne.herinneringen', [
 				}
 			}
 		}
-		var search = _.pick($routeParams, ['author', 'subject']);
+		var search = _.pick($routeParams, ['author_id', 'subject']);
 		story.query(search).$promise.then(prepareMemories);
 	},
 ]);

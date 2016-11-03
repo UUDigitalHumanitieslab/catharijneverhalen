@@ -58,7 +58,7 @@ angular.module('catharijne.herinnering', [
 				$scope.subjectUrl = '#/voorwerp?url=' + encodeURIComponent(objectInstance.url);
 			});
 			$scope.formatContent = formatStory(storyInstance);
-			$scope.authorUrl = '#/herinneringen?author=' + extractPk(storyInstance.author);
+			$scope.authorUrl = '#/herinneringen?author_id=' + extractPk(storyInstance.author);
 		});
 	},
 ]);

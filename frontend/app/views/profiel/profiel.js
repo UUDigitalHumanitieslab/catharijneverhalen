@@ -24,7 +24,7 @@ angular.module('catharijne.profiel', [
 				$scope.self = person.get({'pk': pk});
 			}
 			$scope.username = username;
-			$scope.storiesPreview.href = '#/herinneringen?author=' + pk;
+			$scope.storiesPreview.href = '#/herinneringen?author_id=' + pk;
 		}
 		user.identity.$promise.then(initScope);
 		$scope.storiesPreview = {
