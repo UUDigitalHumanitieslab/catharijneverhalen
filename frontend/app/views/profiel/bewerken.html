@@ -50,7 +50,7 @@
 			</span>
 			<label>
 				Geslacht
-				<select name=gender id=gender ng-model="my.gender" ng-options="key as value for (key, value) in genderOptions">
+				<select name=gender id=gender ng-model="my.gender" ng-options="key as value for (key, value) in genderOptions track by key">
 					<option value=""></option>
 				</select>
 			</label>
