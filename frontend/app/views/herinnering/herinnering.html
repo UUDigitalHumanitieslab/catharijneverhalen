@@ -6,6 +6,7 @@
 		<div class=intro ng-if="story.introduction">
 			<p>{{story.introduction}}</p>
 		</div>
+		<a class=button ng-href="{{'#/toevoegen/' + story.pk}}" ng-if="story.author === me.person">Bewerk mijn verhaal</a>
 	</article>
 </div>
 <div class=row>
@@ -15,12 +16,16 @@
 				<dl>
 					<dt ng-if="story.subject">Herinnering bij</dt>
 					<dd ng-if="story.subject">
-						{{subject.title}}
-						<br>
-						{{subject.creator || 'maker onbekend'}}, {{subject.dateRange || 'datum onbekend'}}
+						<a ng-href="{{subjectUrl}}">
+							{{subject.title}}
+							<br>
+							{{subject.creator || 'maker onbekend'}}, {{subject.dateRange || 'datum onbekend'}}
+						</a>
 					</dd>
 					<dt>Bijgedragen door</dt>
-					<dd>{{story.username}}</dd>
+					<dd><a ng-href="{{authorUrl}}">
+						{{story.username}}
+					</a></dd>
 					<dt ng-if="story.place || story.year">Speelt zich af in</dt>
 					<dd ng-if="story.place || story.year">{{story.place}}{{story.place && story.year && ', ' || ''}}{{story.year}}</dd>
 				</dl>

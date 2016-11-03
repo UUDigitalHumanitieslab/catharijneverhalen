@@ -3,6 +3,8 @@
 angular.module('catharijne.herinnering', [
 	'catharijne.story',
 	'catharijne.object',
+	'catharijne.user',
+	'catharijne.resource',
 	'ngRoute',
 ]).config(['$routeProvider', function memoryConfig($routeProvider) {
 	$routeProvider.when('/herinnering/:pk', {
@@ -10,8 +12,12 @@ angular.module('catharijne.herinnering', [
 		controller: 'MemoryCtrl',
 	});
 }]).controller('MemoryCtrl', [
-	'$scope', 'story', 'object', '$routeParams',
-	function memoryController($scope, story, object, $routeParams) {
+	'$scope', 'story', 'object', 'user',
+	'$routeParams', 'extractPk',
+	function memoryController(
+		$scope, story, object, user,
+		$routeParams, extractPk
+	) {
 		function isHeader(text) {
 			return text.trim().split(/\s+/, 12).length < 10;
 		}
@@ -42,10 +48,17 @@ angular.module('catharijne.herinnering', [
 			}
 			return sections;
 		}
+		$scope.me = user.identity;
 		$scope.story = story.get({pk: $routeParams.pk});
-		$scope.story.$promise.then(function getSubject(storyInstance) {
-			$scope.subject = object.get({url: storyInstance.subject});
+		$scope.story.$promise.then(function initDetails(storyInstance) {
+			$scope.subject = object.get({
+				url: storyInstance.subject
+			});
+			$scope.subject.$promise.then(function initSubject(objectInstance) {
+				$scope.subjectUrl = '#/voorwerp?url=' + encodeURIComponent(objectInstance.url);
+			});
 			$scope.formatContent = formatStory(storyInstance);
+			$scope.authorUrl = '#/herinneringen?author=' + extractPk(storyInstance.author);
 		});
 	},
 ]);
