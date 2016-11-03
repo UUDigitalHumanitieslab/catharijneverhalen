@@ -25,6 +25,14 @@
 					<dd ng-if="story.place || story.year">{{story.place}}{{story.place && story.year && ', ' || ''}}{{story.year}}</dd>
 				</dl>
 			</div>
+			<div class="container-text" ng-if="story.url_attachments.length">
+			<h5>Opnames van deze herinnering</h5>
+				<ul>
+					<li ng-repeat="url in story.url_attachments">
+						<a ng-href="{{url.attachment}}">{{url.attachment}}</a>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</article>
 </div>
