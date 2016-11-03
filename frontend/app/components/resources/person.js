@@ -69,8 +69,8 @@ angular.module('catharijne.person', [
 			instance.$promise = $http.put(path + pk + '/', formData, {
 				headers: {'Content-Type': undefined},
 				transformResponse: appendTransform.response(augment),
-			}).then(function updateSuccess(data) {
-				_.assign(instance, data);
+			}).then(function updateSuccess(xhr) {
+				_.assign(instance, xhr.data);
 				return instance;
 			});
 			instance.$promise.then(success, fail).finally(function resolve() {

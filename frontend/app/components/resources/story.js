@@ -72,8 +72,8 @@ angular.module('catharijne.story', ['catharijne.resource'])
 			result.$promise = $http.post(base, formData, {
 				headers: {'Content-Type': undefined},
 				transformRequest: angular.identity,
-			}).then(function saveSuccess(attachment) {
-				_.assign(result, attachment);
+			}).then(function saveSuccess(xhr) {
+				_.assign(result, xhr.data);
 				return result;
 			});
 			result.$promise.then(success, fail).finally(function saveResolve() {
