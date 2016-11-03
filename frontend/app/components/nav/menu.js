@@ -29,10 +29,11 @@ angular.module('catharijne.menu', [
 		return service;
 	},
 ]).controller('MenuCtrl', [
-	'$scope', 'menu', 'user',
-	function menuController($scope, menu, user) {
+	'$scope', 'menu', 'user', '$location',
+	function menuController($scope, menu, user, $location) {
 		$scope.menu = menu;
 		$scope.user = user;
+		$scope.location = $location;
 	},
 ]).directive('appMenuButton', function menuButtonDirective() {
 	return {
