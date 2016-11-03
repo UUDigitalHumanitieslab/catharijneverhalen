@@ -11,8 +11,12 @@ angular.module('catharijne.profiel', [
 		controller: 'ProfileCtrl',
 	});
 }]).controller('ProfileCtrl', [
-	'$routeParams', '$scope', 'user', 'person', 'extractPk',
-	function profileController($routeParams, $scope, user, person, extractPk) {
+	'$routeParams', '$scope', 'user', 'person',
+	'genders', 'extractPk',
+	function profileController(
+		$routeParams, $scope, user, person,
+		genders, extractPk
+	) {
 		function initScope(userInstance) {
 			var username = $routeParams.username || userInstance.username;
 			if (username === userInstance.username) {
@@ -29,5 +33,6 @@ angular.module('catharijne.profiel', [
 			title: 'Collecties',
 			linkText: 'Binnenkort',
 		};
+		$scope.genderFormat = genders;
 	},
 ]);

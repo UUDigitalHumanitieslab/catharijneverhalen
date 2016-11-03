@@ -131,4 +131,8 @@ angular.module('catharijne.person', [
 	function parentListFactory(baseListResource) {
 		return baseListResource('/api/marital-statuses/');
 	},
-]);
+]).constant('genders', {
+	male: 'man',
+	female: 'vrouw',
+	other: 'anders',
+});

@@ -9,6 +9,8 @@ from django.contrib.auth.models import User
 from rest_framework import serializers, exceptions
 from rest_framework.reverse import reverse
 
+import six
+
 from api.models import *
 
 
@@ -90,8 +92,38 @@ class ParentOccupationSerializer(serializers.ModelSerializer):
         fields = ('pk', 'parent', 'occupation')
 
 
+class DisplayChoiceField(serializers.ChoiceField):
+    """ Fixed ChoiceField that actually uses the display values. """
+    
+    def __init__(self, choices, **kwargs):
+        super(DisplayChoiceField, self).__init__(choices, **kwargs)
+        self.reverse_choices = {
+            six.text_type(value): key for (key, value) in self.choices.items()
+        }
+    
+    def to_internal_value(self, data):
+        if data == '' and self.allow_blank:
+            return ''
+        text_data = six.text_type(data)
+        if text_data in self.choice_strings_to_values:
+            return self.choice_strings_to_values[text_data]
+        if text_data in self.reverse_choices:
+            return self.reverse_choices[text_data]
+        self.fail('invalid_choice', input=data)
+    
+    def to_representation(self, value):
+        if value in (None, ''):
+            return value
+        return self.choices[value]
+
+
 class PersonSerializer(serializers.HyperlinkedModelSerializer):
     username = serializers.ReadOnlyField(source='user.username')
+    gender = DisplayChoiceField(
+        allow_null=True,
+        choices=Person.GENDER_CHOICES,
+        required=False,
+    )
     parent_occupations = ParentOccupationSerializer(many=True, read_only=True)
     education_level = serializers.SlugRelatedField(
         slug_field='name',

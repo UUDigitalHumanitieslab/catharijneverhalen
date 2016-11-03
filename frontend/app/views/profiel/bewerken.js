@@ -14,11 +14,13 @@ angular.module('catharijne.profiel.bewerken', [
 		});
 	},
 ]).controller('ProfileEditCtrl', [
-	'$scope', 'user', 'extractPk', 'person', 'parentOccupation', '$location',
-	'parentList', 'educationLevelList', 'maritalStatusList', 'wrapWithResource',
+	'$scope', 'user', 'extractPk', 'person', 'parentOccupation',
+	'genders', '$location', 'parentList', 'educationLevelList',
+	'maritalStatusList', 'wrapWithResource',
 	function profileEditController(
-		$scope, user, extractPk, person, parentOccupation, $location,
-		parentList, educationLevelList, maritalStatusList, wrapWithResource
+		$scope, user, extractPk, person, parentOccupation,
+		genders, $location, parentList, educationLevelList,
+		maritalStatusList, wrapWithResource
 	) {
 		function initDetails(personInstance) {
 			if (personInstance.portrait) $scope.portraitFileName = personInstance.portrait.match(/[^/]+$/)[0];
@@ -32,11 +34,7 @@ angular.module('catharijne.profiel.bewerken', [
 			$scope.my.$promise.then(initDetails);
 		}
 		user.identity.$promise.then(initScope);
-		$scope.genderOptions = {
-			1: 'vrouw',
-			2: 'man',
-			3: 'anders',
-		};
+		$scope.genderOptions = genders;
 		$scope.educationLevelList = educationLevelList;
 		$scope.maritalStatusList = maritalStatusList;
 		$scope.parentOccupations = {
