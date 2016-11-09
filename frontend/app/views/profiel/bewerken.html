@@ -71,7 +71,7 @@
 			</span>
 			<label>
 				Hoogst genoten opleiding
-				<select name=education_level id=education_level ng-model="my.education_level" ng-options="value for value in educationLevelList">
+				<select name=education_level id=education_level ng-model="my.education_level" ng-options="value for value in educationLevelList track by value">
 					<option value=""></option>
 				</select>
 			</label>
@@ -92,7 +92,7 @@
 			</span>
 			<label>
 				Burgerlijke staat
-				<select name=marital_status id=marital_status ng-model="my.marital_status" ng-options="value for value in maritalStatusList">
+				<select name=marital_status id=marital_status ng-model="my.marital_status" ng-options="value for value in maritalStatusList track by value">
 					<option value=""></option>
 				</select>
 			</label>

@@ -25,7 +25,7 @@
 				<select
 					ng-if="field.type === 'select'"
 					ng-attr-name="{{field.name}}"
-					ng-options="value for value in field.options"
+					ng-options="value for value in field.options track by value"
 					ng-attr-required="{{field.required}}"
 					ng-attr-value="{{field.value}}"
 				>
@@ -80,7 +80,7 @@
 					ng-if="field.type === 'select'"
 					ng-attr-name="{{field.name}}"
 					ng-model="item[field.name]"
-					ng-options="value for value in field.options"
+					ng-options="value for value in field.options track by value"
 					ng-attr-required="{{field.required}}"
 					ng-attr-value="{{field.value}}"
 				>
