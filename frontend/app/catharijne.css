@@ -115,6 +115,10 @@ button.close:after {
     padding: 0;
 }
 
+.app-attachment-manager > button {
+    margin-bottom: 15px;
+}
+
 .app-attachment-manager form {
     display: table-row;
 }

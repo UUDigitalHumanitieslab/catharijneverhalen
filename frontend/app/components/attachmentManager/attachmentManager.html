@@ -1,5 +1,6 @@
 <div class="form app-attachment-manager">
 	<button ng-click="active=true" ng-transclude></button>
+	<p>{{meta.info}}</p>
 	<article class="block-form modal" ng-show="active">
 		<button ng-click="active=false" class="close">Sluit</button>
 		<h3>{{meta.title}}</h3>
