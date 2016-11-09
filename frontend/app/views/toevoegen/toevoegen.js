@@ -52,9 +52,6 @@ angular.module('catharijne.toevoegen', [
 				}
 			});
 		}
-		if (! $scope.story.content) {
-			$scope.story.content = 'Beschrijf hier uw herinnering (maximaal 500 woorden). Gebruik witregels om alinea’s te scheiden. Een alinea van minder dan tien woorden wordt weergegeven als een kopje. Voorbeeld:\n\nDit is een alinea van meer dan tien woorden. U sluit deze af met een witregel door twee keer op enter te drukken.\n\nDit wordt een kopje\n\nNa bovenstaande witregel gaat het verhaal weer verder met een alinea van meer dan tien woorden.';
-		}
 		function storySaveSuccess(instance) {
 			$location.path('/herinnering/' + instance.pk);
 		}

@@ -20,6 +20,24 @@
     DHL insertions that don't belong anywhere else.
 */
 
+/*
+    General: italic form field placeholders.
+    Credits to http://stackoverflow.com/a/2610741/1166087 .
+*/
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    font-style: italic;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    font-style: italic;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    font-style: italic;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    font-style: italic;
+}
+
 /* Object picker widget */
 
 figure.app-object-picker {
@@ -113,6 +131,10 @@ button.close:after {
 .app-attachment-manager {
     margin: 0;
     padding: 0;
+}
+
+.app-attachment-manager > button {
+    margin-bottom: 15px;
 }
 
 .app-attachment-manager form {
@@ -6214,7 +6236,7 @@ body:after {
     left: 0;
     z-index: 9999;
     background-color: black;
-    filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=90);
+/*    filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=90); rem DHL*/
     opacity: 0.9;
     display: none;
 }
@@ -6246,7 +6268,7 @@ body:after {
 .lb-outerContainer {
     position: relative;
     background-color: #B69E54;
-    * zoom: 1;
+    zoom: 1;
     width: 250px;
     height: 250px;
     margin: 0 auto;
@@ -6381,7 +6403,7 @@ body:after {
 .lb-dataContainer {
     margin: 0 auto;
     padding-top: 5px;
-    * zoom: 1;
+    zoom: 1;
     width: 100%;
     min-height: 125px;
     min-width: 600px;
@@ -6447,7 +6469,7 @@ body:after {
     outline: none;
     border: 2px solid #fff;
     cursor: pointer;
-    filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=70);
+/*    filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=70); rem DHL*/
     opacity: .7;
     -webkit-transition: opacity, 0.25s;
     -moz-transition: opacity, 0.25s;
@@ -6472,7 +6494,7 @@ body:after {
 
 
 .lb-close:hover {
-    filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=100);
+/*    filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=100); rem DHL*/
     opacity: 1;
 }
 
