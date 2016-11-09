@@ -20,6 +20,24 @@
     DHL insertions that don't belong anywhere else.
 */
 
+/*
+    General: italic form field placeholders.
+    Credits to http://stackoverflow.com/a/2610741/1166087 .
+*/
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    font-style: italic;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    font-style: italic;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    font-style: italic;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    font-style: italic;
+}
+
 /* Object picker widget */
 
 figure.app-object-picker {
@@ -113,6 +131,10 @@ button.close:after {
 .app-attachment-manager {
     margin: 0;
     padding: 0;
+}
+
+.app-attachment-manager > button {
+    margin-bottom: 15px;
 }
 
 .app-attachment-manager form {

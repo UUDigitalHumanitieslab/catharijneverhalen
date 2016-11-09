@@ -37,7 +37,11 @@
 			<h5>Opnames van deze herinnering</h5>
 				<ul>
 					<li ng-repeat="url in story.url_attachments">
-						<a ng-href="{{url.attachment}}">{{url.attachment}}</a>
+						<a
+							ng-href="{{url.attachment}}"
+							target=_blank
+							rel="noopener noreferrer"
+						>{{url.attachment}}</a>
 					</li>
 				</ul>
 			</div>
@@ -53,7 +57,11 @@
 			</div>
 			<div class=container-image ng-if="section.images">
 				<div class=image-wrapper ng-repeat="image in section.images">
-					<a ng-href="{{image.attachment}}">
+					<a
+						ng-href="{{image.attachment}}"
+						target=_blank
+						rel="noopener noreferrer"
+					>
 						<picture><img ng-src="{{image.attachment}}"></picture>
 					</a>
 				</div>
