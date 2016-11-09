@@ -1,0 +1,8 @@
+<div class="row">
+	<article class="block-overview">
+		<ul class="list-overview" ng-if="items">
+			<app-block ng-repeat="item in items" item="item"></app-block>
+		</ul>
+		<ul class="list-overview" ng-if="!items" ng-transclude></ul>
+	</article>
+</div>

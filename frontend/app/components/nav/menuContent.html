@@ -1,0 +1,17 @@
+<div class="container-nav-search js-menu">
+	<div class="wrapper">
+		<nav class="nav-main">
+			<div class="overlay-top"></div>
+			<ul>
+				<li><a href="#/home">Home</a></li>
+				<li><a href="#/herinneringen">Herinneringen</a></li>
+				<li><a href="#/voorwerpen">Voorwerpen</a></li>
+				<li ng-show="user.identity.url"><a href="#/profiel">Mijn profiel</a></li>
+				<li ng-show="user.identity.url"><a href="#/toevoegen">Verhaal bijdragen</a></li>
+				<li ng-show="!user.identity.url"><a href="#/aanmelden?next={{location.url()}}">Aanmelden</a></li>
+				<li ng-show="!user.identity.url"><a href="#/inloggen?next={{location.url()}}">Inloggen</a></li>
+				<li ng-show="user.identity.url"><a href="#/uitloggen?next={{location.url()}}">Uitloggen</a></li>
+			</ul>
+		</nav>
+	</div>
+</div>

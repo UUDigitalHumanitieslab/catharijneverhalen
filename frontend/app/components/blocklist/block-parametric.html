@@ -1,0 +1,24 @@
+<li>
+	<a ng-if="item.imageUrl" ng-href="{{ item.href }}" ng-click="item.click && item.click($event)">
+		<div class="container-image">
+			<picture>
+				<img ng-src="{{ item.imageUrl }}">
+			</picture>
+			<span class="hover">
+				<div class="wrapper">
+					<span>{{ item.linkText || 'Lees meer' }}</span>
+				</div>
+			</span>
+		</div>
+	</a>
+	<div class="container-content">
+		<span ng-if="item.supertitle" class="divider">
+			{{ item.supertitle }}
+		</span>
+		<h3>{{ item.title }}</h3>
+		<p>{{ item.description }}</p>
+		<a ng-href="{{ item.href }}" ng-click="item.click && item.click($event)" class="button">
+			{{ item.linkText || 'Lees meer' }}
+		</a>
+	</div>
+</li>

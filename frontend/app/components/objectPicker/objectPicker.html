@@ -1,0 +1,7 @@
+<figure class=app-object-picker>
+	<div ng-style=background>
+		<button ng-click="pick()">Kies een voorwerp</button>
+	</div>
+	<figcaption ng-show=object>{{object.title}}</figcaption>
+	<app-blocklist items=objectDescriptions ng-show=picking></app-blocklist>
+</figure>

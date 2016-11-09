@@ -1,0 +1,32 @@
+{
+  "name": "catharijneverhalen",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Frontend to the online storybase of the Dutch museum Catharijneconvent",
+  "repository": "https://github.com/UUDigitalHumantieslab/catharijneverhalen",
+  "license": "MIT",
+  "devDependencies": {
+    "angular-google-maps": "^2.3.4",
+    "bower": "^1.7.9",
+    "jasmine-core": "^2.4.1",
+    "karma": "^1.2.0",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-junit-reporter": "^1.1.0",
+    "karma-ng-html2js-preprocessor": "^1.0.0",
+    "protractor": "^4.0.3",
+    "shelljs": "^0.7.3"
+  },
+  "scripts": {
+    "postinstall": "bower install",
+    "pretest": "npm install",
+    "test": "karma start karma.conf.js",
+    "test-once": "karma start karma.conf.js  --single-run",
+    "preupdate-webdriver": "npm install",
+    "update-webdriver": "webdriver-manager update",
+    "preprotractor": "npm run update-webdriver",
+    "protractor": "protractor e2e-tests/protractor.conf.js",
+    "test-all": "npm run test-once ; npm run protractor"
+  }
+}

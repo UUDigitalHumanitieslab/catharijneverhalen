@@ -1,0 +1,21 @@
+{
+  "name": "catharijneverhalen",
+  "description": "Frontend to the online storybase of the Dutch museum Catharijneconvent",
+  "version": "0.1.0",
+  "homepage": "https://github.com/UUDigitalHumantieslab/catharijneverhalen",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.5.8",
+    "angular-route": "~1.5.8",
+    "angular-loader": "~1.5.8",
+    "angular-resource": "~1.5.8",
+    "html5-boilerplate": "^5.3.0",
+    "angular-google-maps": "^2.3.4",
+    "lodash": "^4.15.0",
+    "angular-simple-logger": "^0.1.7"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.5.8"
+  }
+}

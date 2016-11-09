@@ -1,0 +1,67 @@
+<cc-banner tiny=true></cc-banner>
+<div class="row">
+	<article class="block-form">
+		<form class="wrapper form" id=registration-form name=form>
+			<h3>Maak een account aan</h3>
+			<table class=table style="text-align: left;">
+				<tr>
+					<td><label for=username>Gebruikersnaam:</label></td>
+					<td><input name=username id=username type=text size=30 placeholder=Ingrid required ng-model="credentials.username" ng-model-options="{debounce: {blur: 0, default: 500}}"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<label for=username>Deze naam verschijnt bij uw herinneringen op uw profiel. Dit hoeft niet uw echte naam te zijn.</label>
+						<span ng-show="form.$submitted || form.username.$touched">
+							<label for=username ng-show="form.username.$error.required" class=error>Het is noodzakelijk dat u een gebruikersnaam kiest.</label>
+							<label for=username ng-show="serverRejectedUsername" class=error>Deze gebruikersnaam is helaas al in gebruik. Kies een andere naam.</label>
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td><label for=email>Emailadres:</label></td>
+					<td><input name=email id=login type=email placeholder="voorbeeld@domein.xyz" required size=30 ng-model="credentials.email" ng-model-options="{debounce: {blur: 0, default: 500}}"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<label for=email>Uw emailadres wordt niet aan andere bezoekers getoond.</label>
+						<span ng-show="form.$submitted || form.email.$touched">
+							<label for=email ng-show="form.email.$error.email || serverRejectedEmail" class=error>Dit is geen geldig emailadres.</label>
+							<label for=email ng-show="form.email.$error.required" class=error>Het is noodzakelijk dat u een emailadres opgeeft.</label>
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td><label for=password>Wachtwoord:</label></td>
+					<td><input name=password id=password type=password size=30 minlength=8 required placeholder="&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;" ng-model="credentials.password" ng-model-options="{debounce: {blur: 0, default: 500}}" ng-change="passwordCheck=form.password.$viewValue.replace(replaceFrom, replaceTo)"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<label for=password>Kies een uniek wachtwoord. Hoe langer het wachtwoord, hoe beter. Er mogen spaties en leestekens in zitten.</label>
+						<span ng-show="form.$submitted || form.password.$touched">
+							<label for=password ng-show="form.password.$error.minlength || serverRejectedPassword" class=error>Het wachtwoord moet minimaal uit 8 tekens bestaan.</label>
+							<label for=password ng-show="form.password.$error.required" class=error>Het is noodzakelijk dat u een wachtwoord kiest.</label>
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td><label for=password2>Controle:</label></td>
+					<td><input name=password2 id=password2 type=password size=30 required placeholder="&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;&bullet;" ng-model="password2" ng-model-options="{debounce: {blur: 0, default: 500}}" ng-pattern="passwordCheck"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<label for=password2>Voer hetzelfde wachtwoord nogmaals in.</label>
+						<span ng-show="form.$submitted || form.password2.$touched">
+							<label for=password2 ng-show="form.password2.$error.pattern" class=error>De wachtwoorden komen niet overeen.</label>
+						</span>
+					</td>
+				</tr>
+			</table>
+			<p>Door u aan te melden, gaat u akkoord met onze voorwaarden.</p>
+			<button type=submit ng-click="register(credentials)" ng-disabled="pending || form.$invalid">Aanmelden</button>
+		</form>
+	</article>
+</div>

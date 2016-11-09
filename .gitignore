@@ -1,0 +1,14 @@
+logs/*
+!.gitkeep
+node_modules/
+bower_components/
+tmp
+.DS_Store
+.idea
+__pycache__
+*.pyc
+/frontend/app/components/googleMaps/googleMaps-apiKey.js
+.cache
+settings.py
+!/backend/catharijneverhalen/settings.py
+/backend/media

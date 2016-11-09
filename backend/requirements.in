@@ -1,0 +1,7 @@
+Django
+DjangoRestFramework
+psycopg2
+Pillow
+coreapi
+django-filter
+django-crispy-forms  # for admin, dev convenience

@@ -1,0 +1,11 @@
+<div ng-class="['row', {'no-background': !image}]">
+	<article ng-class="['block-pageheader-fullwidth', {small: !large || tiny, tiny: !large && tiny}]">
+		<div class=container-image ng-if="image">
+			<img ng-src="{{image}}" style="width: 100%">
+			<div class="overlay-top" ng-if="!tiny"></div>
+			<div class="overlay-bottom" ng-if="!tiny"></div>
+		</div>
+		<div class="overlay-top" ng-if="!image && !tiny"></div>
+		<div class="overlay-bottom" ng-if="!image && !tiny"></div>
+	</article>
+</div>
