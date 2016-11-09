@@ -123,12 +123,12 @@ angular.module('catharijne.person', [
 	},
 ]).factory('educationLevelList', [
 	'baseListResource',
-	function parentListFactory(baseListResource) {
+	function maritalStatusListFactory(baseListResource) {
 		return baseListResource('/api/education-levels/');
 	},
 ]).factory('maritalStatusList', [
 	'baseListResource',
-	function parentListFactory(baseListResource) {
+	function educationLevelListFactory(baseListResource) {
 		return baseListResource('/api/marital-statuses/');
 	},
 ]).constant('genders', {
