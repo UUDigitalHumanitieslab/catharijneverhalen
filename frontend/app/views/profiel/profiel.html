@@ -1,24 +1,51 @@
+<cc-banner></cc-banner>
 <div class="row no-background">
-	<article class="block-pageheader-fullwidth small">
-		<div class="overlay-top"></div>
+	<article class="block-intro">
+		<h1 class="divider special" ng-if="self">Mijn profiel</h1>
+		<h1 class="divider special" ng-if="!self">Profiel van {{username}}</h1>
 		<div class="overlay-bottom"></div>
 	</article>
 </div>
 <app-blocklist>
-	<app-block>
+	<app-block ng-if="self">
 		<div class="container-image">
-			<img src="profiel.jpg">
+			<img ng-src="{{self.portrait}}">
 		</div>
 		<div class="container-content">
-			<h3>Gebruiker</h3>
+			<h3>Persoonlijke details</h3>
+			<a class=button href="#/profiel/bewerken">Bewerk mijn profiel</a>
 			<dl>
+				<dt>Volledige naam</dt>
+				<dd>{{self.name || '?'}}</dd>
 				<dt>Woonplaats</dt>
-				<dt>Geboortejaar</dt>
+				<dd>{{self.address_place || '?'}}</dd>
+				<dt>Geboortedatum</dt>
+				<dd>{{self.birth_date || '?'}}</dd>
 				<dt>Geboorteplaats</dt>
+				<dd>{{self.birth_place || '?'}}</dd>
 				<dt>Geslacht</dt>
+				<dd>{{genderFormat[self.gender] || '?'}}</dd>
+				<dt>Nationaliteit</dt>
+				<dd>{{self.nationality || '?'}}</dd>
+				<dt>Opleidingsniveau</dt>
+				<dd>{{self.education_level || '?'}}</dd>
+				<dt>Beroep</dt>
+				<dd>{{self.occupation || '?'}}</dd>
+				<dt>Burgerlijke staat</dt>
+				<dd>{{self.marital_status || '?'}}</dd>
+				<dt>Religieuze achtergrond</dt>
+				<dd>{{self.religious_background || '?'}}</dd>
+				<dt>Vroegere gezinssamenstelling</dt>
+				<dd>{{self.family_composition || '?'}}</dd>
 				<dt>Beroep ouders</dt>
+				<dd ng-if="self.parent_occupations"><table>
+					<tr ng-repeat="occupation in self.parent_occupations">
+						<td>{{occupation.parent}}</td>
+						<td>{{occupation.occupation}}</td>
+					</tr>
+				</table></dd>
+				<dd ng-if="!self.parent_occupations">?</dd>
 			</dl>
-			<button>Bewerk mijn profiel</button>
 		</div>
 	</app-block>
 	<app-block item="storiesPreview"></app-block>

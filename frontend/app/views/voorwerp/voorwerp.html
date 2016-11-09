@@ -1,0 +1,32 @@
+<cc-banner image="'image/' + object.image"></cc-banner>
+<div class=row>
+	<article class=block-intro>
+		<span class="line-start line-end">Voorwerp uit het thema Communie</span>
+		<h1 class="divider special">{{object.title}}</h1>
+		<div class=intro>
+			<p>{{object.creator}}, {{object.dateRange}}</p>
+		</div>
+	</article>
+</div>
+<div class="row">
+	<article class="block-cta">
+		<div class="container-cta double" style="height: 292px;">
+			<div class="cta">
+				<a ng-href="#/toevoegen?subject={{objectUrl}}">
+					<div class="wrapper">
+						<h3 class="divider special">Ik heb een herinnering bij dit voorwerp</h3>
+						<span class="button">Bijdragen</span>
+					</div>
+				</a>
+			</div>
+			<div class="cta">
+				<a ng-href="#/herinneringen?subject={{objectUrl}}">
+					<div class="wrapper">
+						<h3 class="divider special">Herinneringen van anderen</h3>
+						<span class="button">Bekijken</span>
+					</div>
+				</a>
+			</div>
+		</div>
+	</article>
+</div>

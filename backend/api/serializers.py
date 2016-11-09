@@ -9,6 +9,8 @@ from django.contrib.auth.models import User
 from rest_framework import serializers, exceptions
 from rest_framework.reverse import reverse
 
+import six
+
 from api.models import *
 
 
@@ -60,21 +62,69 @@ class EditSerializer(FieldFilterMixin, serializers.HyperlinkedModelSerializer):
         self.filter_fields(super(EditSerializer, self), *args, **kwargs)
 
 
+class ParentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Parent
+        fields = ('pk', 'name')
+
+
+class EducationLevelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EducationLevel
+        fields = ('pk', 'name')
+
+
+class MaritalStatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MaritalStatus
+        fields = ('pk', 'name')
+
+
 class ParentOccupationSerializer(serializers.ModelSerializer):
-    """ Serializer meant for embedding into PersonSerializer. """
+    """ Serializer meant standalone and for embedding into PersonSerializer. """
     parent = serializers.SlugRelatedField(
         slug_field='name',
-        queryset=ParentOccupation.objects.all(),
+        queryset=Parent.objects.all(),
     )
     
     class Meta:
         model = ParentOccupation
-        fields = ('parent', 'occupation')
+        fields = ('pk', 'parent', 'occupation')
+
+
+class DisplayChoiceField(serializers.ChoiceField):
+    """ Fixed ChoiceField that actually uses the display values. """
+    
+    def __init__(self, choices, **kwargs):
+        super(DisplayChoiceField, self).__init__(choices, **kwargs)
+        self.reverse_choices = {
+            six.text_type(value): key for (key, value) in self.choices.items()
+        }
+    
+    def to_internal_value(self, data):
+        if data == '' and self.allow_blank:
+            return ''
+        text_data = six.text_type(data)
+        if text_data in self.choice_strings_to_values:
+            return self.choice_strings_to_values[text_data]
+        if text_data in self.reverse_choices:
+            return self.reverse_choices[text_data]
+        self.fail('invalid_choice', input=data)
+    
+    def to_representation(self, value):
+        if value in (None, ''):
+            return value
+        return self.choices[value]
 
 
 class PersonSerializer(serializers.HyperlinkedModelSerializer):
     username = serializers.ReadOnlyField(source='user.username')
-    parent_occupations = ParentOccupationSerializer(many=True)
+    gender = DisplayChoiceField(
+        allow_null=True,
+        choices=Person.GENDER_CHOICES,
+        required=False,
+    )
+    parent_occupations = ParentOccupationSerializer(many=True, read_only=True)
     education_level = serializers.SlugRelatedField(
         slug_field='name',
         queryset=EducationLevel.objects.all(),
@@ -119,13 +169,6 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
             'user': {'view_name': 'api:user-detail', 'read_only': True},
             'stories': {'view_name': 'api:story-detail', 'read_only': True},
         }
-    
-    def create(self, data):
-        parent_occupations_data = data.pop('parent_occupations')
-        person = super(PersonSerializer, self).create(data)
-        for parent_occupation in parent_occupations_data:
-            ParentOccupation.objects.create(person=person, **parent_occupation)
-        return person
 
 
 class AttachmentSerializer(
@@ -168,9 +211,8 @@ class UrlAttachmentSerializer(AttachmentSerializer):
     """ Serializer meant standalone and for embedding into StorySerializer. """
     class Meta:
         model = UrlStoryAttachment
-        fields = ('url', 'story', 'attachment')
+        fields = ('pk', 'story', 'attachment')
         extra_kwargs = {
-            'url': {'view_name': 'api:urlstoryattachment-detail'},
             'story': {'view_name': 'api:story-detail'},
         }
 
@@ -179,9 +221,8 @@ class ImageAttachmentSerializer(AttachmentSerializer):
     """ Serializer meant standalone and for embedding into StorySerializer. """
     class Meta:
         model = ImageStoryAttachment
-        fields = ('url', 'story', 'attachment')
+        fields = ('pk', 'story', 'attachment')
         extra_kwargs = {
-            'url': {'view_name': 'api:imagestoryattachment-detail'},
             'story': {'view_name': 'api:story-detail'},
         }
 
@@ -191,12 +232,12 @@ class StorySerializer(serializers.HyperlinkedModelSerializer):
     url_attachments = UrlAttachmentSerializer(
         many=True,
         read_only=True,
-        fields=('url', 'attachment'),
+        fields=('pk', 'attachment'),
     )
     image_attachments = ImageAttachmentSerializer(
         many=True,
         read_only=True,
-        fields=('url', 'attachment'),
+        fields=('pk', 'attachment'),
     )
     edits = EditSerializer(
         many=True,
@@ -208,6 +249,7 @@ class StorySerializer(serializers.HyperlinkedModelSerializer):
         model = Story
         fields = (
             'url',
+            'pk',
             'place',
             'year',
             'year_end',
@@ -220,6 +262,7 @@ class StorySerializer(serializers.HyperlinkedModelSerializer):
             'subject',
             'title',
             'content',
+            'published',
             'url_attachments',
             'image_attachments',
             'edits',

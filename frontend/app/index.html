@@ -20,18 +20,7 @@
 				<div class="container-logo">
 					<a href="#/" class="button home">Museum Catharijneconvent</a>
 				</div>
-				<div class="container-button">
-					<div ng-controller="MenuStatus" class="button menu js-togglemenu see-me" ng-click="toggleMenu()">
-						<span>Menu</span>
-						<div class="hamburger">
-							<div class="wrapper">
-								<div class="top"></div>
-								<div class="center"></div>
-								<div class="bottom"></div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<app-menu-button></app-menu-button>
 			</div>
 		</header>
 		
@@ -42,20 +31,8 @@
 		<div class="container" ng-view></div>
 	</div>
 	
-	<div class="container-nav-search js-menu">
-		<div class="wrapper">
-			<nav class="nav-main">
-				<div class="overlay-top"></div>
-				<ul>
-					<li><a href="#/home">Home</a></li>
-					<li><a href="#/aanmelden">Aanmelden</a></li>
-					<li><a href="#/inloggen">Inloggen</a></li>
-					<li><a href="#/profiel">Mijn profiel</a></li>
-				</ul>
-			</nav>
-		</div>
-	</div>
-
+	<app-menu-content></app-menu-content>
+	
 	<footer class="footer-main">
 		<div class="wrapper">
 			<div>Catharijneverhalen: v<span app-version></span></div>
@@ -68,11 +45,21 @@
 	<script src="bower_components/lodash/lodash.js"></script>
 	<script src="bower_components/angular/angular.js"></script>
 	<script src="bower_components/angular-route/angular-route.js"></script>
+	<script src="bower_components/angular-resource/angular-resource.js"></script>
 	<script src="app.js"></script>
-	<script src="components/menu/menu.js"></script>
+	<script src="components/attachmentManager/attachmentManager.js"></script>
+	<script src="components/nav/menu.js"></script>
+	<script src="components/nav/authRedirect.js"></script>
+	<script src="components/nav/banner.js"></script>
 	<script src="components/blocklist/block.js"></script>
 	<script src="components/blocklist/blocklist.js"></script>
 	<script src="components/objectPicker/objectPicker.js"></script>
+	<script src="components/resources/config.js"></script>
+	<script src="components/resources/csrf.js"></script>
+	<script src="components/resources/object.js"></script>
+	<script src="components/resources/person.js"></script>
+	<script src="components/resources/story.js"></script>
+	<script src="components/resources/user.js"></script>
 	<script src="components/version/version.js"></script>
 	<script src="components/version/version-directive.js"></script>
 	<script src="components/version/interpolate-filter.js"></script>
@@ -80,7 +67,13 @@
 	<script src="views/meedoen/meedoen.js"></script>
 	<script src="views/aanmelden/aanmelden.js"></script>
 	<script src="views/inloggen/inloggen.js"></script>
+	<script src="views/uitloggen/uitloggen.js"></script>
 	<script src="views/herinneringofprofiel/herinneringofprofiel.js"></script>
 	<script src="views/profiel/profiel.js"></script>
+	<script src="views/profiel/bewerken.js"></script>
 	<script src="views/toevoegen/toevoegen.js"></script>
+	<script src="views/herinnering/herinnering.js"></script>
+	<script src="views/herinneringen/herinneringen.js"></script>
+	<script src="views/voorwerpen/voorwerpen.js"></script>
+	<script src="views/voorwerp/voorwerp.js"></script>
 </body></html>

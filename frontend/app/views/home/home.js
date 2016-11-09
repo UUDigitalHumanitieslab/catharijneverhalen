@@ -31,9 +31,9 @@ angular.module('catharijne.home', ['ngRoute', 'catharijne.blocklist'])
 			description: 'Bekijk de collectie voorwerpen van het museum.'
 		}, {
 			title: 'Uitleg en contact',
-			href: '#/uitleg',
+			click: _.noop,
 			description: 'Klik hier voor meer informatie en contact.',
-			linkText: 'Naar uitleg en contact',
+			linkText: 'Binnenkort',
 		}
 	];
 }]);

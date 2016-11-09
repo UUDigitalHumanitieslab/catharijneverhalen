@@ -1,0 +1,63 @@
+<cc-banner image="subject && ('image/' + subject.image) || story.imageAttachments && story.imageAttachments[0].attachment" large=true></cc-banner>
+<div class=row>
+	<article class=block-intro>
+		<span class="line-start line-end">Herinnering</span>
+		<h1 class="divider special">{{story.title}}</h1>
+		<div class=intro ng-if="story.introduction">
+			<p>{{story.introduction}}</p>
+		</div>
+		<div class=content ng-if="!story.published" style="clear: both;">
+			Uw herinnering is nog niet gepubliceerd en is dus niet zichtbaar voor andere bezoekers van deze website.
+		</div>
+		<a class=button ng-href="{{'#/toevoegen/' + story.pk}}" ng-if="story.author === me.person">Bewerk mijn verhaal</a>
+	</article>
+</div>
+<div class=row>
+	<article class=block-text-noimage>
+		<div class=container-wrapper>
+			<div class="container-text content">
+				<dl>
+					<dt ng-if="story.subject">Herinnering bij</dt>
+					<dd ng-if="story.subject">
+						<a ng-href="{{subjectUrl}}">
+							{{subject.title}}
+							<br>
+							{{subject.creator || 'maker onbekend'}}, {{subject.dateRange || 'datum onbekend'}}
+						</a>
+					</dd>
+					<dt>Bijgedragen door</dt>
+					<dd><a ng-href="{{authorUrl}}">
+						{{story.username}}
+					</a></dd>
+					<dt ng-if="story.place || story.year">Speelt zich af in</dt>
+					<dd ng-if="story.place || story.year">{{story.place}}{{story.place && story.year && ', ' || ''}}{{story.year}}</dd>
+				</dl>
+			</div>
+			<div class="container-text" ng-if="story.url_attachments.length">
+			<h5>Opnames van deze herinnering</h5>
+				<ul>
+					<li ng-repeat="url in story.url_attachments">
+						<a ng-href="{{url.attachment}}">{{url.attachment}}</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</article>
+</div>
+<div class="row" ng-repeat="section in formatContent">
+	<article ng-class="{'block-text-noimage': !section.images, 'block-text-image': section.images, 'block-text-image-right': section.images}">
+		<h3 ng-if="section.header">{{section.header}}</h3>
+		<div class="container-wrapper">
+			<div class="container-text content">
+				<p ng-repeat="paragraph in section.paragraphs">{{paragraph}}</p>
+			</div>
+			<div class=container-image ng-if="section.images">
+				<div class=image-wrapper ng-repeat="image in section.images">
+					<a ng-href="{{image.attachment}}">
+						<picture><img ng-src="{{image.attachment}}"></picture>
+					</a>
+				</div>
+			</div>
+		</div>
+	</article>
+</div>
