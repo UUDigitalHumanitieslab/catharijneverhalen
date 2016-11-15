@@ -36,7 +36,7 @@
 				Geboortedatum
 				<input type=date name=birth_date id=birth_date ng-model="my.birth_date" placeholder="jjjj-mm-dd">
 			</label>
-			<label ng-class="{error: (form.$submitted || form.birth_date.$touched) && (form.birth_date.$error.pattern || clientError && (clientError.birth_date || clientError.birth_year))}">
+			<label for=birth_date ng-class="{error: (form.$submitted || form.birth_date.$touched) && (form.birth_date.$error.date || clientError && clientError.birth_date)}" style="display: block;">
 				Voer uw volledige geboortedatum in: eerst uw geboortejaar, dan de maand en tenslotte de dag. <span style="white-space: nowrap;">Bijvoorbeeld 1970-06-20</span>.
 			</label>
 			<label>
