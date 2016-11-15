@@ -503,6 +503,7 @@ button.close:after {
 
 .form /*.row REMOVED BY DHL*/ input[type="text"], .form input[type="number"], .form input[type="email"],
 .form input[type="password"],
+.form input[type="date"], /* insertion by DHL */
 .form input[type="tel"], .form input[type="url"],
 .form textarea, .form select
 /*, .form .column input[type="text"] REMOVED BY DHL*/ {
@@ -521,6 +522,7 @@ button.close:after {
 
 .form input[type="text"], .form input[type="number"], .form input[type="email"],
 .form input[type="password"],
+.form input[type="date"], /* insertion by DHL */
 .form input[type="tel"], .form input[type="url"],
 .form select {
     line-height: 30px;
@@ -1522,6 +1524,7 @@ label.error {
 
 .form /*.row REMOVED BY DHL*/ input[type="text"], .form input[type="number"], .form input[type="email"],
 .form input[type="password"],
+.form input[type="date"], /* insertion by DHL */
 .form input[type="tel"], .form input[type="url"],
 .form textarea, .form select,
 /*.form .column input[type="text"], REMOVED BY DHL*/ .form input[type="number"],
@@ -1535,6 +1538,7 @@ label.error {
 
     .form /*.row REMOVED BY DHL*/ input[type="text"], .form input[type="number"], .form input[type="email"],
     .form input[type="password"],
+    .form input[type="date"], /* insertion by DHL */
     .form input[type="tel"], .form input[type="url"],
     .form textarea, .form select,
     /*.form .column input[type="text"], REMOVED BY DHL*/ .form input[type="number"],
@@ -1547,6 +1551,7 @@ label.error {
 
     /* Insertions by DHL */
     .form input[type="text"], .form input[type="email"],
+    .form input[type="date"], /* insertion by DHL */
     .form input[type="password"],
     .form input[type="tel"], .form input[type="url"],
     .form select {
@@ -1644,6 +1649,7 @@ label.error {
 
 
 .form .row input[type="text"], .form .row input[type="email"], .form .row input[type="password"],
+.form .row input[type="date"], /* insertion by DHL */
 .form .row input[type="tel"], .form .row input[type="url"], .form .row input[type="number"],
 .form .row textarea, .form .row select {
     width: 100%;
@@ -1704,6 +1710,7 @@ label.error {
 
 .form .column input[type="text"], .form .column input[type="email"],
 .form .column input[type="password"],
+.form .column input[type="date"], /* insertion by DHL */
 .form .column input[type="tel"],
 .form .column input[type="url"], .form .column input[type="number"],
 .form .column textarea, .form .column select {

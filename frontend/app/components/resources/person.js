@@ -8,28 +8,18 @@ angular.module('catharijne.person', [
 		function augment(data, headers, status) {
 			if (!status || 200 <= status && status < 300) {
 				if (data.url) data.pk = extractPk(data.url);
-				// Use birth_date as the single source of truth.
-				if (data.birth_year && !data.birth_date) {
-					data.birth_date = data.birth_year;
-					data.birth_year = null;
+				if (data.birth_date && typeof data.birth_date === 'string') {
+					// Reason for the + 'T00:00:00Z': prevent timezone bugs.
+					data.birth_date = new Date(data.birth_date + 'T00:00:00Z');
 				}
 			}
 			return data;
 		}
 		function unaugment(data, headers) {
-			if (data.birth_date && (data.birth_date.length === 4 || typeof data.birth_date === 'number')) {
-				data.birth_year = data.birth_date;
-				data.birth_date = null;
+			if (data.birth_date) {
+				data.birth_date = data.birth_date.toISOString().slice(0, 10);
 			}
 			return data;
-		}
-		function unaugmentForm(form) {
-			var birthDateField = angular.element(form.querySelector('#birth_date'));
-			var value = birthDateField.val();
-			if (value && (value.length === 4 || typeof value === 'number')) {
-				birthDateField.prop('name', 'birth_year');
-			}
-			return form;
 		}
 		function unwrapPaginated(data, headers, status) {
 			if (200 <= status && status < 300 && data.results) {
@@ -64,7 +54,7 @@ angular.module('catharijne.person', [
 			// Bind to a person instance before use.
 			var instance = this;
 			var pk = params.pk || instance.pk;
-			var formData = new FormData(unaugmentForm(form));
+			var formData = new FormData(form);
 			instance.$resolved = false;
 			instance.$promise = $http.put(path + pk + '/', formData, {
 				headers: {'Content-Type': undefined},

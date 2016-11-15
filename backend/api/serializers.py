@@ -149,7 +149,6 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
             'username',
             'name',
             'address_place',
-            'birth_year',
             'birth_date',
             'birth_place',
             'gender',

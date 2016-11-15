@@ -32,7 +32,6 @@ class Person(models.Model):
     )
     name = models.CharField(blank=True, max_length=254)
     address_place = models.CharField(blank=True, max_length=126)
-    birth_year = models.SmallIntegerField(null=True, blank=True)
     birth_date = models.DateField(null=True, blank=True)
     birth_place = models.CharField(blank=True, max_length=126)
     gender = models.SmallIntegerField(

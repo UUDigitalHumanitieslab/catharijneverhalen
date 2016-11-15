@@ -34,10 +34,10 @@
 			</span>
 			<label>
 				Geboortedatum
-				<input type=text name=birth_date id=birth_date pattern="\d{4}(-\d{2}-\d{2})?" ng-model="my.birth_date" placeholder="jjjj-mm-dd">
+				<input type=date name=birth_date id=birth_date ng-model="my.birth_date" placeholder="jjjj-mm-dd">
 			</label>
 			<label ng-class="{error: (form.$submitted || form.birth_date.$touched) && (form.birth_date.$error.pattern || clientError && (clientError.birth_date || clientError.birth_year))}">
-				U kunt kiezen of u alleen uw viercijferig geboortejaar invoert of de volledige geboortedatum.
+				Voer uw volledige geboortedatum in: eerst uw geboortejaar, dan de maand en tenslotte de dag. <span style="white-space: nowrap;">Bijvoorbeeld 1970-06-20</span>.
 			</label>
 			<label>
 				Geboorteplaats
