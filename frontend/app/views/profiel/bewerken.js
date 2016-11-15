@@ -56,6 +56,7 @@ angular.module('catharijne.profiel.bewerken', [
 					options: parentList,
 					name: 'parent',
 					required: true,
+					label: 'Ouder',
 				},
 				{
 					type: 'text',
@@ -64,6 +65,7 @@ angular.module('catharijne.profiel.bewerken', [
 					placeholder: 'loodgieter',
 					required: true,
 					size: 20,
+					label: 'Beroep',
 				},
 			],
 			items: [],

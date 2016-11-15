@@ -20,7 +20,7 @@
 				<dt>Woonplaats</dt>
 				<dd>{{self.address_place || '?'}}</dd>
 				<dt>Geboortedatum</dt>
-				<dd>{{self.birth_date || '?'}}</dd>
+				<dd>{{self.birth_date && self.birth_date.toISOString().slice(0, 10) || '?'}}</dd>
 				<dt>Geboorteplaats</dt>
 				<dd>{{self.birth_place || '?'}}</dd>
 				<dt>Geslacht</dt>
