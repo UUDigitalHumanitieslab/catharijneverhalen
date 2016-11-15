@@ -133,8 +133,21 @@ button.close:after {
     padding: 0;
 }
 
-.app-attachment-manager > button {
-    margin-bottom: 15px;
+.app-attachment-manager fieldset {
+    border: 2px solid black;
+    padding: 10px;
+}
+
+.app-attachment-manager table.table {
+    width: auto;
+}
+
+.app-attachment-manager > fieldset > h4 {
+    margin-top: 0;
+}
+
+.app-attachment-manager > fieldset > button {
+    margin-bottom: 0;
 }
 
 .app-attachment-manager form {
@@ -145,7 +158,7 @@ button.close:after {
     display: table-cell;
 }
 
-.app-attachment-manager form img {
+.app-attachment-manager img {
     max-height: 50px;
 }
 

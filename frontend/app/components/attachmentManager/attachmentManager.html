@@ -1,6 +1,33 @@
 <div class="form app-attachment-manager">
-	<button ng-click="active=true" ng-transclude></button>
-	<p>{{meta.info}}</p>
+	<fieldset>
+		<h4>{{meta.title}}</h4>
+		<table class=table ng-if="itemList.length">
+			<thead ng-if="fieldList.length > 1"><tr>
+				<th ng-repeat="field in fieldList">{{field.label}}</th>
+			</tr></thead>
+			<tbody>
+				<tr ng-repeat="item in itemList">
+					<td ng-repeat="field in fieldList">
+						<span
+							ng-if="field.type !== 'file' && field.type !== 'url'"
+						>{{item[field.name]}}</span>
+						<a
+							ng-if="field.type === 'url'"
+							ng-href="item[field.name]"
+							target=_blank
+							rel="noopener noreferrer"
+						>{{item[field.name]}}</a>
+						<img
+							ng-if="field.type === 'file' && field.accept && field.accept.includes('image')"
+							ng-src="{{item[field.name]}}"
+						>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<p>{{meta.info}}</p>
+		<button ng-click="active=true" ng-transclude></button>
+	</fieldset>
 	<article class="block-form modal" ng-show="active">
 		<button ng-click="active=false" class="close">Sluit</button>
 		<h3>{{meta.title}}</h3>
