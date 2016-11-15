@@ -22,7 +22,9 @@ angular.module('catharijne.herinneringen', [
 				linkText: 'Bekijk',
 				title: storyInstance.title,
 			};
-			if (storyInstance.subject) {
+			if (storyInstance.image_attachments.length) {
+				presentation.imageUrl = storyInstance.image_attachments[0].attachment;
+			} else if (storyInstance.subject) {
 				object.get({
 					url: storyInstance.subject,
 				}).$promise.then(function subjectFetch(objectInstance) {
