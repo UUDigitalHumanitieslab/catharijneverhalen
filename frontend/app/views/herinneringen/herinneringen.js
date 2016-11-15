@@ -45,6 +45,7 @@ angular.module('catharijne.herinneringen', [
 		function prepareMemories(storyList) {
 			$scope.memories = _.map(storyList, prepareMemory);
 			if ($scope.memories.length) {
+				$scope.bannerSelection = _.sample($scope.memories);
 				if ($routeParams.author_id) {
 					$scope.author = storyList[0].username;
 				}
