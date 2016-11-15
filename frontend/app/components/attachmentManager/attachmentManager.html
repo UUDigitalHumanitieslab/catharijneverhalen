@@ -39,6 +39,7 @@
 			id="{{formName($index)}}"
 		>
 			<button
+				type=button
 				class=delete
 				ng-click="remove(item, $index)"
 				ng-disabled="item.$pending"
@@ -99,6 +100,7 @@
 			id="{{formName($index)}}"
 		>
 			<button
+				type=button
 				class=delete
 				ng-click="remove(item, $index)"
 				ng-disabled="item.$pending"
