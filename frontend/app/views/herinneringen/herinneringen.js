@@ -22,7 +22,9 @@ angular.module('catharijne.herinneringen', [
 				linkText: 'Bekijk',
 				title: storyInstance.title,
 			};
-			if (storyInstance.subject) {
+			if (storyInstance.image_attachments.length) {
+				presentation.imageUrl = storyInstance.image_attachments[0].attachment;
+			} else if (storyInstance.subject) {
 				object.get({
 					url: storyInstance.subject,
 				}).$promise.then(function subjectFetch(objectInstance) {
@@ -43,6 +45,7 @@ angular.module('catharijne.herinneringen', [
 		function prepareMemories(storyList) {
 			$scope.memories = _.map(storyList, prepareMemory);
 			if ($scope.memories.length) {
+				$scope.bannerSelection = _.sample($scope.memories);
 				if ($routeParams.author_id) {
 					$scope.author = storyList[0].username;
 				}
