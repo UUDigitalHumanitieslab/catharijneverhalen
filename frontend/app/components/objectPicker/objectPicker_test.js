@@ -1,7 +1,7 @@
 'use strict';
 
 describe('catharijne.objectPicker module', function() {
-	var scope, backend, flushRequests, flushPromises;
+	var scope, backend, prefix, flushRequests, flushPromises;
 	var responseMock = [{
 		"image" : "ABM v275a-e.jpg",
 		"inventoryID" : "ABM v275a-e",
@@ -18,13 +18,15 @@ describe('catharijne.objectPicker module', function() {
 	
 	beforeEach(function() {
 		module('catharijne.objectPicker');
+		module('catharijne.resource');
 		module('templates');
-		inject(function($rootScope, $httpBackend) {
+		inject(function($rootScope, $httpBackend, currentOrigin) {
 			scope = $rootScope.$new();
+			prefix = currentOrigin + '/app/demo_objects.json';
 			$httpBackend.whenGET('/api/gettoken/').respond(204, '', {
 				'Set-Cookie': 'csrftoken=1234',
 			});
-			backend = $httpBackend.expectGET(/.*demo_objects\.json/);
+			backend = $httpBackend.expectGET(prefix);
 			flushRequests = _.bind($httpBackend.flush, $httpBackend);
 			flushPromises = _.bind($rootScope.$apply, $rootScope);
 		});
@@ -55,8 +57,7 @@ describe('catharijne.objectPicker module', function() {
 			expect(scope.objectUrl).not.toBeDefined();
 			expect(scope.object).not.toBeDefined();
 			expect(scope.background).not.toBeDefined();
-			scope.objectUrl = 'http://localhost:9876/demo_objects.json#RMCC%20v1026';
-			scope.update();
+			scope.update(prefix + '#RMCC%20v1026');
 			expect(scope.objectUrl).not.toBeDefined();
 			expect(scope.object).not.toBeDefined();
 			expect(scope.background).not.toBeDefined();
@@ -66,60 +67,29 @@ describe('catharijne.objectPicker module', function() {
 			flushPromises();
 			expect(scope.objectUrl).not.toBeDefined();
 			expect(scope.object).not.toBeDefined();
-			expect(scope.background).not.toBeDefined();
-			scope.objectUrl = 'http://localhost:9876/demo_objects.json#RMCC%20v1026';
-			scope.update();
+			expect(scope.background['background-image']).not.toBeDefined();
+			scope.update(prefix + '#RMCC%20v1026');
 			flushPromises();
-			expect(scope.objectUrl).toBe(
-				'http://localhost:9876/demo_objects.json#RMCC%20v1026'
-			);
+			expect(scope.objectUrl).toContain('#RMCC%20v1026');
 			expect(scope.object).toEqual(responseMock[1]);
 			expect(
 				scope.background['background-image']
 			).toContain(responseMock[1].image);
-			scope.update();
-			flushPromises();
-			expect(scope.objectUrl).toBe(
-				'http://localhost:9876/demo_objects.json#RMCC%20v1026'
-			);
-			expect(scope.object).toEqual(responseMock[1]);
-			expect(
-				scope.background['background-image']
-			).toContain(responseMock[1].image);
-			delete scope.object;
-			scope.update();
-			flushPromises();
-			expect(scope.objectUrl).toBe('RMCC v1026');
-			expect(scope.object).toEqual(responseMock[1]);
-			expect(
-				scope.background['background-image']
-			).toContain(responseMock[1].image);
-			scope.update(
-				'http://localhost:9876/demo_objects.json#ABM%20v275a-e'
-			);
-			flushPromises();
-			expect(scope.objectUrl).toBe(
-				'http://localhost:9876/demo_objects.json#ABM%20v275a-e'
-			);
-			expect(scope.object).toEqual(responseMock[0]);
-			expect(
-				scope.background['background-image']
-			).toContain(responseMock[1].image);
-			delete scope.objectUrl;
 			scope.update();
 			flushPromises();
 			expect(scope.objectUrl).not.toBeDefined();
 			expect(scope.object).not.toBeDefined();
+			expect(scope.background['background-image']).not.toBeDefined();
+			scope.update(prefix + '#ABM%20v275a-e');
+			flushPromises();
+			expect(scope.objectUrl).toContain('#ABM%20v275a-e');
+			expect(scope.object).toEqual(responseMock[0]);
 			expect(
 				scope.background['background-image']
 			).toContain(responseMock[1].image);
-			scope.update(
-				'http://localhost:9876/demo_objects.json#RMCC%20v1026'
-			);
+			scope.update(prefix + '#RMCC%20v1026');
 			flushPromises();
-			expect(scope.objectUrl).toBe(
-				'http://localhost:9876/demo_objects.json#RMCC%20v1026'
-			);
+			expect(scope.objectUrl).toContain('#RMCC%20v1026');
 			expect(scope.object).toEqual(responseMock[1]);
 			expect(
 				scope.background['background-image']
