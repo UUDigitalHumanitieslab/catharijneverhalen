@@ -44,50 +44,75 @@ describe('catharijne.objectPicker module', function() {
 		});
 		
 		it('can update to a consistent state', function() {
-			expect(scope.objectId).not.toBeDefined();
+			expect(scope.objectUrl).not.toBeDefined();
 			expect(scope.object).not.toBeDefined();
-			expect(controller.allObjects).not.toBeDefined();
+			expect(scope.background).not.toBeDefined();
 			scope.update();
-			expect(scope.objectId).not.toBeDefined();
+			expect(scope.objectUrl).not.toBeDefined();
 			expect(scope.object).not.toBeDefined();
-			expect(controller.allObjects).not.toBeDefined();
-			scope.objectId = 'RMCC v1026';
+			expect(scope.background).not.toBeDefined();
+			scope.objectUrl = 'http://localhost:9876/demo_objects.json#RMCC%20v1026';
 			scope.update();
-			expect(scope.objectId).not.toBeDefined();
+			expect(scope.objectUrl).not.toBeDefined();
 			expect(scope.object).not.toBeDefined();
-			expect(controller.allObjects).not.toBeDefined();
-			controller.allObjects = _.cloneDeep(responseMock);
+			expect(scope.background).not.toBeDefined();
+			backend.respond(_.cloneDeep(responseMock));
+			flushRequests();
 			scope.update();
-			expect(scope.objectId).not.toBeDefined();
+			expect(scope.objectUrl).not.toBeDefined();
 			expect(scope.object).not.toBeDefined();
-			expect(controller.allObjects).toEqual(responseMock);
-			scope.objectId = 'RMCC v1026';
+			expect(scope.background).not.toBeDefined();
+			scope.objectUrl = 'http://localhost:9876/demo_objects.json#RMCC%20v1026';
 			scope.update();
-			expect(scope.objectId).toBe('RMCC v1026');
+			expect(scope.objectUrl).toBe(
+				'http://localhost:9876/demo_objects.json#RMCC%20v1026'
+			);
 			expect(scope.object).toEqual(responseMock[1]);
-			expect(controller.allObjects).toEqual(responseMock);
+			expect(
+				scope.background['background-image']
+			).toContain(responseMock[1].image);
 			scope.update();
-			expect(scope.objectId).toBe('RMCC v1026');
+			expect(scope.objectUrl).toBe(
+				'http://localhost:9876/demo_objects.json#RMCC%20v1026'
+			);
 			expect(scope.object).toEqual(responseMock[1]);
-			expect(controller.allObjects).toEqual(responseMock);
+			expect(
+				scope.background['background-image']
+			).toContain(responseMock[1].image);
 			delete scope.object;
 			scope.update();
-			expect(scope.objectId).toBe('RMCC v1026');
+			expect(scope.objectUrl).toBe('RMCC v1026');
 			expect(scope.object).toEqual(responseMock[1]);
-			expect(controller.allObjects).toEqual(responseMock);
-			scope.update('ABM v275a-e');
-			expect(scope.objectId).toBe('ABM v275a-e');
+			expect(
+				scope.background['background-image']
+			).toContain(responseMock[1].image);
+			scope.update(
+				'http://localhost:9876/demo_objects.json#ABM%20v275a-e'
+			);
+			expect(scope.objectUrl).toBe(
+				'http://localhost:9876/demo_objects.json#ABM%20v275a-e'
+			);
 			expect(scope.object).toEqual(responseMock[0]);
-			expect(controller.allObjects).toEqual(responseMock);
-			delete scope.objectId;
+			expect(
+				scope.background['background-image']
+			).toContain(responseMock[1].image);
+			delete scope.objectUrl;
 			scope.update();
-			expect(scope.objectId).not.toBeDefined();
+			expect(scope.objectUrl).not.toBeDefined();
 			expect(scope.object).not.toBeDefined();
-			expect(controller.allObjects).toEqual(responseMock);
-			scope.update('RMCC v1026');
-			expect(scope.objectId).toBe('RMCC v1026');
+			expect(
+				scope.background['background-image']
+			).toContain(responseMock[1].image);
+			scope.update(
+				'http://localhost:9876/demo_objects.json#RMCC%20v1026'
+			);
+			expect(scope.objectUrl).toBe(
+				'http://localhost:9876/demo_objects.json#RMCC%20v1026'
+			);
 			expect(scope.object).toEqual(responseMock[1]);
-			expect(controller.allObjects).toEqual(responseMock);
+			expect(
+				scope.background['background-image']
+			).toContain(responseMock[1].image);
 		});
 		
 		it('fetches data asynchronously', function() {
