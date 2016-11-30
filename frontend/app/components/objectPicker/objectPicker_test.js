@@ -103,24 +103,22 @@ describe('catharijne.objectPicker module', function() {
 		});
 		
 		it('fetches data asynchronously', function() {
-			spyOn(scope, 'update').and.callThrough();
+			expect(scope.objectDescriptions).not.toBeDefined();
 			backend.respond(_.cloneDeep(responseMock));
 			flushRequests();
-			expect(scope.update).toHaveBeenCalledWith(/*nothing*/);
-			expect(controller.allObjects).toEqual(responseMock);
-			expect(scope.objectDescriptions).toEqual([{
+			expect(scope.objectDescriptions).toEqual([jasmine.objectContaining({
 				"imageUrl" : "image/ABM v275a-e.jpg",
-				"title" : " Communieserviesje ",
+				"title" : "Communieserviesje",
 				"description" : "N.V. Société Céramique, 1950-1955",
 				"linkText": "Kies",
 				"click": jasmine.any(Function),
-			}, {
+			}), jasmine.objectContaining({
 				"imageUrl" : "image/RMCC v1026.jpg",
-				"title" : " Eerste communiegeschenk: glas beschilderd met kelk en hostie, ",
+				"title" : "Eerste communiegeschenk: glas beschilderd met kelk en hostie,",
 				"description" : "Maker onbekend, 1920",
 				"linkText": "Kies",
 				"click": jasmine.any(Function),
-			}]);
+			})]);
 		});
 		
 		it('sets click handlers for making a choice', function() {
@@ -129,15 +127,16 @@ describe('catharijne.objectPicker module', function() {
 			flushRequests();
 			scope.objectDescriptions[0].click();
 			expect(scope.update.calls.mostRecent().args).toEqual([
-				'ABM v275a-e',
+				prefix + '#ABM%20v275a-e',
 			]);
 			scope.objectDescriptions[1].click();
 			expect(scope.update.calls.mostRecent().args).toEqual([
-				'RMCC v1026',
+				prefix + '#RMCC%20v1026',
 			]);
 		});
 		
 		it('logs fetch errors', inject(function($log) {
+			expect($log.debug.logs.length).toBe(0);
 			backend.respond(404, 'not found');
 			flushRequests();
 			expect($log.debug.logs.length).toBe(1);
