@@ -168,7 +168,7 @@ describe('catharijne.objectPicker module', function() {
 		beforeEach(inject(function($compile) {
 			parentScope = scope;
 			elementFunc = $compile(
-				'<app-object-picker object-id=id></app-object-picker>'
+				'<app-object-picker object-url=url></app-object-picker>'
 			);
 			backend.respond(_.cloneDeep(responseMock));
 		}));
@@ -179,14 +179,15 @@ describe('catharijne.objectPicker module', function() {
 		});
 		
 		it('shows image with caption when available', function() {
-			parentScope.id = 'RMCC v1026';
+			parentScope.url = prefix + '#RMCC%20v1026';
 			createElement();
 			flushRequests();
+			flushPromises();
 			expect(element.children().length).toBe(3);
 			setScope();
-			var img = getChild('img');
-			expect(img.length).toBe(1);
-			expect(img.attr('src')).toBe('image/RMCC v1026.jpg');
+			var div = getChild('div');
+			expect(div.length).toBe(1);
+			expect(div.attr('style')).toContain('image/RMCC v1026.jpg');
 			var caption = getChild('figcaption');
 			expect(caption.length).toBe(1);
 			expect(caption.text()).toBe(scope.objectDescriptions[1].title);
@@ -194,7 +195,7 @@ describe('catharijne.objectPicker module', function() {
 		
 		it('shows a button otherwise', function() {
 			createElement();
-			expect(element.children().length).toBe(2);
+			expect(element.children().length).toBe(3);
 			setScope();
 			expect(scope.$parent).toBe(parentScope);
 			var button = getChild('button');
