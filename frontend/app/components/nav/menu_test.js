@@ -3,41 +3,40 @@
 describe('catharijne.menu module', function() {
 	beforeEach(module('catharijne.menu'));
 	
-	describe('MenuStatus controller', function() {
-		beforeEach(inject(function($controller, $rootScope) {
-			this.scope = $rootScope.$new();
-			this.ctrl = $controller('MenuStatus', {$scope: this.scope});
+	describe('menu service', function() {
+		beforeEach(inject(function(menu) {
+			this.menu = menu;
 		}));
 		
 		it('initially sets the menu closed status', function() {
-			expect(this.scope.menuOpen).toBeFalse;
+			expect(this.menu.menuOpen).toBeFalse;
 		});
 		
 		describe('openMenu function', function() {
 			it('sets the menu open status', function() {
-				this.scope.closeMenu();
-				this.scope.openMenu();
-				expect(this.scope.menuOpen).toBeTrue;
+				this.menu.closeMenu();
+				this.menu.openMenu();
+				expect(this.menu.menuOpen).toBeTrue;
 			});
 		});
 		
 		describe('closeMenu function', function() {
 			it('sets the menu closed status', function() {
-				this.scope.openMenu();
-				this.scope.closeMenu();
-				expect(this.scope.menuOpen).toBeFalse;
+				this.menu.openMenu();
+				this.menu.closeMenu();
+				expect(this.menu.menuOpen).toBeFalse;
 			});
 		});
 		
 		describe('toggleMenu function', function() {
 			it('alternates between open and closed status', function() {
-				expect(this.scope.menuOpen).toBeFalse;
-				this.scope.toggleMenu();
-				expect(this.scope.menuOpen).toBeTrue;
-				this.scope.toggleMenu();
-				expect(this.scope.menuOpen).toBeFalse;
-				this.scope.toggleMenu();
-				expect(this.scope.menuOpen).toBeTrue;
+				expect(this.menu.menuOpen).toBeFalse;
+				this.menu.toggleMenu();
+				expect(this.menu.menuOpen).toBeTrue;
+				this.menu.toggleMenu();
+				expect(this.menu.menuOpen).toBeFalse;
+				this.menu.toggleMenu();
+				expect(this.menu.menuOpen).toBeTrue;
 			});
 		});
 	});
