@@ -5,14 +5,14 @@ describe('catharijne.objectPicker module', function() {
 	var responseMock = [{
 		"image" : "ABM v275a-e.jpg",
 		"inventoryID" : "ABM v275a-e",
-		"title" : " Communieserviesje ",
-		"creator" : "N.V. Société Céramique	",
+		"title" : "Communieserviesje",
+		"creator" : "N.V. Société Céramique",
 		"dateRange" : "1950-1955"
 	}, {
 		"image" : "RMCC v1026.jpg",
 		"inventoryID" : "RMCC v1026",
-		"title" : " Eerste communiegeschenk: glas beschilderd met kelk en hostie, ",
-		"creator" : "Maker onbekend	",
+		"title" : "Eerste communiegeschenk: glas beschilderd met kelk en hostie,",
+		"creator" : "Maker onbekend",
 		"dateRange" : 1920
 	}];
 	
@@ -71,7 +71,9 @@ describe('catharijne.objectPicker module', function() {
 			scope.update(prefix + '#RMCC%20v1026');
 			flushPromises();
 			expect(scope.objectUrl).toContain('#RMCC%20v1026');
-			expect(scope.object).toEqual(responseMock[1]);
+			expect(scope.object).toEqual(
+				jasmine.objectContaining(responseMock[1])
+			);
 			expect(
 				scope.background['background-image']
 			).toContain(responseMock[1].image);
@@ -83,14 +85,18 @@ describe('catharijne.objectPicker module', function() {
 			scope.update(prefix + '#ABM%20v275a-e');
 			flushPromises();
 			expect(scope.objectUrl).toContain('#ABM%20v275a-e');
-			expect(scope.object).toEqual(responseMock[0]);
+			expect(scope.object).toEqual(
+				jasmine.objectContaining(responseMock[0])
+			);
 			expect(
 				scope.background['background-image']
-			).toContain(responseMock[1].image);
+			).toContain(responseMock[0].image);
 			scope.update(prefix + '#RMCC%20v1026');
 			flushPromises();
 			expect(scope.objectUrl).toContain('#RMCC%20v1026');
-			expect(scope.object).toEqual(responseMock[1]);
+			expect(scope.object).toEqual(
+				jasmine.objectContaining(responseMock[1])
+			);
 			expect(
 				scope.background['background-image']
 			).toContain(responseMock[1].image);
