@@ -8,6 +8,7 @@ describe('catharijne.herinneringofprofiel', function() {
 	
 	routeFix.checkRoute(
 		'/herinneringofprofiel',
-		'views/herinneringofprofiel/herinneringofprofiel.html'
+		'views/herinneringofprofiel/herinneringofprofiel.html',
+		'RandomObjectImageCtrl'
 	);
 });

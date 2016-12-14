@@ -8,6 +8,7 @@ describe('catharijne.meedoen', function() {
 	
 	routeFix.checkRoute(
 		'/meedoen',
-		'views/meedoen/meedoen.html'
+		'views/meedoen/meedoen.html',
+		'ParticipateCtrl'
 	);
 });

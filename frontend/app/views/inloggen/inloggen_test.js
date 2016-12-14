@@ -8,6 +8,7 @@ describe('catharijne.inloggen', function() {
 	
 	routeFix.checkRoute(
 		'/inloggen',
-		'views/inloggen/inloggen.html'
+		'views/inloggen/inloggen.html',
+		'LoginCtrl'
 	);
 });
