@@ -7,7 +7,7 @@ describe('catharijne.profiel', function() {
 	});
 	
 	routeFix.checkRoute(
-		'/profiel/:profileId?',
+		'/profiel/:username?',
 		'views/profiel/profiel.html',
 		'ProfileCtrl'
 	);
