@@ -21,7 +21,10 @@ var routeFix = {
 		}
 		it(specString, function() {
 			inject();
-			expect(routeFix.$routeProvider.when).toHaveBeenCalledWith(route, routeConfig);
+			expect(routeFix.$routeProvider.when).toHaveBeenCalledWith(
+				route,
+				jasmine.objectContaining(routeConfig)
+			);
 		});
 	}
 };
