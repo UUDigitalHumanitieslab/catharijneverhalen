@@ -56,7 +56,7 @@ angular.module('catharijne.profiel', [
 			$scope.username = username;
 			$scope.storiesPreview.href = '#/herinneringen?author_id=' + pk;
 		}
-		user.identity.$promise.then(initScope);
+		user.whenAuthenticated(initScope);
 		$scope.storiesPreview = {
 			title: 'Herinneringen',
 			linkText: 'Bekijk',

@@ -8,6 +8,7 @@ describe('catharijne.aanmelden', function() {
 	
 	routeFix.checkRoute(
 		'/aanmelden',
-		'views/aanmelden/aanmelden.html'
+		'views/aanmelden/aanmelden.html',
+		'RegisterCtrl'
 	);
 });

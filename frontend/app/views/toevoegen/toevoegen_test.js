@@ -2,7 +2,7 @@
 
 injectorFix.describe('catharijne.toevoegen', function() {
 	routeFix.checkRoute(
-		'/toevoegen',
+		'/toevoegen/:pk?',
 		'views/toevoegen/toevoegen.html',
 		'StoryFormCtrl'
 	);
