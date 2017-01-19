@@ -18,6 +18,8 @@ angular.module('catharijne.objectPicker', [
 	$scope.pick = function() {
 		$scope.picking = true;
 	};
+	// Only modify .object, .objectUrl, .background by calling .update.
+	// Resets the properties if no argument is passed.
 	$scope.update = function(objectUrl) {
 		object.get({url: objectUrl}, function updateSuccess(obj) {
 			$scope.object = obj;

@@ -30,14 +30,3 @@ Next, create a virtualenv and activate it. Then:
 ## Running a test server
 
     python manage.py runserver --settings=settings
-
-
-## Running the unit tests
-
-Once:
-
-    pip install pytest-django
-
-Every time:
-
-    py.test --ds=settings

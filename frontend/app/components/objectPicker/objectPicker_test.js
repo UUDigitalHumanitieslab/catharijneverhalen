@@ -1,28 +1,34 @@
 'use strict';
 
 describe('catharijne.objectPicker module', function() {
-	var scope, backend, flushRequests;
+	var scope, backend, prefix, flushRequests, flushPromises;
 	var responseMock = [{
 		"image" : "ABM v275a-e.jpg",
 		"inventoryID" : "ABM v275a-e",
-		"title" : " Communieserviesje ",
-		"creator" : "N.V. Société Céramique	",
+		"title" : "Communieserviesje",
+		"creator" : "N.V. Société Céramique",
 		"dateRange" : "1950-1955"
 	}, {
 		"image" : "RMCC v1026.jpg",
 		"inventoryID" : "RMCC v1026",
-		"title" : " Eerste communiegeschenk: glas beschilderd met kelk en hostie, ",
-		"creator" : "Maker onbekend	",
+		"title" : "Eerste communiegeschenk: glas beschilderd met kelk en hostie,",
+		"creator" : "Maker onbekend",
 		"dateRange" : 1920
 	}];
 	
 	beforeEach(function() {
 		module('catharijne.objectPicker');
+		module('catharijne.resource');
 		module('templates');
-		inject(function($rootScope, $httpBackend) {
+		inject(function($rootScope, $httpBackend, currentOrigin) {
 			scope = $rootScope.$new();
-			backend = $httpBackend.expectGET('demo_objects.json');
+			prefix = currentOrigin + '/app/demo_objects.json';
+			$httpBackend.whenGET('/api/gettoken/').respond(204, '', {
+				'Set-Cookie': 'csrftoken=1234',
+			});
+			backend = $httpBackend.expectGET(prefix);
 			flushRequests = _.bind($httpBackend.flush, $httpBackend);
+			flushPromises = _.bind($rootScope.$apply, $rootScope);
 		});
 	});
 	
@@ -44,71 +50,75 @@ describe('catharijne.objectPicker module', function() {
 		});
 		
 		it('can update to a consistent state', function() {
-			expect(scope.objectId).not.toBeDefined();
+			expect(scope.objectUrl).not.toBeDefined();
 			expect(scope.object).not.toBeDefined();
-			expect(controller.allObjects).not.toBeDefined();
+			expect(scope.background).not.toBeDefined();
 			scope.update();
-			expect(scope.objectId).not.toBeDefined();
+			expect(scope.objectUrl).not.toBeDefined();
 			expect(scope.object).not.toBeDefined();
-			expect(controller.allObjects).not.toBeDefined();
-			scope.objectId = 'RMCC v1026';
-			scope.update();
-			expect(scope.objectId).not.toBeDefined();
+			expect(scope.background).not.toBeDefined();
+			scope.update(prefix + '#RMCC%20v1026');
+			expect(scope.objectUrl).not.toBeDefined();
 			expect(scope.object).not.toBeDefined();
-			expect(controller.allObjects).not.toBeDefined();
-			controller.allObjects = _.cloneDeep(responseMock);
+			expect(scope.background).not.toBeDefined();
+			backend.respond(_.cloneDeep(responseMock));
+			flushRequests();
 			scope.update();
-			expect(scope.objectId).not.toBeDefined();
+			flushPromises();
+			expect(scope.objectUrl).not.toBeDefined();
 			expect(scope.object).not.toBeDefined();
-			expect(controller.allObjects).toEqual(responseMock);
-			scope.objectId = 'RMCC v1026';
+			expect(scope.background['background-image']).not.toBeDefined();
+			scope.update(prefix + '#RMCC%20v1026');
+			flushPromises();
+			expect(scope.objectUrl).toContain('#RMCC%20v1026');
+			expect(scope.object).toEqual(
+				jasmine.objectContaining(responseMock[1])
+			);
+			expect(
+				scope.background['background-image']
+			).toContain(responseMock[1].image);
 			scope.update();
-			expect(scope.objectId).toBe('RMCC v1026');
-			expect(scope.object).toEqual(responseMock[1]);
-			expect(controller.allObjects).toEqual(responseMock);
-			scope.update();
-			expect(scope.objectId).toBe('RMCC v1026');
-			expect(scope.object).toEqual(responseMock[1]);
-			expect(controller.allObjects).toEqual(responseMock);
-			delete scope.object;
-			scope.update();
-			expect(scope.objectId).toBe('RMCC v1026');
-			expect(scope.object).toEqual(responseMock[1]);
-			expect(controller.allObjects).toEqual(responseMock);
-			scope.update('ABM v275a-e');
-			expect(scope.objectId).toBe('ABM v275a-e');
-			expect(scope.object).toEqual(responseMock[0]);
-			expect(controller.allObjects).toEqual(responseMock);
-			delete scope.objectId;
-			scope.update();
-			expect(scope.objectId).not.toBeDefined();
+			flushPromises();
+			expect(scope.objectUrl).not.toBeDefined();
 			expect(scope.object).not.toBeDefined();
-			expect(controller.allObjects).toEqual(responseMock);
-			scope.update('RMCC v1026');
-			expect(scope.objectId).toBe('RMCC v1026');
-			expect(scope.object).toEqual(responseMock[1]);
-			expect(controller.allObjects).toEqual(responseMock);
+			expect(scope.background['background-image']).not.toBeDefined();
+			scope.update(prefix + '#ABM%20v275a-e');
+			flushPromises();
+			expect(scope.objectUrl).toContain('#ABM%20v275a-e');
+			expect(scope.object).toEqual(
+				jasmine.objectContaining(responseMock[0])
+			);
+			expect(
+				scope.background['background-image']
+			).toContain(responseMock[0].image);
+			scope.update(prefix + '#RMCC%20v1026');
+			flushPromises();
+			expect(scope.objectUrl).toContain('#RMCC%20v1026');
+			expect(scope.object).toEqual(
+				jasmine.objectContaining(responseMock[1])
+			);
+			expect(
+				scope.background['background-image']
+			).toContain(responseMock[1].image);
 		});
 		
 		it('fetches data asynchronously', function() {
-			spyOn(scope, 'update').and.callThrough();
+			expect(scope.objectDescriptions).not.toBeDefined();
 			backend.respond(_.cloneDeep(responseMock));
 			flushRequests();
-			expect(scope.update).toHaveBeenCalledWith(/*nothing*/);
-			expect(controller.allObjects).toEqual(responseMock);
-			expect(scope.objectDescriptions).toEqual([{
+			expect(scope.objectDescriptions).toEqual([jasmine.objectContaining({
 				"imageUrl" : "image/ABM v275a-e.jpg",
-				"title" : " Communieserviesje ",
+				"title" : "Communieserviesje",
 				"description" : "N.V. Société Céramique, 1950-1955",
 				"linkText": "Kies",
 				"click": jasmine.any(Function),
-			}, {
+			}), jasmine.objectContaining({
 				"imageUrl" : "image/RMCC v1026.jpg",
-				"title" : " Eerste communiegeschenk: glas beschilderd met kelk en hostie, ",
+				"title" : "Eerste communiegeschenk: glas beschilderd met kelk en hostie,",
 				"description" : "Maker onbekend, 1920",
 				"linkText": "Kies",
 				"click": jasmine.any(Function),
-			}]);
+			})]);
 		});
 		
 		it('sets click handlers for making a choice', function() {
@@ -117,15 +127,16 @@ describe('catharijne.objectPicker module', function() {
 			flushRequests();
 			scope.objectDescriptions[0].click();
 			expect(scope.update.calls.mostRecent().args).toEqual([
-				'ABM v275a-e',
+				prefix + '#ABM%20v275a-e',
 			]);
 			scope.objectDescriptions[1].click();
 			expect(scope.update.calls.mostRecent().args).toEqual([
-				'RMCC v1026',
+				prefix + '#RMCC%20v1026',
 			]);
 		});
 		
 		it('logs fetch errors', inject(function($log) {
+			expect($log.debug.logs.length).toBe(0);
 			backend.respond(404, 'not found');
 			flushRequests();
 			expect($log.debug.logs.length).toBe(1);
@@ -157,7 +168,7 @@ describe('catharijne.objectPicker module', function() {
 		beforeEach(inject(function($compile) {
 			parentScope = scope;
 			elementFunc = $compile(
-				'<app-object-picker object-id=id></app-object-picker>'
+				'<app-object-picker object-url=url></app-object-picker>'
 			);
 			backend.respond(_.cloneDeep(responseMock));
 		}));
@@ -168,14 +179,15 @@ describe('catharijne.objectPicker module', function() {
 		});
 		
 		it('shows image with caption when available', function() {
-			parentScope.id = 'RMCC v1026';
+			parentScope.url = prefix + '#RMCC%20v1026';
 			createElement();
 			flushRequests();
+			flushPromises();
 			expect(element.children().length).toBe(3);
 			setScope();
-			var img = getChild('img');
-			expect(img.length).toBe(1);
-			expect(img.attr('src')).toBe('image/RMCC v1026.jpg');
+			var div = getChild('div');
+			expect(div.length).toBe(1);
+			expect(div.attr('style')).toContain('image/RMCC v1026.jpg');
 			var caption = getChild('figcaption');
 			expect(caption.length).toBe(1);
 			expect(caption.text()).toBe(scope.objectDescriptions[1].title);
@@ -183,7 +195,7 @@ describe('catharijne.objectPicker module', function() {
 		
 		it('shows a button otherwise', function() {
 			createElement();
-			expect(element.children().length).toBe(2);
+			expect(element.children().length).toBe(3);
 			setScope();
 			expect(scope.$parent).toBe(parentScope);
 			var button = getChild('button');
